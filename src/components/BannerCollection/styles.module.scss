@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80vh;
+    position: relative;
+
+    .imageContainer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        .image {
+            object-fit: cover;
+            object-position: center 30%;
+            z-index: 1;
+        }
+
+        h2 {
+            position: absolute;
+            color: #fff;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        h2:first-of-type {
+            left: 20%;
+            bottom: 8%;
+        }
+
+        h2:last-of-type {
+            right: 20%;
+            bottom: 8%;
+            opacity: 0.8;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent 60%);
+            z-index: 1;
+        }
+    }
+}

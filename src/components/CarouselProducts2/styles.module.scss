@@ -1,0 +1,151 @@
+.container {
+    width: 100%;
+    //padding: 2rem 1rem;
+    //outline: 2px solid red;
+
+    .products {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+
+        .carouselContainer {
+            width: 100%;
+            max-width: 1500px;
+            position: relative;
+
+            .carousel {
+                padding-bottom: 2.5rem;
+
+                .slide {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+                    transition: transform 0.3s ease;
+                    cursor: pointer;
+                    padding: 20px;
+
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .imageContainer {
+                        width: 100%;
+                        aspect-ratio: 1.4 / 2;
+                        overflow: hidden;
+                        position: relative;
+
+                        .image {
+                            object-fit: cover;
+                            object-position: center;
+                            transition: transform 0.4s ease;
+
+                            &:hover {
+                                transform: scale(1.05);
+                            }
+                        }
+                    }
+
+                    .productInfo {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+
+                        h4 {
+                            font-size: 1rem;
+                            font-weight: 500;
+                            color: #222;
+                            margin-bottom: 1rem;
+                            letter-spacing: 2px;
+                        }
+
+                        p {
+                            font-size: 1rem;
+                            color: #000;
+                            margin-top: 0.25rem;
+                            letter-spacing: 2px;
+                            font-weight: 600;
+
+                            &:last-child {
+                                color: #666;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .swiper-pagination {
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.05);
+                border-radius: 1rem;
+                width: fit-content;
+                padding: 0.4rem 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .swiper-pagination-bullet {
+                background: #222;
+                opacity: 0.3;
+
+
+                &-active {
+                    background: #0a8754;
+                    opacity: 1;
+                }
+            }
+
+            :global(.swiper-button-prev),
+            :global(.swiper-button-next) {
+                background-color: rgba(255, 255, 255, 0.8);
+                color: #000;
+                width: 40px;
+                height: 40px;
+                padding: 8px;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(4px);
+
+                &::after {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #fff;
+                }
+            }
+
+            :global(.swiper-button-prev) {
+                left: 20px;
+            }
+
+            :global(.swiper-button-next) {
+                right: 20px;
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .carouselContainer .carousel {
+            .slide {
+                .imageContainer {
+                    aspect-ratio: 4 / 3;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 2rem 1rem;
+
+        .carouselContainer .carousel {
+            .slide {
+                .imageContainer {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
