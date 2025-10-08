@@ -26,7 +26,7 @@ export default function CarouselProducts({
         <section className={styles.container}>
             <div className={styles.products}>
                 {text && <div className={styles.textContainer}>
-                    <h2>"Cada peça é uma história que se entrelaça com a sua, criada para refletir sua autenticidade e te acompanhar nos momentos que importam."</h2>
+                    <h2>&quot;Cada peça é uma história que se entrelaça com a sua, criada para refletir sua autenticidade e te acompanhar nos momentos que importam.&quot;</h2>
                 </div>}
                 <div className={styles.carouselContainer}>
                     <Swiper
