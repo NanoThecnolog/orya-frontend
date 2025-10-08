@@ -26,7 +26,6 @@ export const products: ProductProps[] = [
         img: "/img/ORYA 16414.jpg",
         price: 319.90,
         name: "Pulseira X",
-
     },
     {
         img: "/img/ORYA 16527.jpg",
@@ -34,8 +33,18 @@ export const products: ProductProps[] = [
         name: "Brinco X",
     },
     {
-        img: "/img/ORYA 16512.jpg",
+        img: "/img/ORYA 16538.jpg",
         price: 99.90,
-        name: "Pulseira X",
+        name: "Brinco X",
+    },
+    {
+        img: "/img/ORYA 16523.jpg",
+        price: 59.90,
+        name: "Brinco X"
+    },
+    {
+        img: "/img/ORYA 16540.jpg",
+        price: 79.90,
+        name: "Brinco X"
     },
 ]

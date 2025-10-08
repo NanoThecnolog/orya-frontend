@@ -9,6 +9,9 @@ import { collection } from "@/common/variables/collections";
 import Categories from "@/components/Categories";
 import { categories } from "@/common/variables/categories";
 import CarouselProducts2 from "@/components/CarouselProducts2";
+import TextDivisor from "@/components/TextDivisor";
+import Banner from "@/components/Banner";
+import About from "@/components/About";
 
 export default function Home() {
   return (
@@ -25,6 +28,9 @@ export default function Home() {
         <BannerCollection collection={collection} />
         <Categories categories={categories} />
         <CarouselProducts2 products={products} />
+        <TextDivisor />
+        <Banner image="/img/ORYA 16550.png" />
+        <About />
       </main>
     </>
   );

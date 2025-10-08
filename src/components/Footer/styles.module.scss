@@ -7,23 +7,86 @@
     background-color: var(--wine);
     padding: 20px 0;
 
-    ul {
-        outline: 2px solid red;
-        //flex: 1.5;
-        //display: grid;
-        //grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+    .linkContainer {
         width: 50%;
+        display: flex;
         justify-content: center;
         align-items: center;
+
+        ul {
+            display: grid;
+            grid-template-columns: 240px 240px;
+            grid-auto-flow: column;
+            grid-template-rows: repeat(4, auto);
+            gap: 10px;
+            column-gap: 100px;
+
+            li {
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+        }
     }
 
     .iconContainer {
-        //flex: 1;
         width: 50%;
-        outline: 2px solid red;
+        //outline: 2px solid red;
+
+        .inputContainer {
+            width: 100%;
+            //outline: 2px solid red;
+
+            label {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                position: relative;
+
+                h4 {
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    font-size: 1rem;
+                    text-align: center;
+                    width: 420px;
+                }
+
+                input {
+                    width: 420px;
+                    border-radius: 2rem;
+                    padding: 10px 15px;
+                    border: none;
+                    background-color: rgba(255, 255, 255, .2);
+                    color: white;
+
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &::placeholder {
+                        color: white;
+                    }
+
+
+                }
+
+                svg {
+                    position: absolute;
+                    bottom: 10px;
+                    right: 550px;
+                }
+            }
+        }
+
+        .socialContainer {
+            margin-top: 30px;
+            padding-left: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+            color: rgba(255, 255, 255, .4);
+        }
     }
 
 }

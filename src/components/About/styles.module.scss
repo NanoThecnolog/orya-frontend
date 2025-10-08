@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1500px;
+    height: 50vh;
+    //outline: 2px solid red;
+
+    .logoContainer {
+
+        width: 50%;
+
+        .imageContainer {
+            position: relative;
+            width: 400px;
+            height: 150px;
+            //outline: 2px solid red;
+
+            .image {
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+    }
+
+    .textContainer {
+        width: 50%;
+
+        .text {
+            //outline: 2px solid red;
+            width: 600px;
+            font-weight: 400;
+            font-size: 1.5rem;
+            line-height: 2.2rem;
+            color: var(--wine);
+            text-align: justify;
+        }
+    }
+}

@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --wine: #610824;
   --font-Roboto: "Roboto", serif;
+  --font-Noto: "Noto Naskh Arabic", serif;
 }
 
 @media (prefers-color-scheme: dark) {

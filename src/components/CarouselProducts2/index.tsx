@@ -31,11 +31,12 @@ export default function CarouselProducts2({
                         pagination={pagination ? { clickable: true } : false}
                         autoplay={autoplay ? { delay: 4000, disableOnInteraction: false } : false}
                         slidesPerView={4}
+                        initialSlide={4}
                         className={styles.carousel}
                     >
                         {products.map((product, index) => {
-                            const price = format.price(product.price)
-                            const discount = format.discount(product.price, 10)
+                            const price = format.price(product.price).replace(".", ",")
+                            const discount = format.discount(product.price, 10).replace(".", ",")
                             return (
                                 <SwiperSlide key={index} className={styles.slide}>
                                     <div className={styles.imageContainer}>
