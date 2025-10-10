@@ -1,1 +1,144 @@
-.container {}
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: var(--wine);
+    margin-top: 200px;
+    margin-bottom: 35px;
+
+    .titlePage {
+        text-align: center;
+    }
+
+    .collectionContainer {
+        position: relative;
+        width: 100%;
+        height: 800px;
+        display: flex;
+        overflow: hidden;
+        margin: 35px 0;
+        cursor: pointer;
+
+
+        .imageContainer {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 100%;
+
+
+            .image {
+                position: relative !important;
+                flex: 1;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        .infoContainer {
+            position: absolute;
+            top: 50%;
+            transform: translateY(200%);
+            max-width: 40%;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+
+            //outline: 2px solid red;
+
+            h2 {
+                font-size: 1.4rem;
+                letter-spacing: 2px;
+                margin-bottom: 1rem;
+                text-transform: uppercase;
+            }
+
+            p {
+                font-size: 1.1rem;
+                line-height: 1.4;
+                width: 60%;
+            }
+        }
+
+        &:nth-child(even) .infoContainer {
+            right: 100px;
+            text-align: left;
+        }
+
+        &:nth-child(odd) .infoContainer {
+            left: 100px;
+            text-align: left;
+        }
+    }
+
+    /* Responsividade */
+    @media (max-width: 1200px) {
+        .collectionContainer {
+            height: 600px;
+
+            .infoContainer h2 {
+                font-size: 2.5rem;
+            }
+
+            .infoContainer p {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    @media (max-width: 900px) {
+        .collectionContainer {
+            height: auto;
+            flex-direction: column;
+
+            .imageContainer {
+                flex-direction: column;
+                height: auto;
+
+                .image {
+                    width: 100%;
+                    height: 400px !important;
+                }
+            }
+
+            .infoContainer {
+                position: static;
+                transform: none;
+                max-width: 100%;
+                text-align: center;
+                padding: 2rem;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
+                color: white;
+
+                h2 {
+                    font-size: 2rem;
+                }
+
+                p {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        .collectionContainer .imageContainer .image {
+            height: 300px !important;
+        }
+
+        .collectionContainer .infoContainer {
+            padding: 1.5rem;
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+        }
+    }
+}

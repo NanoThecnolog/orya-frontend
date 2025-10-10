@@ -15,7 +15,6 @@ export default function Collections() {
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
-                <h1>Coleções</h1>
                 <CollectionsComponent collections={collections} />
             </main>
         </>

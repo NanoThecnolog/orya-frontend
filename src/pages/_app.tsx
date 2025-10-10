@@ -10,8 +10,18 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const currentPath = router.pathname
+  const asPath = router.asPath
 
-  const showWineFontColor = currentPath !== "/"
+  const winePaths = [
+    "/",
+  ]
+  const winePrefixes = [
+    "/collections/collection/",
+  ]
+
+  const showWineFontColor =
+    winePaths.includes(currentPath) ||
+    winePrefixes.some(prefix => asPath.startsWith(prefix))
   return <>
     <Header useWine={showWineFontColor} />
     <Component {...pageProps} />

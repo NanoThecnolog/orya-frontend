@@ -13,7 +13,7 @@ interface HeaderProps {
 export default function Header({ useWine }: HeaderProps) {
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
     const [mobileOpen, setMobileOpen] = useState(false)
-    const logoSRC = useWine ? "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png" : "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png"
+    const logoSRC = useWine ? "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" : "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
 
     const handleDropdown = (item: string) => {
         setActiveMenu(activeMenu === item ? null : item)
@@ -38,7 +38,7 @@ export default function Header({ useWine }: HeaderProps) {
                     <li
                         key={item.title}
                         onClick={() => handleDropdown(item.title)}
-                        style={{ color: useWine ? "var(--wine)" : "white" }}
+                        style={{ color: useWine ? "white" : "var(--wine)" }}
                     >
                         {item.title}
                         {!item.link && <IoIosArrowDown />}
@@ -48,6 +48,7 @@ export default function Header({ useWine }: HeaderProps) {
                                     <li
                                         key={drop.title}
                                         className={styles.dropItem}
+                                        style={{ color: useWine ? "white" : "var(--wine)" }}
                                     >
                                         {drop.title}
                                     </li>
@@ -58,7 +59,7 @@ export default function Header({ useWine }: HeaderProps) {
                 )}
             </ul>
 
-            <div className={styles.iconContainer}>
+            <div className={styles.iconContainer} style={{ color: useWine ? "white" : "var(--wine)" }}>
                 <div className={styles.link}>
                     <span>port</span>
                     <IoIosArrowDown />
