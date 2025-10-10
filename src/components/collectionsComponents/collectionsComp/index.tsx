@@ -8,7 +8,7 @@ interface Props {
 
 export default function CollectionsComponent({ collections }: Props) {
     return (
-        <section>
+        <section className={styles.container}>
             {
                 collections.map((collection, index) =>
                     <div key={`${collection.title}${index}`}>

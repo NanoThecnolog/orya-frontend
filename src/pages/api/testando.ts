@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const url = process.env.BASE_URL
@@ -15,7 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
         res.status(200).json(response.data);
-    } catch (error: any) {
-        res.status(error.response?.status || 500).json({ message: error.message });
+    } catch (err) {
+        const error = err as AxiosError<{ message?: string }>
+        const status = error.response?.status || 500
+        const message = error.response?.data?.message || error.message
+        res.status(status || 500).json({ message });
     }
 }
