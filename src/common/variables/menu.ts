@@ -6,15 +6,15 @@ export const menu: MenuProps[] = [
         dropMenu: [
             {
                 title: "Parisienne",
-                link: "/collection/parisienne",
+                link: "/collections/collection/parisienne",
             },
             {
                 title: "Ondyne",
-                link: "/collection/ondyne",
+                link: "/collections/collection/ondyne",
             },
             {
                 title: "Francines",
-                link: "/collection/francines",
+                link: "/collections/collection/francines",
             },
         ],
     },

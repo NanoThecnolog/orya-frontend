@@ -6,11 +6,13 @@ import { IoBagOutline } from 'react-icons/io5'
 import { useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { menu } from '@/common/variables/menu'
+import { useRouter } from 'next/navigation'
 
 interface HeaderProps {
     useWine: boolean
 }
 export default function Header({ useWine }: HeaderProps) {
+    const router = useRouter()
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
     const [mobileOpen, setMobileOpen] = useState(false)
     const logoSRC = useWine ? "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" : "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
@@ -18,9 +20,12 @@ export default function Header({ useWine }: HeaderProps) {
     const handleDropdown = (item: string) => {
         setActiveMenu(activeMenu === item ? null : item)
     }
+    const handleClick = (link: string) => {
+        router.push(link)
+    }
     return (
         <nav className={styles.container}>
-            <div className={styles.logoContainer}>
+            <div className={styles.logoContainer} onClick={() => router.push("/")}>
                 <Image
                     src={logoSRC}
                     alt="logo"
@@ -49,6 +54,7 @@ export default function Header({ useWine }: HeaderProps) {
                                         key={drop.title}
                                         className={styles.dropItem}
                                         style={{ color: useWine ? "white" : "var(--wine)" }}
+                                        onClick={() => handleClick(drop.link!)}
                                     >
                                         {drop.title}
                                     </li>

@@ -5,7 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const url = process.env.BASE_URL
     const token = process.env.ACCESS_TOKEN
     const userID = process.env.CLIENT_ID
-    console.log(url, token, userID)
+    //console.log(url, token, userID)
     try {
         const response = await axios.get(`${url}/store`, {
             headers: {
