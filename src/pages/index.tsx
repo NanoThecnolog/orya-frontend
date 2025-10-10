@@ -12,8 +12,22 @@ import CarouselProducts2 from "@/components/CarouselProducts2";
 import TextDivisor from "@/components/TextDivisor";
 import Banner from "@/components/Banner";
 import About from "@/components/About";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Home() {
+  const testeAPI = async () => {
+    try {
+      const response = await axios.get("/api/testando")
+      const data = response.data
+      console.log("resultado da request de teste", data)
+    } catch (err) {
+      console.error("erro na request de teste", err)
+    }
+  }
+  useEffect(() => {
+    testeAPI()
+  }, [])
   return (
     <>
       <Head>

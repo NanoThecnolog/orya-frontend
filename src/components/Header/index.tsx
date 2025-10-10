@@ -7,12 +7,13 @@ import { useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { menu } from '@/common/variables/menu'
 
-export default function Header() {
+interface HeaderProps {
+    useWine: boolean
+}
+export default function Header({ useWine }: HeaderProps) {
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
     const [mobileOpen, setMobileOpen] = useState(false)
-    /*const menu = [
-        "coleções", "categorias", "linhas", "onde encontrar", "sobre"
-    ]*/
+    const logoSRC = useWine ? "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png" : "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png"
 
     const handleDropdown = (item: string) => {
         setActiveMenu(activeMenu === item ? null : item)
@@ -21,7 +22,7 @@ export default function Header() {
         <nav className={styles.container}>
             <div className={styles.logoContainer}>
                 <Image
-                    src="/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png"
+                    src={logoSRC}
                     alt="logo"
                     fill
                     priority={false}
@@ -34,7 +35,11 @@ export default function Header() {
 
             <ul className={`${styles.menu} ${mobileOpen ? styles.open : ""}`}>
                 {menu.map(item =>
-                    <li key={item.title} onClick={() => handleDropdown(item.title)}>
+                    <li
+                        key={item.title}
+                        onClick={() => handleDropdown(item.title)}
+                        style={{ color: useWine ? "var(--wine)" : "white" }}
+                    >
                         {item.title}
                         {!item.link && <IoIosArrowDown />}
                         {activeMenu === item.title && !item.link && (
