@@ -7,6 +7,8 @@ import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
+import { MainProvider } from "@/contexts/mainContext";
+import CartSidebar from "@/components/CartSideBar";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -23,17 +25,25 @@ export default function App({ Component, pageProps }: AppProps) {
   const showWineFontColor =
     winePaths.includes(currentPath) ||
     winePrefixes.some(prefix => asPath.startsWith(prefix))
-  return <AnimatePresence mode="wait">
-    <motion.div
-      key={router.route}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: .5, ease: "easeInOut" }}
-    >
-      <Header useWine={showWineFontColor} />
-      <Component {...pageProps} />
-      <Footer />
-    </motion.div>
-  </AnimatePresence>;
+
+  const items = [
+    { id: 1, name: "Produto 1", price: 120 },
+    { id: 2, name: "Produto 2", price: 80 },
+  ];
+  return <MainProvider>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={router.route}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: .5, ease: "easeInOut" }}
+      >
+        <Header useWine={showWineFontColor} />
+        <CartSidebar items={items} />
+        <Component {...pageProps} />
+        <Footer />
+      </motion.div>
+    </AnimatePresence>
+  </MainProvider>
 }

@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.scss";
 import Carousel from "@/components/Carousel";
 import { carouselImages } from "@/common/variables/carouselImages";
 import CarouselProducts from "@/components/CarouselProducts";
-import { products } from "@/common/variables/products";
+//import { products } from "@/common/variables/products";
 import BannerCollection from "@/components/BannerCollection";
 import { collection } from "@/common/variables/collections";
 import Categories from "@/components/Categories";
@@ -16,19 +16,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { StoreInfo } from "@/@types/nuvemshop/storeInfo";
 import { ProductList } from "@/@types/nuvemshop/products";
-import { GetServerSideProps } from "next";
+//import { GetServerSideProps } from "next";
+import CartSidebar from "@/components/CartSideBar";
+import { useMain } from "@/contexts/mainContext";
 
-interface HomeProps {
+/*interface HomeProps {
   products: ProductList | null
-}
+}*/
 
 export default function Home() {
   const [products, setProducts] = useState<ProductList | null>(null)
+  //const [cartOpen, setCartOpen] = useState<boolean>(false)
+
+
   const testeAPI = async () => {
     try {
       const response = await axios.get<StoreInfo>("/api/store")
       const data = response.data
-      console.log("resultado da request de teste", data)
+      //console.log("resultado da request de teste", data)
     } catch (err) {
       console.error("erro na request de teste", err)
     }
@@ -37,7 +42,7 @@ export default function Home() {
     try {
       const response = await axios.get<ProductList>("/api/products")
       const data = response.data
-      console.log("resultado da request de produtos", data)
+      //console.log("resultado da request de produtos", data)
       setProducts(data)
     } catch (err) {
       console.error("erro na request de produtos", err)
@@ -47,6 +52,9 @@ export default function Home() {
     testeAPI()
     getProducts()
   }, [])
+
+
+
   return (
     <>
       <Head>

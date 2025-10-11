@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { menu } from '@/common/variables/menu'
 import { useRouter } from 'next/navigation'
+import { useMain } from '@/contexts/mainContext'
 
 interface HeaderProps {
     useWine: boolean
@@ -15,7 +16,11 @@ export default function Header({ useWine }: HeaderProps) {
     const router = useRouter()
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
     const [mobileOpen, setMobileOpen] = useState(false)
-    const logoSRC = useWine ? "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" : "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
+    const logoSRC = useWine ?
+        "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" :
+        "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
+
+    const { setCartOpen } = useMain()
 
     const handleDropdown = (item: string) => {
         setActiveMenu(activeMenu === item ? null : item)
@@ -73,7 +78,7 @@ export default function Header({ useWine }: HeaderProps) {
                 <div className={styles.icons}>
                     <CiSearch size={20} />
                     <CiUser size={20} />
-                    <IoBagOutline size={19} />
+                    <IoBagOutline size={19} onClick={() => { setCartOpen(true) }} />
                 </div>
             </div>
         </nav>

@@ -5,6 +5,8 @@ import { ProductProps } from '@/common/variables/products'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { format } from '@/utils/formatContent'
 import { ProductList } from '@/@types/nuvemshop/products'
+import CartButton from '../ui/CartButton'
+import SendCartButton from '../ui/CartButton'
 
 interface CarouselProductProps {
     products: ProductList | null
@@ -23,6 +25,10 @@ export default function CarouselProducts({
     loop = true,
     text = false
 }: CarouselProductProps) {
+
+    const handleClick = () => {
+        //enviar pro carrinho
+    }
     return (
         <section className={styles.container}>
             <div className={styles.products}>
@@ -55,6 +61,9 @@ export default function CarouselProducts({
                                                 className={styles.image}
                                                 priority={false}
                                             />
+                                            <div className={styles.buttonContainer}>
+                                                <SendCartButton handleClick={handleClick} />
+                                            </div>
                                         </div>
                                         <div className={styles.productInfo}>
                                             <h4>{product.name.pt.toUpperCase()}</h4>
