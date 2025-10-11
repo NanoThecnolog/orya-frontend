@@ -3,7 +3,7 @@ export interface Product {
     name: LocaleText
     description: LocaleText
     handle: LocaleText
-    attributes: any[]
+    attributes: Attributes[]
     published: boolean
     free_shipping: boolean
     requires_shipping: boolean
@@ -18,6 +18,13 @@ export interface Product {
     tags: string
     images: ProductImage[]
     categories: Category[]
+}
+
+export interface Attributes {
+    pt: string
+}
+export interface Values {
+    pt: string
 }
 
 export interface LocaleText {
@@ -39,7 +46,7 @@ export interface Variant {
     height: string
     depth: string
     sku: string | null
-    values: any[]
+    values: Values[]
     barcode: string | null
     mpn: string | null
     age_group: string | null
@@ -77,7 +84,7 @@ export interface Category {
     description: LocaleText
     handle: LocaleText
     parent: number | null
-    subcategories: any[]
+    subcategories: string[]
     seo_title: LocaleText
     seo_description: LocaleText
     google_shopping_category: string
