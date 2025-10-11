@@ -12,21 +12,40 @@ import CarouselProducts2 from "@/components/CarouselProducts2";
 import TextDivisor from "@/components/TextDivisor";
 import Banner from "@/components/Banner";
 import About from "@/components/About";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { StoreInfo } from "@/@types/nuvemshop/storeInfo";
+import { ProductList } from "@/@types/nuvemshop/products";
+import { GetServerSideProps } from "next";
+
+interface HomeProps {
+  products: ProductList | null
+}
 
 export default function Home() {
+  const [products, setProducts] = useState<ProductList | null>(null)
   const testeAPI = async () => {
     try {
-      const response = await axios.get("/api/testando")
+      const response = await axios.get<StoreInfo>("/api/store")
       const data = response.data
       console.log("resultado da request de teste", data)
     } catch (err) {
       console.error("erro na request de teste", err)
     }
   }
+  const getProducts = async () => {
+    try {
+      const response = await axios.get<ProductList>("/api/products")
+      const data = response.data
+      console.log("resultado da request de produtos", data)
+      setProducts(data)
+    } catch (err) {
+      console.error("erro na request de produtos", err)
+    }
+  }
   useEffect(() => {
     testeAPI()
+    getProducts()
   }, [])
   return (
     <>
@@ -49,3 +68,20 @@ export default function Home() {
     </>
   );
 }
+
+/*export const getServerSideProps: GetServerSideProps = async () => {
+
+  try {
+    const response = await axios.get<ProductList>("/api/products")
+    const data = response.data
+    console.log("resultado da request de teste", data)
+    return {
+      props: { products: data }
+    }
+  } catch (err) {
+    console.error("erro na request de teste", err)
+    return {
+      props: { products: null }
+    }
+  }
+}*/

@@ -4,9 +4,10 @@ import Image from 'next/image'
 import { ProductProps } from '@/common/variables/products'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { format } from '@/utils/formatContent'
+import { ProductList } from '@/@types/nuvemshop/products'
 
 interface CarouselProductProps {
-    products: ProductProps[]
+    products: ProductList | null
     navigation?: boolean
     pagination?: boolean
     autoplay?: boolean
@@ -31,18 +32,18 @@ export default function CarouselProducts2({
                         pagination={pagination ? { clickable: true } : false}
                         autoplay={autoplay ? { delay: 4000, disableOnInteraction: false } : false}
                         slidesPerView={4}
-                        initialSlide={4}
+                        initialSlide={3}
                         className={styles.carousel}
                     >
-                        {products.map((product, index) => {
-                            const price = format.price(product.price).replace(".", ",")
-                            const discount = format.discount(product.price, 10).replace(".", ",")
+                        {products && products.map((product, index) => {
+                            const price = format.price(product.variants?.[0]?.price).replace(".", ",")
+                            const discount = format.discount(product.variants?.[0]?.price, 10).replace(".", ",")
                             return (
                                 <SwiperSlide key={index} className={styles.slide}>
                                     <div className={styles.imageContainer}>
                                         <Image
-                                            src={product.img}
-                                            alt={product.name}
+                                            src={product.images[0].src}
+                                            alt={product.name.pt}
                                             fill
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                             className={styles.image}
@@ -50,7 +51,7 @@ export default function CarouselProducts2({
                                         />
                                     </div>
                                     <div className={styles.productInfo}>
-                                        <h4>{product.name.toUpperCase()}</h4>
+                                        <h4>{product.name.pt.toUpperCase()}</h4>
                                         <p>{price}</p>
                                         <p>{discount} no pix</p>
                                     </div>

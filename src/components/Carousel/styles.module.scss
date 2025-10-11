@@ -49,6 +49,21 @@
 .image {
     object-fit: cover;
     object-position: top;
+    animation: imageAnimation 25s ease-in-out infinite;
+}
+
+@keyframes imageAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .logo {

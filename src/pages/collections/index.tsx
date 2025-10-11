@@ -5,8 +5,6 @@ import { collections } from '@/common/variables/collections'
 import CollectionsComponent from '@/components/collectionsComponents/collectionsComp'
 
 export default function Collections() {
-
-
     return (
         <>
             <Head>

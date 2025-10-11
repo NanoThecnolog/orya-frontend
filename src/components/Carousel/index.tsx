@@ -48,7 +48,7 @@ export default function Carousel({
                                 src={img.src}
                                 alt={img.alt ?? `slide-${index}`}
                                 fill
-                                sizes='(max-width: 768px) 100vw, 50vw'
+                                sizes='100vw, 50vw'
                                 className={styles.image}
                                 priority={index === 0}
                             />
@@ -58,6 +58,7 @@ export default function Carousel({
                                 width={480}
                                 height={480}
                                 className={`${styles.logo} ${styles[`logo-${index}`]}`}
+                                priority={false}
                             />
                         </div>
                     </SwiperSlide>
