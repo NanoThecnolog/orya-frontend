@@ -3,7 +3,6 @@ import styles from "@/styles/Home.module.scss";
 import Carousel from "@/components/Carousel";
 import { carouselImages } from "@/common/variables/carouselImages";
 import CarouselProducts from "@/components/CarouselProducts";
-//import { products } from "@/common/variables/products";
 import BannerCollection from "@/components/BannerCollection";
 import { collection } from "@/common/variables/collections";
 import Categories from "@/components/Categories";
@@ -14,22 +13,21 @@ import Banner from "@/components/Banner";
 import About from "@/components/About";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { StoreInfo } from "@/@types/nuvemshop/storeInfo";
 import { ProductList } from "@/@types/nuvemshop/products";
-//import { GetServerSideProps } from "next";
-import CartSidebar from "@/components/CartSideBar";
+import { GetServerSideProps } from "next";
 import { useMain } from "@/contexts/mainContext";
 
-/*interface HomeProps {
+interface HomeProps {
   products: ProductList | null
-}*/
+}
 
 export default function Home() {
-  const [products, setProducts] = useState<ProductList | null>(null)
-  //const [cartOpen, setCartOpen] = useState<boolean>(false)
+  const [products, setProducts] = useState<ProductList>([])
+  const { productList, setProductList } = useMain()
 
 
-  const testeAPI = async () => {
+
+  /*const testeAPI = async () => {
     try {
       const response = await axios.get<StoreInfo>("/api/store")
       const data = response.data
@@ -37,21 +35,22 @@ export default function Home() {
     } catch (err) {
       console.error("erro na request de teste", err)
     }
-  }
+  }*/
   const getProducts = async () => {
     try {
       const response = await axios.get<ProductList>("/api/products")
       const data = response.data
-      //console.log("resultado da request de produtos", data)
-      setProducts(data)
+      console.log("resultado da request de produtos", data)
+      setProductList(data)
     } catch (err) {
       console.error("erro na request de produtos", err)
     }
   }
   useEffect(() => {
-    testeAPI()
-    getProducts()
+    //testeAPI()
+    if (productList.length === 0) getProducts()
   }, [])
+
 
 
 
@@ -65,10 +64,10 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <Carousel images={carouselImages} autoplay={false} />
-        <CarouselProducts products={products} text={true} />
+        <CarouselProducts products={productList} text={true} />
         <BannerCollection collection={collection} />
         <Categories categories={categories} />
-        <CarouselProducts2 products={products} />
+        <CarouselProducts2 products={productList} />
         <TextDivisor />
         <Banner image="/img/ORYA 16550.png" />
         <About />
@@ -78,16 +77,17 @@ export default function Home() {
 }
 
 /*export const getServerSideProps: GetServerSideProps = async () => {
+  const url = process.env.OFFICIAL_URL
 
   try {
-    const response = await axios.get<ProductList>("/api/products")
+    const response = await axios.get<ProductList>(`${url}/api/products`)
     const data = response.data
-    console.log("resultado da request de teste", data)
+    console.log("resultado da request de produtos", data)
     return {
       props: { products: data }
     }
   } catch (err) {
-    console.error("erro na request de teste", err)
+    console.error("erro na request de produtos", err)
     return {
       props: { products: null }
     }

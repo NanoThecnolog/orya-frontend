@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    height: 600px;
+    position: relative;
+
+    @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        height: auto;
+        align-items: center;
+    }
+}
+
+.thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 0.3rem;
+
+    @media (max-width: 768px) {
+        flex-direction: row;
+        justify-content: center;
+        overflow-x: auto;
+        max-width: 100%;
+        padding-right: 0;
+    }
+}
+
+.thumb {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+    overflow: hidden;
+    transition: border 0.2s, transform 0.2s;
+
+    &:hover {
+        border-color: #aaa;
+        transform: scale(1.05);
+    }
+
+    &.active {
+        border: 2px solid #3483fa;
+    }
+}
+
+.thumbImage {
+    object-fit: cover;
+}
+
+.mainImageContainer {
+    position: relative;
+    flex: 1;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fafafa;
+    aspect-ratio: 1/1;
+    min-height: 400px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 400px;
+        min-height: 300px;
+    }
+}
+
+.mainImage {
+    object-fit: contain;
+    //background: #fff;
+}

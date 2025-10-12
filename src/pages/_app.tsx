@@ -26,10 +26,6 @@ export default function App({ Component, pageProps }: AppProps) {
     winePaths.includes(currentPath) ||
     winePrefixes.some(prefix => asPath.startsWith(prefix))
 
-  const items = [
-    { id: 1, name: "Produto 1", price: 120 },
-    { id: 2, name: "Produto 2", price: 80 },
-  ];
   return <MainProvider>
     <AnimatePresence mode="wait">
       <motion.div
@@ -40,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         transition={{ duration: .5, ease: "easeInOut" }}
       >
         <Header useWine={showWineFontColor} />
-        <CartSidebar items={items} />
+        <CartSidebar />
         <Component {...pageProps} />
         <Footer />
       </motion.div>
