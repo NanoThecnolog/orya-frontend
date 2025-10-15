@@ -64,9 +64,10 @@ export default function ProductInfo({ info }: InfoProps) {
                 <div className={styles.shippingContainer}>
                     Meios de envio
                 </div>
-                <div className={styles.descriptionContainer}>
-                    <p>{info.description.pt}</p>
-                </div>
+                <div
+                    className={styles.descriptionContainer}
+                    dangerouslySetInnerHTML={{ __html: info.description.pt }}
+                />
             </div>
         </section>
     )

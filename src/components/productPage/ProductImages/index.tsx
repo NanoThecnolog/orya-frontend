@@ -8,18 +8,20 @@ interface ProductImagesProps {
 }
 
 export default function ProductImages({ images }: ProductImagesProps) {
-    const [activeImage, setActiveImage] = useState(images[0])
+    const [activeImage, setActiveImage] = useState<string>(images[0].src)
     return (
         <div className={styles.container}>
             <div className={styles.thumbs}>
-                {images.map((src, index) =>
+                {images.map((img, index) =>
                     <div
                         key={index}
-                        className={`${styles.thumb} ${src === activeImage ? styles.active : ""}`}
-                        onClick={() => setActiveImage(src)}
+                        className={`${styles.thumb} ${img.src === activeImage ? styles.active : ""}`}
+                        onClick={() => {
+                            setActiveImage(img.src)
+                        }}
                     >
                         <Image
-                            src={src}
+                            src={img.src}
                             alt={`Imagem ${index + 1}`}
                             fill
                             priority={false}
@@ -28,7 +30,7 @@ export default function ProductImages({ images }: ProductImagesProps) {
                     </div>
                 )}
             </div>
-            <div>
+            <div className={styles.mainImageContainer}>
                 <Image
                     src={activeImage}
                     alt="Imagem do produto"

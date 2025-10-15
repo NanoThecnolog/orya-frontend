@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
     "/",
   ]
   const winePrefixes = [
-    "/collections/collection/",
+    "/collections/",
   ]
 
   const showWineFontColor =

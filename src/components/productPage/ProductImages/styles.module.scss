@@ -19,6 +19,8 @@
     overflow-y: auto;
     max-height: 100%;
     padding-right: 0.3rem;
+    cursor: pointer;
+    outline: 2px solid red;
 
     @media (max-width: 768px) {
         flex-direction: row;
@@ -61,7 +63,7 @@
     border: 1px solid #eee;
     border-radius: 10px;
     overflow: hidden;
-    background: #fafafa;
+    background: transparent;
     aspect-ratio: 1/1;
     min-height: 400px;
 
@@ -73,6 +75,6 @@
 }
 
 .mainImage {
-    object-fit: contain;
+    object-fit: cover;
     //background: #fff;
 }

@@ -5,10 +5,9 @@ import { ProductProps } from '@/common/variables/products'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { format } from '@/utils/formatContent'
 import { Product, ProductList } from '@/@types/nuvemshop/products'
-import CartButton from '../ui/CartButton'
-import SendCartButton from '../ui/CartButton'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
+import SendCartButton from '@/components/ui/CartButton'
 
 interface CarouselProductProps {
     products: ProductList | null
@@ -70,11 +69,12 @@ export default function CarouselProducts({
                             products.map((product, index) => {
                                 const price = format.price(product.variants?.[0]?.price ?? null)
                                 const discount = format.discount(product.variants?.[0]?.price ?? null, 10)
+                                const image = product.images?.[0]?.src ?? "/img/sem-foto.png"
                                 return (
                                     <SwiperSlide key={index} className={styles.slide}>
                                         <div className={styles.imageContainer}>
                                             <Image
-                                                src={product.images[0].src}
+                                                src={image}
                                                 alt={product.name.pt}
                                                 fill
                                                 sizes="(max-width: 768px) 100vw, 50vw"

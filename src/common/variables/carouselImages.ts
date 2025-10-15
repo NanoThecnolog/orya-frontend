@@ -1,4 +1,4 @@
-import { CarouselImage } from "@/components/Carousel";
+import { CarouselImage } from "@/components/homeComponents/Carousel";
 
 export const carouselImages: CarouselImage[] = [
     {

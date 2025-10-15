@@ -104,6 +104,25 @@
             display: flex;
             gap: 5px;
             cursor: pointer;
+
+            .cartIcon {
+                position: relative;
+                cursor: pointer;
+
+                .cartCount {
+                    position: absolute;
+                    top: -6px;
+                    right: -6px;
+                    background: var(--wine);
+                    color: white;
+                    font-size: 10px;
+                    font-weight: 600;
+                    border-radius: 50%;
+                    padding: 2px 5px;
+                    min-width: 14px;
+                    text-align: center;
+                }
+            }
         }
     }
 

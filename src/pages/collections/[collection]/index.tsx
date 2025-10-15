@@ -9,6 +9,8 @@ export default function Collection() {
     const router = useRouter()
     const { collection } = router.query
 
+    const collect = 'colecao ondyne'
+
     const data = {
         title: collection as string,
         description: "Ducil mos vendae el et modi opta doluptam, que rest porroris dolupicimus aliquas alitiis di si ditiusd aeribus.Ihit vid quamus, quid quatquam, ut ipsam, ut voluptatur aut rem ius qui optatis molores nones",

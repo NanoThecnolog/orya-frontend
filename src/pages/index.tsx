@@ -1,16 +1,16 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
-import Carousel from "@/components/Carousel";
+import Carousel from "@/components/homeComponents/Carousel";
 import { carouselImages } from "@/common/variables/carouselImages";
-import CarouselProducts from "@/components/CarouselProducts";
-import BannerCollection from "@/components/BannerCollection";
+import CarouselProducts from "@/components/homeComponents/CarouselProducts";
+import BannerCollection from "@/components/homeComponents/BannerCollection";
 import { collection } from "@/common/variables/collections";
-import Categories from "@/components/Categories";
+import Categories from "@/components/homeComponents/Categories";
 import { categories } from "@/common/variables/categories";
-import CarouselProducts2 from "@/components/CarouselProducts2";
-import TextDivisor from "@/components/TextDivisor";
+import CarouselProducts2 from "@/components/homeComponents/CarouselProducts2";
+import TextDivisor from "@/components/homeComponents/TextDivisor";
 import Banner from "@/components/Banner";
-import About from "@/components/About";
+import About from "@/components/homeComponents/About";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductList } from "@/@types/nuvemshop/products";
@@ -22,7 +22,7 @@ interface HomeProps {
 }
 
 export default function Home() {
-  const [products, setProducts] = useState<ProductList>([])
+  //const [products, setProducts] = useState<ProductList>([])
   const { productList, setProductList } = useMain()
 
 

@@ -15,6 +15,7 @@ interface HeaderProps {
 export default function Header({ useWine }: HeaderProps) {
     const router = useRouter()
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
+    const { cartItems } = useMain()
     const [mobileOpen, setMobileOpen] = useState(false)
     const logoSRC = useWine ?
         "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" :
@@ -78,7 +79,12 @@ export default function Header({ useWine }: HeaderProps) {
                 <div className={styles.icons}>
                     <CiSearch size={20} />
                     <CiUser size={20} />
-                    <IoBagOutline size={19} onClick={() => { setCartOpen(true) }} />
+                    <div className={styles.cartIcon} onClick={() => { setCartOpen(true) }}>
+                        <IoBagOutline size={19} />
+                        {cartItems.length > 0 &&
+                            <span className={styles.cartCount}>{cartItems.length}</span>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
