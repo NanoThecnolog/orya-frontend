@@ -1,17 +1,19 @@
+import { Product, ProductList } from "@/@types/nuvemshop/products";
 import axios, { AxiosError, AxiosInstance } from "axios";
 
-const token = process.env.ACCESS_TOKEN
-//console.log(token)
-if (!token) console.error("Variável de ambiente ACCESS_TOKEN não configurada.")
 
-const url = process.env.BASE_URL;
-if (!url) console.error("Variável de ambiente BASE_URL não configurada.");
 
 class Nuvemshop {
-    private token: string | undefined = token;
+    private token: string | undefined;
     private api: AxiosInstance
 
     constructor() {
+        const token = process.env.ACCESS_TOKEN
+        if (!token) console.error("Variável de ambiente ACCESS_TOKEN não configurada.")
+
+        const url = process.env.BASE_URL;
+        if (!url) console.error("Variável de ambiente BASE_URL não configurada.");
+        this.token = token || ""
         this.api = axios.create({
             baseURL: url,
             headers: {
@@ -58,6 +60,16 @@ class Nuvemshop {
             console.error(`Erro ao buscar produto id ${id}: ${message}`);
             return { error: true, status, message };
         }
+    }
+
+    relatedProductsByCategory(product: Product, products: ProductList): Product[] {
+        const related = products.filter(item =>
+            item.id !== product.id &&
+            item.categories.some(category =>
+                product.categories.some(categ =>
+                    category.name.pt.toLowerCase() === categ.name.pt.toLowerCase())
+            ))
+        return related
     }
 }
 

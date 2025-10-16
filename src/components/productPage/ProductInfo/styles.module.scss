@@ -1,6 +1,7 @@
 .container {
     color: black;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
@@ -8,99 +9,126 @@
     margin: 100px 0;
     gap: 20px;
 
-
-
-
-    .infoContainer {
+    .productContainer {
         display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-direction: column;
-
-        //outline: 2px solid red;
-        height: 100%;
-        width: 50%;
         gap: 20px;
+        width: 100%;
+        padding-bottom: 40px;
 
 
-        .productInfo {
-            width: 100%;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, .2);
-
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            p:first-of-type {
-                font-size: 1.2rem;
-            }
-
-            p:last-of-type {
-                font-size: .9rem;
-            }
-        }
-
-        .quantityContainer {
+        .infoContainer {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+
             //outline: 2px solid red;
-            width: 100%;
+            height: 100%;
+            width: 50%;
             gap: 20px;
 
-            .inputContainer {
-                //outline: 2px solid red;
-                position: relative;
-                border-radius: .4rem;
-                border: 1px solid gray;
 
-                input {
-                    text-align: center;
-                    background-color: transparent;
-                    color: black;
-                    border: none;
-                    padding: 5px 0;
+            .productInfo {
+                width: 100%;
+                padding-bottom: 20px;
+                border-bottom: 1px solid rgba(0, 0, 0, .2);
 
-                    &:focus {
-                        outline: none;
-                    }
 
-                    //outline: 2px solid red;
+                h2 {
+                    font-size: 2rem;
                 }
 
-                .decres {
-                    position: absolute;
-                    top: 5px;
-                    left: 8px;
+                p:first-of-type {
+                    font-size: 1.2rem;
                 }
 
-                .acres {
-                    position: absolute;
-                    top: 5px;
-                    right: 8px;
+                p:last-of-type {
+                    font-size: .9rem;
                 }
             }
 
-            .buttonContainer {
+            .quantityContainer {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                //outline: 2px solid red;
                 width: 100%;
+                gap: 20px;
 
-                .buyBtn {
-                    color: white;
-                    background-color: var(--wine);
-                    padding: 5px 10px;
-                    width: 100%;
+                .inputContainer {
+                    //outline: 2px solid red;
+                    position: relative;
                     border-radius: .4rem;
-                    text-transform: uppercase;
+                    border: 1px solid gray;
+
+                    input {
+                        text-align: center;
+                        background-color: transparent;
+                        color: black;
+                        border: none;
+                        padding: 5px 0;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        //outline: 2px solid red;
+                    }
+
+                    .decres {
+                        position: absolute;
+                        top: 5px;
+                        left: 8px;
+                    }
+
+                    .acres {
+                        position: absolute;
+                        top: 5px;
+                        right: 8px;
+                    }
                 }
+
+                .buttonContainer {
+                    width: 100%;
+
+                    .buyBtn {
+                        color: white;
+                        background-color: var(--wine);
+                        padding: 5px 10px;
+                        width: 100%;
+                        border-radius: .4rem;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            .paymentMethodsContainer {}
+
+            .shippingContainer {}
+
+            .descriptionContainer {}
+        }
+    }
+
+    .takeCareContainer {
+        //outline: 2px solid red;
+        width: 90%;
+        padding: 0 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        ul {
+            padding: 10px 0;
+
+            li {
+                list-style-type: disc;
+                margin-left: 20px;
             }
         }
 
-        .paymentMethodsContainer {}
-
-        .shippingContainer {}
-
-        .descriptionContainer {}
+        h4 {
+            padding-bottom: 5px;
+        }
     }
 }

@@ -6,15 +6,15 @@ export const menu: MenuProps[] = [
         dropMenu: [
             {
                 title: "Parisienne",
-                link: "/collections/collection/parisienne",
+                link: "/collections/parisienne",
             },
             {
                 title: "Ondyne",
-                link: "/collections/collection/ondyne",
+                link: "/collections/ondyne",
             },
             {
                 title: "Francines",
-                link: "/collections/collection/francines",
+                link: "/collections/francines",
             },
         ],
     },
@@ -23,15 +23,15 @@ export const menu: MenuProps[] = [
         dropMenu: [
             {
                 title: "brincos",
-                link: "/category/brincos"
+                link: "/categories/category/brincos"
             },
             {
                 title: "pulseiras",
-                link: "/category/pulseiras"
+                link: "/categories/category/pulseiras"
             },
             {
                 title: "anéis",
-                link: "/category/aneis"
+                link: "/categories/category/aneis"
             }
         ]
     },

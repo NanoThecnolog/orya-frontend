@@ -8,6 +8,7 @@ import { Product, ProductList } from '@/@types/nuvemshop/products'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import SendCartButton from '@/components/ui/CartButton'
+import { Ecommerce } from '@/services/classes/ecommerce'
 
 interface CarouselProductProps {
     products: ProductList | null
@@ -34,18 +35,8 @@ export default function CarouselProducts({
     }
 
     const handleClick = (product: Product) => {
-        const hasItem = cartItems.find(item => item.product.id === product.id)
-        if (hasItem) {
-            setCartItems((prev) =>
-                prev.map(item =>
-                    item.product.id === product.id
-                        ? { ...item, amount: item.amount + 1 }
-                        : item
-                )
-            );
-        } else {
-            setCartItems((prev) => [...prev, { product, amount: 1 }]);
-        }
+        const ecommerce = new Ecommerce(cartItems, setCartItems)
+        ecommerce.addToCart(product)
     }
 
     return (

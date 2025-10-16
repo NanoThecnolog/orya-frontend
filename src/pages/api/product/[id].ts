@@ -2,6 +2,7 @@ import { nuvemshop } from '@/services/classes/nuvemshop';
 import { AxiosError } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'GET') {
         res.setHeader('Allow', ["GET"])
