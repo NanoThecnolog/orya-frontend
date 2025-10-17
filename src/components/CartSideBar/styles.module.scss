@@ -44,15 +44,75 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 1rem;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
 
-            .name {
-                font-weight: 500;
+
+            .imageContainer {
+                width: 85px;
+                height: 125px;
+                position: relative;
+
+                .image {
+                    object-fit: cover;
+                    object-position: center;
+                }
             }
 
-            .price {
+            .cartItemDetails {
+                display: flex;
+                flex-direction: column;
+                //outline: 2px solid red;
+                justify-content: space-around;
+                align-items: center;
+                //width: 100%;
+                text-align: center;
+                width: 100px;
+
+
+                .name {
+                    font-weight: 500;
+                }
+
+                .amount {
+                    //position: relative;
+                    width: 100%;
+                    //outline: 2px solid red;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    svg {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .priceContainer {
+                //outline: 2px solid red;
                 font-weight: 700;
+                display: flex;
+                flex-direction: column-reverse;
+                justify-content: space-around;
+                align-items: center;
+
+                svg {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #8d0101;
+                        transform: scale(1.05);
+                    }
+                }
             }
         }
+
+        .subTotalContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
     }
 
     .footer {
