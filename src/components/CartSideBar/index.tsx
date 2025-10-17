@@ -83,14 +83,12 @@ export default function CartSidebar() {
                     }
                 </div>
 
-                <div>
-                    <button onClick={() => setCartItems([])}>Limpar carrinho</button>
-                </div>
-
-                <div className={styles.footer}>
-                    <p>Total: {format.price(totalPrice.toFixed(2))}</p>
-                    <button>Finalizar Compra</button>
-                </div>
+                {
+                    cartItems.length > 0 && <div className={styles.footer}>
+                        <p>Total: {format.price(totalPrice.toFixed(2))}</p>
+                        <button>Finalizar Compra</button>
+                    </div>
+                }
             </aside>
         </>
     );
