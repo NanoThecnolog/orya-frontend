@@ -47,32 +47,34 @@ export default function CartSidebar() {
 
                 <div className={styles.items}>
                     {cartItems.length === 0 && <p>Carrinho vazio</p>}
-                    {cartItems.map(item => (
-                        <div key={item.product.id} className={styles.item}>
-                            <div className={styles.imageContainer}>
-                                <Image
-                                    src={item.product.images[1].src}
-                                    alt={item.product.name.pt}
-                                    fill
-                                    priority={false}
-                                    className={styles.image}
-                                />
-                            </div>
-
-                            <div className={styles.cartItemDetails}>
-                                <h4 className={styles.name}>{item.product.name.pt}</h4>
-                                <div className={styles.amount}>
-                                    <IoIosRemove className={styles.removeButton} size={25} onClick={() => handleAmount(item.product, "sub")} />
-                                    <p>{item.amount}</p>
-                                    <IoIosAdd className={styles.addButton} size={25} onClick={() => handleAmount(item.product, "add")} />
+                    {cartItems.map(item => {
+                        const image = item.product.images?.[1]?.src ?? "/img/sem-foto.png"
+                        return (
+                            <div key={item.product.id} className={styles.item}>
+                                <div className={styles.imageContainer}>
+                                    <Image
+                                        src={image}
+                                        alt={item.product.name.pt}
+                                        fill
+                                        priority={false}
+                                        className={styles.image}
+                                    />
+                                </div>
+                                <div className={styles.cartItemDetails}>
+                                    <h4 className={styles.name}>{item.product.name.pt}</h4>
+                                    <div className={styles.amount}>
+                                        <IoIosRemove className={styles.removeButton} size={25} onClick={() => handleAmount(item.product, "sub")} />
+                                        <p>{item.amount}</p>
+                                        <IoIosAdd className={styles.addButton} size={25} onClick={() => handleAmount(item.product, "add")} />
+                                    </div>
+                                </div>
+                                <div className={styles.priceContainer}>
+                                    <p className={styles.price}>{format.price(item.product.variants?.[0]?.price)}</p>
+                                    <FaTrash title="excluir" onClick={() => handleAmount(item.product, "remove")} />
                                 </div>
                             </div>
-                            <div className={styles.priceContainer}>
-                                <p className={styles.price}>{format.price(item.product.variants?.[0]?.price)}</p>
-                                <FaTrash title="excluir" onClick={() => handleAmount(item.product, "remove")} />
-                            </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                     {
                         cartItems.length > 0 && <div className={styles.subTotalContainer}>
                             <h4>subtotal (sem frete)</h4>
