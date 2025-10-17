@@ -34,7 +34,7 @@ export default function CartSidebar() {
         const ecommerce = new Ecommerce(cartItems, setCartItems)
         if (operation === "add") ecommerce.addToCart(product)
         if (operation === "sub") ecommerce.subFromCart(product)
-        else ecommerce.deleteProductFromCart(product)
+        if (operation === "remove") ecommerce.deleteProductFromCart(product)
     }
 
     return (
