@@ -11,6 +11,7 @@
         .textContainer {
             max-width: 1200px;
             text-align: center;
+            padding: 0 1rem;
 
             h2 {
                 font-size: 1.5rem;
@@ -26,10 +27,7 @@
             position: relative;
 
             .carousel {
-                //outline: 2px solid red;
-                padding-bottom: 2.5rem; // espaço para paginação
-                //display: flex;
-                //gap: 20px;
+                padding-bottom: 2.5rem;
 
                 .slide {
                     display: flex;
@@ -47,7 +45,6 @@
                     .imageContainer {
                         width: 100%;
                         aspect-ratio: 1.4 / 2;
-                        //border-radius: 1rem;
                         overflow: hidden;
                         position: relative;
 
@@ -73,41 +70,40 @@
                             width: 100%;
                             bottom: 0;
                             left: 0;
+                            transition: height 0.3s ease;
                         }
                     }
 
                     .productInfo {
                         display: flex;
                         flex-direction: column;
-                        //outline: 2px solid red;
                         width: 100%;
-
+                        text-align: center;
 
                         h4 {
                             font-size: 1rem;
                             font-weight: 500;
                             color: #222;
-                            margin-bottom: 1rem;
-                            letter-spacing: 2px;
+                            margin-bottom: 0.8rem;
+                            letter-spacing: 1.5px;
                         }
 
                         p {
                             font-size: 1rem;
                             color: #000;
                             margin-top: 0.25rem;
-                            letter-spacing: 2px;
+                            letter-spacing: 1.5px;
                             font-weight: 600;
 
                             &:last-child {
                                 color: #666;
-
                             }
                         }
                     }
                 }
             }
 
-            // fundo da paginação
+            /* Paginação e navegação */
             .swiper-pagination {
                 bottom: 0;
                 background-color: rgba(0, 0, 0, 0.05);
@@ -122,7 +118,6 @@
                 background: #222;
                 opacity: 0.3;
 
-
                 &-active {
                     background: #0a8754;
                     opacity: 1;
@@ -136,7 +131,6 @@
                 width: 40px;
                 height: 40px;
                 padding: 8px;
-                //border-radius: 50%;
                 transition: all 0.3s ease;
                 backdrop-filter: blur(4px);
 
@@ -151,7 +145,6 @@
                 }
             }
 
-            // posição ajustada
             :global(.swiper-button-prev) {
                 left: 20px;
             }
@@ -162,23 +155,87 @@
         }
     }
 
+    /* ---- Tablets (até 1024px) ---- */
     @media (max-width: 1024px) {
-        .carouselContainer .carousel {
-            .slide {
-                .imageContainer {
-                    aspect-ratio: 4 / 3;
+        padding: 3rem 1.5rem;
+
+        .products {
+            gap: 2rem;
+
+            .textContainer h2 {
+                font-size: 1.3rem;
+                line-height: 1.5;
+            }
+
+            .carouselContainer {
+                .carousel {
+                    .slide {
+                        padding: 10px;
+
+                        .imageContainer {
+                            aspect-ratio: 4 / 6;
+                        }
+
+                        .productInfo h4 {
+                            font-size: 0.95rem;
+                        }
+
+                        .productInfo p {
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+
+                :global(.swiper-button-prev),
+                :global(.swiper-button-next) {
+                    //width: 35px;
+                    //height: 35px;
+                    display: none;
                 }
             }
         }
     }
 
+    /* ---- Mobile (até 768px) ---- */
     @media (max-width: 768px) {
         padding: 2rem 1rem;
 
-        .carouselContainer .carousel {
-            .slide {
-                .imageContainer {
-                    width: 100%;
+        .products {
+            gap: 2rem;
+
+            .textContainer h2 {
+                font-size: 1.1rem;
+                line-height: 1.4;
+            }
+
+            .carouselContainer {
+                .carousel {
+                    .slide {
+                        padding: 0.5rem;
+
+                        .imageContainer {
+                            aspect-ratio: 1 / 2;
+                        }
+
+                        .productInfo h4 {
+                            font-size: 0.9rem;
+                            letter-spacing: 1px;
+                        }
+
+                        .productInfo p {
+                            font-size: 0.85rem;
+                        }
+                    }
+                }
+
+                :global(.swiper-button-prev),
+                :global(.swiper-button-next) {
+                    display: none;
+                }
+
+                .swiper-pagination {
+                    background-color: rgba(0, 0, 0, 0.1);
+                    padding: 0.3rem 0.8rem;
                 }
             }
         }

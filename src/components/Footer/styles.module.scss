@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-    height: 200px;
+    height: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -43,6 +43,7 @@
                 gap: 10px;
                 position: relative;
 
+
                 h4 {
                     text-transform: uppercase;
                     letter-spacing: 2px;
@@ -51,32 +52,38 @@
                     width: 420px;
                 }
 
-                input {
-                    width: 420px;
-                    border-radius: 2rem;
-                    padding: 10px 15px;
-                    border: none;
-                    background-color: rgba(255, 255, 255, .2);
-                    color: white;
+                .input {
+                    //outline: 2px solid red;
+                    width: 100%;
+                    max-width: 420px;
+                    position: relative;
 
-
-                    &:focus {
-                        outline: none;
-                    }
-
-                    &::placeholder {
+                    input {
+                        width: 100%;
+                        border-radius: 2rem;
+                        padding: 10px 15px;
+                        border: none;
+                        background-color: rgba(255, 255, 255, .2);
                         color: white;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &::placeholder {
+                            color: white;
+                        }
                     }
 
-
+                    svg {
+                        position: absolute;
+                        bottom: 15%;
+                        right: 2%;
+                        cursor: pointer;
+                    }
                 }
 
-                svg {
-                    position: absolute;
-                    bottom: 10px;
-                    right: 550px;
-                    cursor: pointer;
-                }
+
             }
         }
 
@@ -96,6 +103,85 @@
 
                 &:hover {
                     transform: scale(1.1);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+
+        .linkContainer,
+        .iconContainer {
+            width: 100%;
+        }
+
+        .linkContainer ul {
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 40px;
+        }
+
+        .iconContainer {
+            //outline: 2px solid red;
+            padding-top: 10px;
+
+            .inputContainer {
+                //outline: 2px solid red;
+
+                label {
+                    //outline: 2px solid red;
+                    display: flex;
+                    align-items: center;
+
+                    .input {
+                        //outline: 2px solid red;
+                    }
+                }
+
+
+
+            }
+        }
+    }
+
+    /* Ajustes para mobile */
+    @media (max-width: 600px) {
+        gap: 2rem;
+        padding: 2rem 1rem;
+
+        .linkContainer ul {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .iconContainer {
+            .inputContainer label {
+                //max-width: 320px;
+                display: flex;
+                align-items: center;
+                //outline: 2px solid red;
+
+                .input {
+                    input {
+                        font-size: 0.9rem;
+                    }
+
+                    svg {
+                        right: 12px;
+                        bottom: 9px;
+                    }
+                }
+            }
+
+            .socialContainer {
+                gap: 15px;
+
+                svg {
+                    width: 28px;
+                    height: 28px;
                 }
             }
         }

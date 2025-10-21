@@ -23,8 +23,10 @@ export default function Footer() {
                 <div className={styles.inputContainer}>
                     <label htmlFor="">
                         <h4>Se inscreva na nossa newsletter:</h4>
-                        <input type="text" placeholder='EMAIL' />
-                        <LiaLongArrowAltRightSolid />
+                        <div className={styles.input}>
+                            <input type="text" placeholder='EMAIL' />
+                            <LiaLongArrowAltRightSolid size={25} />
+                        </div>
                     </label>
                 </div>
                 <div className={styles.socialContainer}>

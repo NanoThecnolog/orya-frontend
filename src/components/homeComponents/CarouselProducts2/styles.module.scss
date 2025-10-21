@@ -1,13 +1,25 @@
 .container {
     width: 100%;
-    //padding: 2rem 1rem;
-    //outline: 2px solid red;
+    padding: 4rem 2rem;
 
     .products {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 3rem;
+
+        .textContainer {
+            max-width: 1200px;
+            text-align: center;
+            padding: 0 1rem;
+
+            h2 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                line-height: 1.6;
+                color: #692424;
+            }
+        }
 
         .carouselContainer {
             width: 100%;
@@ -58,6 +70,7 @@
                             width: 100%;
                             bottom: 0;
                             left: 0;
+                            transition: height 0.3s ease;
                         }
                     }
 
@@ -65,20 +78,21 @@
                         display: flex;
                         flex-direction: column;
                         width: 100%;
+                        text-align: center;
 
                         h4 {
                             font-size: 1rem;
                             font-weight: 500;
                             color: #222;
-                            margin-bottom: 1rem;
-                            letter-spacing: 2px;
+                            margin-bottom: 0.8rem;
+                            letter-spacing: 1.5px;
                         }
 
                         p {
                             font-size: 1rem;
                             color: #000;
                             margin-top: 0.25rem;
-                            letter-spacing: 2px;
+                            letter-spacing: 1.5px;
                             font-weight: 600;
 
                             &:last-child {
@@ -89,6 +103,7 @@
                 }
             }
 
+            /* Paginação e navegação */
             .swiper-pagination {
                 bottom: 0;
                 background-color: rgba(0, 0, 0, 0.05);
@@ -102,7 +117,6 @@
             .swiper-pagination-bullet {
                 background: #222;
                 opacity: 0.3;
-
 
                 &-active {
                     background: #0a8754;
@@ -141,23 +155,87 @@
         }
     }
 
+    /* ---- Tablets (até 1024px) ---- */
     @media (max-width: 1024px) {
-        .carouselContainer .carousel {
-            .slide {
-                .imageContainer {
-                    aspect-ratio: 4 / 3;
+        padding: 3rem 1.5rem;
+
+        .products {
+            gap: 2rem;
+
+            .textContainer h2 {
+                font-size: 1.3rem;
+                line-height: 1.5;
+            }
+
+            .carouselContainer {
+                .carousel {
+                    .slide {
+                        padding: 10px;
+
+                        .imageContainer {
+                            aspect-ratio: 4 / 6;
+                        }
+
+                        .productInfo h4 {
+                            font-size: 0.95rem;
+                        }
+
+                        .productInfo p {
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+
+                :global(.swiper-button-prev),
+                :global(.swiper-button-next) {
+                    //width: 35px;
+                    //height: 35px;
+                    display: none;
                 }
             }
         }
     }
 
+    /* ---- Mobile (até 768px) ---- */
     @media (max-width: 768px) {
         padding: 2rem 1rem;
 
-        .carouselContainer .carousel {
-            .slide {
-                .imageContainer {
-                    width: 100%;
+        .products {
+            gap: 2rem;
+
+            .textContainer h2 {
+                font-size: 1.1rem;
+                line-height: 1.4;
+            }
+
+            .carouselContainer {
+                .carousel {
+                    .slide {
+                        padding: 0.5rem;
+
+                        .imageContainer {
+                            aspect-ratio: 1 / 2;
+                        }
+
+                        .productInfo h4 {
+                            font-size: 0.9rem;
+                            letter-spacing: 1px;
+                        }
+
+                        .productInfo p {
+                            font-size: 0.85rem;
+                        }
+                    }
+                }
+
+                :global(.swiper-button-prev),
+                :global(.swiper-button-next) {
+                    display: none;
+                }
+
+                .swiper-pagination {
+                    background-color: rgba(0, 0, 0, 0.1);
+                    padding: 0.3rem 0.8rem;
                 }
             }
         }

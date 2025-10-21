@@ -8,6 +8,7 @@
     height: 100px;
     width: 100%;
     z-index: 10;
+    padding: 0 2rem;
 
     .logoContainer {
         height: 100%;
@@ -28,48 +29,44 @@
 
     .menu {
         display: flex;
+        align-items: center;
         gap: 50px;
         list-style: none;
         transition: all 0.3s ease;
 
         li {
-            //position: relative;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
             font-weight: 400;
             text-transform: uppercase;
-            //outline: 2px solid red;
+            position: relative;
 
             .dropdown {
                 position: absolute;
                 top: 100%;
                 left: 0;
-                background: transparent;
+                background: white;
                 border-top: 1px solid rgba(204, 204, 204, 0.15);
                 border-bottom: 1px solid rgba(204, 204, 204, 0.15);
                 padding: 0 50px 0 200px;
                 display: flex;
                 gap: 50px;
                 width: 100vw;
-                min-width: 150px;
                 text-transform: none;
                 z-index: 20;
                 overflow: hidden;
                 height: 0;
-                //max-height: 0;
-                //transition: height .4s ease;
+                transition: height 0.3s ease;
 
                 .dropItem {
                     padding: 5px 15px;
                     white-space: nowrap;
                     font-weight: 900;
                     letter-spacing: 2px;
-                    //outline: 2px solid green;
-                    //transition: .4s ease;
-                    color: white;
-
+                    color: var(--wine);
+                    transition: transform 0.2s ease;
 
                     &:hover {
                         transform: scale(1.05);
@@ -78,8 +75,7 @@
 
                 &.active {
                     padding: 25px 50px 25px 200px;
-                    height: 100px;
-                    max-height: 100px;
+                    height: auto;
                 }
             }
         }
@@ -102,12 +98,11 @@
 
         .icons {
             display: flex;
-            gap: 5px;
+            gap: 10px;
             cursor: pointer;
 
             .cartIcon {
                 position: relative;
-                cursor: pointer;
 
                 .cartCount {
                     position: absolute;
@@ -126,13 +121,37 @@
         }
     }
 
+    /* Tablets */
+    @media (max-width: 1024px) {
+        justify-content: space-between;
+        padding: 0 1.5rem;
+
+        .menu {
+            gap: 30px;
+
+            li {
+                font-size: 0.95rem;
+            }
+        }
+
+        .iconContainer {
+            gap: 10px;
+
+            .icons {
+                gap: 5px;
+            }
+        }
+    }
+
+    /* Celulares */
     @media (max-width: 768px) {
         justify-content: space-between;
-        padding: 0 20px;
+        padding: 0 1rem;
 
         .hamburger {
             display: block;
             z-index: 30;
+            color: white;
         }
 
         .menu {
@@ -140,7 +159,7 @@
             top: 100px;
             left: 0;
             width: 100%;
-            background: white;
+            //background: white;
             flex-direction: column;
             align-items: flex-start;
             gap: 20px;
@@ -148,6 +167,7 @@
             transform: translateY(-200%);
             opacity: 0;
             pointer-events: none;
+            transition: all 0.3s ease;
 
             &.open {
                 transform: translateY(0);
@@ -157,16 +177,17 @@
 
             li {
                 width: 100%;
-                font-size: 18px;
+                font-size: 1.1rem;
 
                 .dropdown {
                     position: static;
                     border: none;
                     background: none;
                     padding: 5px 0;
+                    flex-direction: column;
+                    gap: 10px;
 
-
-                    li {
+                    .dropItem {
                         padding-left: 15px;
                     }
                 }
