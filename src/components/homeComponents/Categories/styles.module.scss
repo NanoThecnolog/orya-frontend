@@ -50,9 +50,11 @@
                 cursor: pointer;
                 backdrop-filter: blur(4px);
 
-                &:hover {
-                    background-color: #fff;
-                    color: #000;
+                @media(hover: hover) and (pointer: fine) {
+                    &:hover {
+                        background-color: #fff;
+                        color: #000;
+                    }
                 }
             }
 

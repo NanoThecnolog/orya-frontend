@@ -38,8 +38,10 @@
                     cursor: pointer;
                     padding: 20px;
 
-                    &:hover {
-                        transform: translateY(-5px);
+                    @media(hover:hover) and (pointer: fine) {
+                        &:hover {
+                            transform: translateY(-5px);
+                        }
                     }
 
                     .imageContainer {
@@ -54,13 +56,15 @@
                             transition: transform 0.4s ease;
                         }
 
-                        &:hover {
-                            .image {
-                                transform: scale(1.05);
-                            }
+                        @media(hover: hover) and (pointer: fine) {
+                            &:hover {
+                                .image {
+                                    transform: scale(1.05);
+                                }
 
-                            .buttonContainer {
-                                height: 50px;
+                                .buttonContainer {
+                                    height: 50px;
+                                }
                             }
                         }
 
@@ -139,9 +143,11 @@
                     font-weight: bold;
                 }
 
-                &:hover {
-                    background-color: rgba(255, 255, 255, 0.2);
-                    color: #fff;
+                @media(hover: hover) and (pointer: fine) {
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.2);
+                        color: #fff;
+                    }
                 }
             }
 

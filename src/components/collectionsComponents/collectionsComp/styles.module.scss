@@ -34,8 +34,10 @@
                 object-position: center;
             }
 
-            &:hover {
-                transform: scale(1.02);
+            @media(hover: hover) and (pointer: fine) {
+                &:hover {
+                    transform: scale(1.02);
+                }
             }
         }
 

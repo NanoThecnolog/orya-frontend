@@ -75,9 +75,13 @@
                     color: var(--wine);
                     //transition: transform 0.2s ease;
 
-                    &:hover {
-                        transform: scale(1.05);
+                    @media(hover: hover) and (pointer: fine) {
+                        &:hover {
+                            transform: scale(1.05);
+                        }
                     }
+
+
                 }
 
                 &.active {
@@ -92,6 +96,44 @@
         display: flex;
         gap: 20px;
         font-weight: 900;
+
+        .searchInput {
+            width: 0;
+            position: relative;
+            opacity: 0;
+
+            input {
+                width: 100%;
+                background-color: white;
+                border: none;
+                border-radius: 2rem;
+                padding: 6px 10px;
+                color: black;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            svg {
+                position: absolute;
+                right: 10px;
+                top: 2px;
+                color: black;
+                cursor: pointer;
+                border-radius: 50%;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, .6);
+                    color: white;
+                }
+            }
+
+            &.open {
+                opacity: 1;
+                width: 300px;
+            }
+        }
 
         .link {
             display: flex;

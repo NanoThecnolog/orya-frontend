@@ -99,9 +99,11 @@
                 svg {
                     cursor: pointer;
 
-                    &:hover {
-                        color: #8d0101;
-                        transform: scale(1.05);
+                    @media(hover: hover) and (pointer: fine) {
+                        &:hover {
+                            color: #8d0101;
+                            transform: scale(1.05);
+                        }
                     }
                 }
             }

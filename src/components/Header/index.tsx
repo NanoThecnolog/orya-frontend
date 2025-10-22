@@ -8,6 +8,7 @@ import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { menu } from '@/common/variables/menu'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
+import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
 
 interface HeaderProps {
     useWine: boolean
@@ -16,7 +17,9 @@ export default function Header({ useWine }: HeaderProps) {
     const router = useRouter()
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
     const { cartItems } = useMain()
-    const [mobileOpen, setMobileOpen] = useState(false)
+    const [mobileOpen, setMobileOpen] = useState<boolean>(false)
+    const [openSearch, setOpenSearch] = useState<boolean>(false)
+    const [searchInput, setSearchInput] = useState<string>("")
     const logoSRC = useWine ?
         "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" :
         "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
@@ -74,12 +77,17 @@ export default function Header({ useWine }: HeaderProps) {
             </ul>
 
             <div className={styles.iconContainer} style={{ color: useWine ? "white" : "var(--wine)" }}>
-                <div className={styles.link}>
-                    <span>port</span>
-                    <IoIosArrowDown />
+                <div className={`${styles.searchInput} ${openSearch ? styles.open : ""}`}>
+                    <input
+                        type="text"
+                        placeholder="Buscar produto"
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                    />
+                    <LiaLongArrowAltRightSolid size={25} />
                 </div>
                 <div className={styles.icons}>
-                    <CiSearch size={20} />
+                    <CiSearch size={20} onClick={() => setOpenSearch(!openSearch)} />
                     <CiUser size={20} />
                     <div className={styles.cartIcon} onClick={() => { setCartOpen(true) }}>
                         <IoBagOutline size={19} />
