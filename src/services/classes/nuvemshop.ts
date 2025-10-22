@@ -36,7 +36,7 @@ class Nuvemshop {
         }
     }
 
-    async getProducts() {
+    async getProducts(): Promise<ProductList> {
         try {
             const response = await this.api.get("/products");
             return response.data;
@@ -44,8 +44,8 @@ class Nuvemshop {
             const error = err as AxiosError<{ message?: string }>;
             const status = error.response?.status || 500;
             const message = error.response?.data?.message || error.message;
-            console.error(`Erro ao buscar produtos: ${message}`);
-            return { error: true, status, message };
+            console.error(`Erro ao buscar produtos: status ${status}, message ${message}`);
+            return [];
         }
     }
     async produto(id: string) {

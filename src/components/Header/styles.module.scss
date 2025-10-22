@@ -198,10 +198,11 @@
         padding: 0 1rem;
         //background: rgba(0, 0, 0, .1);
 
+
         .hamburger {
             display: block;
             z-index: 30;
-            color: white;
+            //color: white;
         }
 
         .menu {
@@ -221,11 +222,16 @@
             //transition: 0.3s;
             //outline: 2px solid red;
 
+
+
             &.open {
                 transform: translateY(0);
                 opacity: 1;
                 pointer-events: auto;
-                height: 100%;
+                height: auto;
+                //min-height: 330px;
+                //background-color: beige;
+
                 //background: rgba(0, 0, 0, .1);
             }
 
@@ -238,10 +244,6 @@
 
                 .dropdown {
                     position: static;
-                    //outline: 2px solid red;
-                    //border: none;
-                    //background: none;
-                    //left: 100px;
                     padding: 5px 0;
                     flex-direction: column;
                     align-items: flex-start;
@@ -249,9 +251,11 @@
                     text-align: start;
                     gap: 10px;
 
+
                     .dropItem {
                         padding-left: 15px;
                         //outline: 2px solid red;
+
                     }
 
                     &.active {

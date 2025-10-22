@@ -7,6 +7,8 @@ import SendCartButton from '@/components/ui/CartButton'
 import { Ecommerce } from '@/services/classes/ecommerce'
 import { useMain } from '@/contexts/mainContext'
 import { format } from '@/utils/formatContent'
+import { useEffect, useState } from 'react'
+import { relatedBreakpoints } from '@/common/variables/swiperBreakpoint'
 
 interface RelatedProps {
     related: Product[]
@@ -14,11 +16,24 @@ interface RelatedProps {
 
 export default function RelatedProducts({ related }: RelatedProps) {
     const { cartItems, setCartItems } = useMain()
+    const [width, setWidth] = useState(0)
+    const [cardsPerContainer, setCardsPerContainer] = useState(4)
 
     const handleClick = (product: Product) => {
         const ecommerce = new Ecommerce(cartItems, setCartItems)
         ecommerce.addToCart(product)
     }
+    useEffect(() => {
+        function handleResize() {
+            const windowWidth = window.innerWidth;
+            setWidth(windowWidth)
+            const { cards } = relatedBreakpoints.find(b => windowWidth < b.width) || { cards: 5 }
+            setCardsPerContainer(cards)
+        }
+        window.addEventListener('resize', handleResize)
+        handleResize()
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
     return (
         <section className={styles.container}>
             <div className={styles.titleSection}>
@@ -30,7 +45,7 @@ export default function RelatedProducts({ related }: RelatedProps) {
                     navigation={false}
                     autoplay={false}
                     loop={false}
-                    slidesPerView={6}
+                    slidesPerView={cardsPerContainer}
                     className={styles.swiperCarousel}
                 >
                     {related.length > 0 && related.map(product => {

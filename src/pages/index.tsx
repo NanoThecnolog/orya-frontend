@@ -23,22 +23,11 @@ interface HomeProps {
 }
 
 export default function Home() {
-  //const [products, setProducts] = useState<ProductList>([])
   const { productList, setProductList } = useMain()
   const [width, setWidth] = useState(0)
   const [cardsPerContainer, setCardsPerContainer] = useState(4)
 
 
-
-  /*const testeAPI = async () => {
-    try {
-      const response = await axios.get<StoreInfo>("/api/store")
-      const data = response.data
-      //console.log("resultado da request de teste", data)
-    } catch (err) {
-      console.error("erro na request de teste", err)
-    }
-  }*/
   const getProducts = async () => {
     try {
       const response = await axios.get<ProductList>("/api/products")

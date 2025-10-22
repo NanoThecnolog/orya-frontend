@@ -3,6 +3,7 @@ import styles from './styles.module.scss'
 import { format } from '@/utils/formatContent'
 import ProductImages from '../ProductImages'
 import { useState } from 'react'
+import { Breadcrumbs } from '@/components/productsComponents/Breadcrumbs'
 
 interface InfoProps {
     info: Product
@@ -27,6 +28,7 @@ export default function ProductInfo({ info }: InfoProps) {
             <div className={styles.productContainer}>
                 <ProductImages images={info.images} />
                 <div className={styles.infoContainer}>
+                    <Breadcrumbs />
                     <div className={styles.productInfo}>
                         <h2>{info.name.pt}</h2>
                         <p>{format.price(info.variants[0].price)}</p>

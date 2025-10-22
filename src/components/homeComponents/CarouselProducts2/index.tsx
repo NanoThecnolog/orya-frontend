@@ -61,7 +61,7 @@ export default function CarouselProducts2({
                         initialSlide={3}
                         className={styles.carousel}
                     >
-                        {products && products.map((product, index) => {
+                        {Array.isArray(products) && products.map((product, index) => {
                             const price = format.price(product.variants?.[0]?.price)
                             const discount = format.discount(product.variants?.[0]?.price, 10)
                             const image = product.images?.[0]?.src ?? "/img/sem-foto.png"

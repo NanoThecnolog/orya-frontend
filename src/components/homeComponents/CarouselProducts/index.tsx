@@ -60,7 +60,7 @@ export default function CarouselProducts({
                         className={styles.carousel}
                     >
                         {
-                            products &&
+                            Array.isArray(products) &&
                             products.map((product, index) => {
                                 const price = format.price(product.variants?.[0]?.price ?? null)
                                 const discount = format.discount(product.variants?.[0]?.price ?? null, 10)

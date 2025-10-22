@@ -33,7 +33,7 @@ export default function Header({ useWine }: HeaderProps) {
         router.push(link)
     }
     return (
-        <nav className={styles.container}>
+        <nav className={styles.container} style={useWine ? {} : { backgroundColor: "beige" }}>
             <div className={styles.logoContainer} onClick={() => router.push("/")}>
                 <Image
                     src={logoSRC}
@@ -43,11 +43,18 @@ export default function Header({ useWine }: HeaderProps) {
                     className={styles.image}
                 />
             </div>
-            <div className={styles.hamburger} onClick={() => setMobileOpen(!mobileOpen)}>
+            <div
+                className={styles.hamburger}
+                onClick={() => setMobileOpen(!mobileOpen)}
+                style={{ color: useWine ? "white" : "var(--wine)" }}
+            >
                 {mobileOpen ? <RxCross2 size={25} /> : <RxHamburgerMenu size={25} />}
             </div>
 
-            <ul className={`${styles.menu} ${mobileOpen ? styles.open : ""}`}>
+            <ul
+                className={`${styles.menu} ${mobileOpen ? styles.open : ""}`}
+                style={useWine ? {} : { backgroundColor: "beige" }}
+            >
                 {menu.map(item =>
                     <li
                         key={item.title}
@@ -64,7 +71,7 @@ export default function Header({ useWine }: HeaderProps) {
                                     <li
                                         key={drop.title}
                                         className={styles.dropItem}
-                                        style={{ color: useWine ? "white" : "var(--wine)" }}
+                                        style={useWine ? { color: "white" } : { backgroundColor: "beige", color: "var(--wine)" }}
                                         onClick={() => handleClick(drop.link!)}
                                     >
                                         {drop.title}

@@ -16,12 +16,12 @@ export function Breadcrumbs() {
         <nav aria-label="breadcrumb" className={styles.breadcrumb}>
             <ol>
                 <li>
-                    <Link href="/">Início</Link>
+                    <Link href={"/"}>Início</Link>
                 </li>
                 {crumbs.map((crumb, i) => (
                     <li key={i}>
                         <span className={styles.separator}>›</span>
-                        <Link href={crumb.href}>{crumb.label}</Link>
+                        <span>{crumb.label}</span>
                     </li>
                 ))}
             </ol>

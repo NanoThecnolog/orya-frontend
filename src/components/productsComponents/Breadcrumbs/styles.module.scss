@@ -11,13 +11,20 @@
         margin: 0;
     }
 
-    a {
-        color: #0070f3;
+    a,
+    span {
+        padding: 0;
+        color: var(--wine);
         text-decoration: none;
+
 
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    span {
+        pointer-events: none;
     }
 
     .separator {

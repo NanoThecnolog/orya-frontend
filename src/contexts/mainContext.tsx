@@ -1,5 +1,6 @@
 import { Product, ProductList } from "@/@types/nuvemshop/products";
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
+import { nuvemshop } from "@/services/classes/nuvemshop";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface MainProviderProps {
     children: ReactNode;
@@ -32,6 +33,14 @@ export function MainProvider({ children }: MainProviderProps) {
     const [cartOpen, setCartOpen] = useState<boolean>(false)
     const [cartItems, setCartItems] = useState<CartProps[]>([])
     const [productList, setProductList] = useState<ProductList>([])
+
+    useEffect(() => {
+        const getProducts = async () => {
+            const products = await nuvemshop.getProducts()
+            setProductList(products)
+        }
+        if (productList.length === 0) getProducts()
+    }, [productList])
 
     return (
         <mainContext.Provider value={{ cartOpen, setCartOpen, cartItems, setCartItems, productList, setProductList }}>
