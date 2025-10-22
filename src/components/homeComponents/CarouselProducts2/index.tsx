@@ -14,7 +14,8 @@ interface CarouselProductProps {
     navigation?: boolean
     pagination?: boolean
     autoplay?: boolean
-    loop?: boolean
+    loop?: boolean,
+    cardsPerContainer: number
 }
 
 export default function CarouselProducts2({
@@ -23,6 +24,7 @@ export default function CarouselProducts2({
     pagination = false,
     autoplay = false,
     loop = true,
+    cardsPerContainer
 }: CarouselProductProps) {
     const router = useRouter()
     const { cartItems, setCartItems } = useMain()
@@ -55,7 +57,7 @@ export default function CarouselProducts2({
                         navigation={navigation}
                         pagination={pagination ? { clickable: true } : false}
                         autoplay={autoplay ? { delay: 4000, disableOnInteraction: false } : false}
-                        slidesPerView={4}
+                        slidesPerView={cardsPerContainer}
                         initialSlide={3}
                         className={styles.carousel}
                     >

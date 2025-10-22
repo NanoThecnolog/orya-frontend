@@ -51,8 +51,10 @@ export default function Header({ useWine }: HeaderProps) {
                         onClick={() => handleDropdown(item.title)}
                         style={{ color: useWine ? "white" : "var(--wine)" }}
                     >
-                        {item.title}
-                        {!item.link && <IoIosArrowDown />}
+                        <div className={styles.listItem}>
+                            {item.title}
+                            {!item.link && <IoIosArrowDown />}
+                        </div>
                         {activeMenu === item.title && !item.link && (
                             <ul className={`${styles.dropdown} ${styles.active}`}>
                                 {item.dropMenu?.map(drop =>

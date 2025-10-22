@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import SendCartButton from '@/components/ui/CartButton'
 import { Ecommerce } from '@/services/classes/ecommerce'
+import { breakpoints } from '@/common/variables/swiperBreakpoint'
 
 interface CarouselProductProps {
     products: ProductList | null
@@ -17,6 +18,7 @@ interface CarouselProductProps {
     autoplay?: boolean
     loop?: boolean
     text?: boolean
+    cardsPerContainer: number
 }
 
 export default function CarouselProducts({
@@ -25,7 +27,8 @@ export default function CarouselProducts({
     pagination = false,
     autoplay = false,
     loop = true,
-    text = false
+    text = false,
+    cardsPerContainer
 }: CarouselProductProps) {
     const router = useRouter()
     const { cartItems, setCartItems } = useMain()
@@ -38,6 +41,7 @@ export default function CarouselProducts({
         const ecommerce = new Ecommerce(cartItems, setCartItems)
         ecommerce.addToCart(product)
     }
+
 
     return (
         <section className={styles.container}>
@@ -52,7 +56,7 @@ export default function CarouselProducts({
                         navigation={navigation}
                         pagination={pagination ? { clickable: true } : false}
                         autoplay={autoplay ? { delay: 4000, disableOnInteraction: false } : false}
-                        slidesPerView={4}
+                        slidesPerView={cardsPerContainer}
                         className={styles.carousel}
                     >
                         {

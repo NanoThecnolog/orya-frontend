@@ -32,7 +32,7 @@
         align-items: center;
         gap: 50px;
         list-style: none;
-        transition: all 0.3s ease;
+        //transition: all 0.3s ease;
 
         li {
             cursor: pointer;
@@ -41,13 +41,20 @@
             gap: 8px;
             font-weight: 400;
             text-transform: uppercase;
-            position: relative;
+
+            //position: relative;
+            .listItem {
+                //outline: 2px solid red;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
 
             .dropdown {
                 position: absolute;
                 top: 100%;
                 left: 0;
-                background: white;
+                //background: white;
                 border-top: 1px solid rgba(204, 204, 204, 0.15);
                 border-bottom: 1px solid rgba(204, 204, 204, 0.15);
                 padding: 0 50px 0 200px;
@@ -58,7 +65,7 @@
                 z-index: 20;
                 overflow: hidden;
                 height: 0;
-                transition: height 0.3s ease;
+                //transition: height 0.3s ease;
 
                 .dropItem {
                     padding: 5px 15px;
@@ -66,7 +73,7 @@
                     font-weight: 900;
                     letter-spacing: 2px;
                     color: var(--wine);
-                    transition: transform 0.2s ease;
+                    //transition: transform 0.2s ease;
 
                     &:hover {
                         transform: scale(1.05);
@@ -147,6 +154,7 @@
     @media (max-width: 768px) {
         justify-content: space-between;
         padding: 0 1rem;
+        //background: rgba(0, 0, 0, .1);
 
         .hamburger {
             display: block;
@@ -159,7 +167,7 @@
             top: 100px;
             left: 0;
             width: 100%;
-            //background: white;
+            //background: rgba(0, 0, 0, .1);
             flex-direction: column;
             align-items: flex-start;
             gap: 20px;
@@ -167,28 +175,46 @@
             transform: translateY(-200%);
             opacity: 0;
             pointer-events: none;
-            transition: all 0.3s ease;
+            height: 0;
+            //transition: 0.3s;
+            //outline: 2px solid red;
 
             &.open {
                 transform: translateY(0);
                 opacity: 1;
                 pointer-events: auto;
+                height: 100%;
+                //background: rgba(0, 0, 0, .1);
             }
 
             li {
                 width: 100%;
                 font-size: 1.1rem;
+                flex-direction: column;
+                align-items: start;
+
 
                 .dropdown {
                     position: static;
-                    border: none;
-                    background: none;
+                    //outline: 2px solid red;
+                    //border: none;
+                    //background: none;
+                    //left: 100px;
                     padding: 5px 0;
                     flex-direction: column;
+                    align-items: flex-start;
+
+                    text-align: start;
                     gap: 10px;
 
                     .dropItem {
                         padding-left: 15px;
+                        //outline: 2px solid red;
+                    }
+
+                    &.active {
+                        padding: 5px 0 5px 50px;
+                        height: auto;
                     }
                 }
             }

@@ -16,6 +16,7 @@ import axios from "axios";
 import { ProductList } from "@/@types/nuvemshop/products";
 import { GetServerSideProps } from "next";
 import { useMain } from "@/contexts/mainContext";
+import { breakpoints } from "@/common/variables/swiperBreakpoint";
 
 interface HomeProps {
   products: ProductList | null
@@ -24,6 +25,8 @@ interface HomeProps {
 export default function Home() {
   //const [products, setProducts] = useState<ProductList>([])
   const { productList, setProductList } = useMain()
+  const [width, setWidth] = useState(0)
+  const [cardsPerContainer, setCardsPerContainer] = useState(4)
 
 
 
@@ -51,8 +54,17 @@ export default function Home() {
     if (productList.length === 0) getProducts()
   }, [])
 
-
-
+  useEffect(() => {
+    function handleResize() {
+      const windowWidth = window.innerWidth;
+      setWidth(windowWidth)
+      const { cards } = breakpoints.find(b => windowWidth < b.width) || { cards: 5 }
+      setCardsPerContainer(cards)
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <>
@@ -64,10 +76,10 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <Carousel images={carouselImages} autoplay={false} />
-        <CarouselProducts products={productList} text={true} />
+        <CarouselProducts products={productList} text={true} cardsPerContainer={cardsPerContainer} />
         <BannerCollection collection={collection} />
         <Categories categories={categories} />
-        <CarouselProducts2 products={productList} />
+        <CarouselProducts2 products={productList} cardsPerContainer={cardsPerContainer} />
         <TextDivisor />
         <Banner image="/img/ORYA 16550.png" />
         <About />
