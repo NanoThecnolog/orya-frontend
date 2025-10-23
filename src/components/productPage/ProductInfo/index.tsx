@@ -4,18 +4,20 @@ import { format } from '@/utils/formatContent'
 import ProductImages from '../ProductImages'
 import { useState } from 'react'
 import { Breadcrumbs } from '@/components/productsComponents/Breadcrumbs'
+import { useMain } from '@/contexts/mainContext'
+import { Ecommerce } from '@/services/classes/ecommerce'
 
 interface InfoProps {
-    info: Product
+    product: Product
 }
 
-export default function ProductInfo({ info }: InfoProps) {
+export default function ProductInfo({ product }: InfoProps) {
     const [amount, setAmount] = useState<number>(1)
-    console.log(info.variants[0].inventory_levels)
+    const { cartItems, setCartItems } = useMain()
+    //console.log(product.variants[0].inventory_levels)
 
     const changeAmount = (operation: boolean) => {
         if (operation) {
-
             setAmount(amount + 1)
         }
         else {
@@ -23,16 +25,20 @@ export default function ProductInfo({ info }: InfoProps) {
             setAmount(amount - 1)
         }
     }
+    const sendToCart = (product: Product) => {
+        const ecommerce = new Ecommerce(cartItems, setCartItems)
+        ecommerce.addToCart(product, amount)
+    }
     return (
         <section className={styles.container}>
             <div className={styles.productContainer}>
-                <ProductImages images={info.images} />
+                <ProductImages images={product.images} />
                 <div className={styles.infoContainer}>
                     <Breadcrumbs />
                     <div className={styles.productInfo}>
-                        <h2>{info.name.pt}</h2>
-                        <p>{format.price(info.variants[0].price)}</p>
-                        <p>{format.discount(info.variants[0].price, 10)}</p>
+                        <h2>{product.name.pt}</h2>
+                        <p>{format.price(product.variants[0].price)}</p>
+                        <p>{format.discount(product.variants[0].price, 10)}</p>
                     </div>
                     <div className={styles.quantityContainer}>
                         <div className={styles.inputContainer}>
@@ -58,7 +64,7 @@ export default function ProductInfo({ info }: InfoProps) {
                             </button>
                         </div>
                         <div className={styles.buttonContainer}>
-                            <button type='button' className={styles.buyBtn}>Encomendar</button>
+                            <button type='button' className={styles.buyBtn} onClick={() => sendToCart(product)}>Encomendar</button>
                         </div>
                     </div>
                     <div className={styles.paymentMethodsContainer}>
@@ -69,7 +75,7 @@ export default function ProductInfo({ info }: InfoProps) {
                     </div>
                     <div
                         className={styles.descriptionContainer}
-                        dangerouslySetInnerHTML={{ __html: info.description.pt }}
+                        dangerouslySetInnerHTML={{ __html: product.description.pt }}
                     />
                 </div>
             </div>

@@ -37,7 +37,7 @@ export default function ProductPage({ product, productList }: ProductProps) {
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
-                <ProductInfo info={product} />
+                <ProductInfo product={product} />
                 {
                     relatedProducts.length > 0 &&
                     <RelatedProducts related={relatedProducts} />

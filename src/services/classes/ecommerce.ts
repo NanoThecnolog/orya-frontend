@@ -38,10 +38,10 @@ export class Ecommerce {
         this.updateCart(updated);
     }
 
-    addToCart(product: Product): void {
-        if (this.hasItem(product)) this.changeAmount(product.id, 1)
+    addToCart(product: Product, amount: number = 1): void {
+        if (this.hasItem(product)) this.changeAmount(product.id, amount)
         else {
-            this.updateCart([...this.cartItems, { product, amount: 1 }])
+            this.updateCart([...this.cartItems, { product, amount }])
             //this.setCartItems((prev) => [...prev, { product, amount: 1 }]);
             toast.success("produto adicionado ao carrinho!")
         }
