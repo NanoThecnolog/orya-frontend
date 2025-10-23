@@ -38,6 +38,7 @@
                 position: relative;
                 aspect-ratio: 14 / 16;
                 //height: clamp(200px, 30vw, 400px);
+                cursor: pointer;
 
                 .image {
                     object-fit: cover;

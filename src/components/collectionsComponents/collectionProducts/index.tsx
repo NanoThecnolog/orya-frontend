@@ -7,18 +7,23 @@ import Image from 'next/image'
 import { useMain } from '@/contexts/mainContext'
 import { Ecommerce } from '@/services/classes/ecommerce'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 interface CompProps {
     products: Product[]
 }
 
 export default function CollectionProducts({ products }: CompProps) {
+    const router = useRouter()
     const { cartItems, setCartItems } = useMain()
 
     const handleClick = (product: Product): void => {
         const ecommerce = new Ecommerce(cartItems, setCartItems)
         ecommerce.addToCart(product)
 
+    }
+    const goToProductPage = (id: number) => {
+        router.push(`/product/${id}`)
     }
     return (
         <section className={styles.container}>
@@ -30,7 +35,7 @@ export default function CollectionProducts({ products }: CompProps) {
                     const image = product.images?.[0]?.src ?? "/img/sem-foto.png"
                     return (
                         <div key={product.id} className={styles.productContainer}>
-                            <div className={styles.imageContainer}>
+                            <div className={styles.imageContainer} onClick={() => goToProductPage(product.id)}>
                                 <Image
                                     src={image}
                                     alt={product.name.pt || "Imagem do produto"}
