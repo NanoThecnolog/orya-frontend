@@ -8,7 +8,7 @@ class DebuLogger {
      * Exibe uma mensagem no console.
      * @param args - Argumentos a serem exibidos no log.
      */
-    log(...args: any[]) {
+    log(...args: unknown[]) {
         if (this.isDebug) console.log(...args)
     }
 
@@ -16,7 +16,7 @@ class DebuLogger {
      * Exibe uma mensagem de erro no console.
      * @param args - Argumentos a serem exibidos como erro.
      */
-    error(...args: any[]) {
+    error(...args: unknown[]) {
         if (this.isDebug) console.error(...args)
     }
 
@@ -24,7 +24,7 @@ class DebuLogger {
      * Exibe um aviso no console.
      * @param args - Argumentos a serem exibidos como aviso.
      */
-    warn(...args: any[]) {
+    warn(...args: unknown[]) {
         if (this.isDebug) console.warn(...args)
     }
 
@@ -32,7 +32,7 @@ class DebuLogger {
      * Exibe uma tabela formatada no console.
      * @param data - Dados a serem exibidos em formato tabular.
      */
-    table(data: any) {
+    table(data: unknown) {
         if (this.isDebug) console.table(data)
     }
 
@@ -40,7 +40,7 @@ class DebuLogger {
      * Exibe uma mensagem informativa no console.
      * @param args - Argumentos a serem exibidos como informação.
      */
-    info(...args: any[]) {
+    info(...args: unknown[]) {
         if (this.isDebug) console.info(...args)
     }
 
@@ -48,7 +48,7 @@ class DebuLogger {
      * Exibe a pilha de chamadas que levou até este ponto.
      * @param args - Mensagem opcional a ser incluída no trace.
      */
-    trace(...args: any[]) {
+    trace(...args: unknown[]) {
         if (this.isDebug) console.trace(...args)
     }
 
