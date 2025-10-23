@@ -17,12 +17,13 @@ import { ProductList } from "@/@types/nuvemshop/products";
 import { GetServerSideProps } from "next";
 import { useMain } from "@/contexts/mainContext";
 import { breakpoints } from "@/common/variables/swiperBreakpoint";
+import { debug } from "@/utils/DebugLogger";
 
 interface HomeProps {
-  products: ProductList | null
+  products: ProductList
 }
 
-export default function Home() {
+export default function Home({ products }: HomeProps) {
   const { productList, setProductList } = useMain()
   const [width, setWidth] = useState(0)
   const [cardsPerContainer, setCardsPerContainer] = useState(4)
@@ -39,9 +40,10 @@ export default function Home() {
     }
   }
   useEffect(() => {
-    //testeAPI()
-    if (productList.length === 0) getProducts()
-  }, [])
+    if (!products || products.length === 0) return
+    debug.log("produtos do server", products)
+    setProductList(products)
+  }, [productList, products])
 
   useEffect(() => {
     function handleResize() {
@@ -77,20 +79,20 @@ export default function Home() {
   );
 }
 
-/*export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const url = process.env.OFFICIAL_URL
 
   try {
     const response = await axios.get<ProductList>(`${url}/api/products`)
     const data = response.data
-    console.log("resultado da request de produtos", data)
+    //console.log("resultado da request de produtos", data)
     return {
       props: { products: data }
     }
   } catch (err) {
     console.error("erro na request de produtos", err)
     return {
-      props: { products: null }
+      props: { products: [] }
     }
   }
-}*/
+}

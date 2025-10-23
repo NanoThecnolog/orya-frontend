@@ -9,6 +9,11 @@ import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
 import { MainProvider } from "@/contexts/mainContext";
 import CartSidebar from "@/components/CartSideBar";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -26,6 +31,22 @@ export default function App({ Component, pageProps }: AppProps) {
     winePaths.includes(currentPath) ||
     winePrefixes.some(prefix => asPath.startsWith(prefix))
 
+  useEffect(() => {
+    const handleStart = () => NProgress.start()
+    const handleStop = () => NProgress.done()
+
+    router.events.on('routeChangeStart', handleStart)
+    router.events.on('routeChangeComplete', handleStop)
+    router.events.on('routeChangeError', handleStop)
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart)
+      router.events.off('routeChangeComplete', handleStop)
+      router.events.off('routeChangeError', handleStop)
+    }
+  }, [router.events])
+
+
   return <MainProvider>
     <AnimatePresence mode="wait">
       <motion.div
@@ -38,6 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Header useWine={showWineFontColor} />
         <CartSidebar />
         <Component {...pageProps} />
+        <ToastContainer autoClose={3500} position="top-left" />
         <Footer />
       </motion.div>
     </AnimatePresence>

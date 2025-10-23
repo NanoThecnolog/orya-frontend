@@ -43,13 +43,25 @@ export default function Header({ useWine }: HeaderProps) {
                     className={styles.image}
                 />
             </div>
+
             <div
                 className={styles.hamburger}
-                onClick={() => setMobileOpen(!mobileOpen)}
                 style={{ color: useWine ? "white" : "var(--wine)" }}
             >
-                {mobileOpen ? <RxCross2 size={25} /> : <RxHamburgerMenu size={25} />}
+                <div className={styles.cartIcon} onClick={() => { setCartOpen(true), setMobileOpen(false) }}>
+                    <IoBagOutline size={19} />
+                    {cartItems.length > 0 &&
+                        <span className={styles.cartCount}>{cartItems.length}</span>
+                    }
+                </div>
+                <div onClick={() => setMobileOpen(!mobileOpen)}>
+                    {mobileOpen ? <RxCross2 size={25} /> : <RxHamburgerMenu size={25} />}
+                </div>
+
+
             </div>
+
+
 
             <ul
                 className={`${styles.menu} ${mobileOpen ? styles.open : ""}`}

@@ -1,0 +1,119 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1500px;
+    gap: clamp(15px, 2vw, 40px);
+    padding: 20px;
+
+    .productsContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(20px, 2vw, 40px);
+
+
+        .productContainer {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            @media(hover:hover) and (pointer: fine) {
+                &:hover {
+                    transform: translateY(-15px);
+
+                    .buttonContainer {
+                        opacity: 1;
+                        pointer-events: auto;
+
+                        &:hover {
+                            background-color: white;
+                            color: var(--wine);
+                            border: 1px solid white;
+                        }
+                    }
+                }
+            }
+
+            .imageContainer {
+                position: relative;
+                aspect-ratio: 14 / 16;
+                //height: clamp(200px, 30vw, 400px);
+
+                .image {
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+
+            .infoContainer {
+                display: flex;
+                justify-content: space-between;
+                padding-top: clamp(5px, 1vw, 10px);
+                padding-bottom: clamp(10px, 2vw, 20px);
+
+                h3 {
+                    font-size: clamp(1rem, 2vw, 1.2rem);
+                }
+
+                .priceContainer {
+                    text-align: right;
+
+                    h4 {
+                        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+                    }
+
+                    h5 {
+                        font-size: clamp(0.8rem, 1.2vw, 1rem);
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .buttonContainer {
+                cursor: pointer;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: clamp(50px, 7vw, 71px);
+                border: 1px solid var(--wine);
+                background-color: var(--wine);
+                color: white;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                opacity: 0;
+                pointer-events: none;
+
+                .buttonInfo {
+                    display: flex;
+                    flex-direction: column;
+
+                    h3 {
+                        font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+                        font-weight: 100;
+                    }
+
+                    h4 {
+                        font-size: clamp(0.8rem, 1.5vw, 1rem);
+                        font-weight: 100;
+                    }
+
+                    @media(max-width: 560px) {
+                        display: none;
+                    }
+                }
+
+                @media(max-width: 780px) {
+                    height: 100px;
+                }
+
+                button {
+                    font-size: clamp(0.85rem, 1.5vw, 1rem);
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}

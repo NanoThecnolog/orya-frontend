@@ -1,6 +1,7 @@
 import { Product } from "@/@types/nuvemshop/products";
 import { CartProps } from "@/contexts/mainContext";
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
 
 export class Ecommerce {
     private cartItems: CartProps[];
@@ -11,38 +12,56 @@ export class Ecommerce {
         this.setCartItems = setCartItems;
     }
     private hasItem(product: Product): boolean {
-        const hasItem = this.cartItems.find(item => item.product.id === product.id)
+        /*const hasItem = this.cartItems.find(item => item.product.id === product.id)
         if (hasItem) return true
-        return false
+        return false*/
+        return this.cartItems.some(item => item.product.id === product.id)
     }
     private updateCart(updater: SetStateAction<CartProps[]>): void {
         this.setCartItems(updater)
     }
     private changeAmount(productID: number, delta: number): void {
-        this.updateCart(prev =>
-            prev.map(item =>
-                item.product.id === productID
-                    ? { ...item, amount: item.amount + delta }
-                    : item
-            ).filter(item => item.amount > 0)
-        )
+        const prevItems = this.cartItems;
+        const updated = prevItems
+            .map(item => {
+                if (item.product.id === productID) {
+                    return { ...item, amount: item.amount + delta };
+                }
+                return item;
+            })
+            .filter(item => item.amount > 0);
+
+        if (prevItems.length > updated.length) {
+            toast.info("Produto removido do carrinho.");
+        }
+
+        this.updateCart(updated);
     }
 
     addToCart(product: Product): void {
-        const hasItem = this.hasItem(product)
-        if (hasItem) this.changeAmount(product.id, 1)
-        else this.setCartItems((prev) => [...prev, { product, amount: 1 }]);
+        if (this.hasItem(product)) this.changeAmount(product.id, 1)
+        else {
+            this.updateCart([...this.cartItems, { product, amount: 1 }])
+            //this.setCartItems((prev) => [...prev, { product, amount: 1 }]);
+            toast.success("produto adicionado ao carrinho!")
+        }
+
     }
     subFromCart(product: Product): void {
-        const hasItem = this.hasItem(product)
-        if (hasItem) this.changeAmount(product.id, -1)
+        if (this.hasItem(product)) this.changeAmount(product.id, -1)
     }
     deleteProductFromCart(product: Product): void {
-        const hasItem = this.hasItem(product)
-        if (hasItem) this.updateCart(prev => prev.filter(item => item.product.id !== product.id))
+        if (this.hasItem(product)) {
+            const updated = this.cartItems.filter(item => item.product.id !== product.id)
+            this.updateCart(updated)
+            toast.info("Produto removido do carrinho!")
+            //this.updateCart(prev => prev.filter(item => item.product.id !== product.id))
+            //toast.success("produto removido do carrinho!")
+        }
     }
     clearCart(): void {
         this.setCartItems([])
+        toast.info("Carrinho vazio!")
     }
 }
 

@@ -1,14 +1,19 @@
 import Image from 'next/image'
 import styles from './styles.module.scss'
 import { CollectionsProps } from '@/@types/collections'
+import { useRouter } from 'next/navigation'
 
 interface CollectionProps {
     collection: CollectionsProps
 }
 
 export default function BannerCollection({ collection }: CollectionProps) {
+    const router = useRouter()
+    const handleClick = () => {
+        router.push(`/collections/${collection.name}`)
+    }
     return (
-        <section className={styles.container}>
+        <section className={styles.container} onClick={handleClick}>
             <div className={styles.imageContainer}>
                 <Image
                     src={collection.image}

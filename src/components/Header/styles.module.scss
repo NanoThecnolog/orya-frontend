@@ -200,9 +200,12 @@
 
 
         .hamburger {
-            display: block;
+            display: flex;
             z-index: 30;
             //color: white;
+            //outline: 2px solid red;
+            align-items: center;
+            gap: 15px;
         }
 
         .menu {

@@ -3,9 +3,21 @@
     width: 100%;
     position: relative;
 
-
     .image {
         object-fit: cover;
         object-position: center;
+    }
+
+    // Responsividade
+    @media (max-width: 1200px) {
+        height: 70vh;
+    }
+
+    @media (max-width: 768px) {
+        height: 50vh;
+    }
+
+    @media (max-width: 480px) {
+        height: 40vh;
     }
 }

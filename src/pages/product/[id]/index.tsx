@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             }
         }
     } catch (err) {
-        console.error("Erro no getServerSideProps", err)
+        console.error("Erro no getServerSideProps da pagina product", err)
         return {
             props: {
                 product: null,
