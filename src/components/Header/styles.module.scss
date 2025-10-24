@@ -51,6 +51,7 @@
             }
 
             .dropdown {
+                cursor: default;
                 position: absolute;
                 top: 100%;
                 left: 0;
@@ -61,7 +62,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 50px;
-                //width: 100%;
+                width: 100%;
                 max-width: 100vw;
                 //text-transform: none;
                 z-index: 20;
