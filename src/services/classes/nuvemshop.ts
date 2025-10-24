@@ -4,7 +4,7 @@ import axios, { AxiosError, AxiosInstance } from "axios";
 
 
 
-class Nuvemshop {
+export class Nuvemshop {
     private token: string | undefined;
     private api: AxiosInstance
 

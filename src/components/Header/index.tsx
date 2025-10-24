@@ -3,12 +3,14 @@ import styles from './styles.module.scss'
 import { CiSearch, CiUser } from 'react-icons/ci'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoBagOutline } from 'react-icons/io5'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
-import { menu } from '@/common/variables/menu'
+//import { menu } from '@/common/variables/menu'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
+import { renderMenu } from '@/services/classes/menu'
+import { MenuProps } from '@/@types/Menu'
 
 interface HeaderProps {
     useWine: boolean
@@ -16,7 +18,8 @@ interface HeaderProps {
 export default function Header({ useWine }: HeaderProps) {
     const router = useRouter()
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
-    const { cartItems } = useMain()
+    const { menu } = useMain()
+    const { cartItems, productList } = useMain()
     const [mobileOpen, setMobileOpen] = useState<boolean>(false)
     const [openSearch, setOpenSearch] = useState<boolean>(false)
     const [searchInput, setSearchInput] = useState<string>("")
@@ -32,6 +35,17 @@ export default function Header({ useWine }: HeaderProps) {
     const handleClick = (link: string) => {
         router.push(link)
     }
+
+    /**
+     * useEffect(() => {
+        const getMenu = async () => {
+            const menu = await renderMenu.menu()
+            setMenu(menu)
+        }
+        getMenu()
+    }, [])
+     */
+
     return (
         <nav className={styles.container} style={useWine ? {} : { backgroundColor: "beige" }}>
             <div className={styles.logoContainer} onClick={() => router.push("/")}>
@@ -57,17 +71,12 @@ export default function Header({ useWine }: HeaderProps) {
                 <div onClick={() => setMobileOpen(!mobileOpen)}>
                     {mobileOpen ? <RxCross2 size={25} /> : <RxHamburgerMenu size={25} />}
                 </div>
-
-
             </div>
-
-
-
             <ul
                 className={`${styles.menu} ${mobileOpen ? styles.open : ""}`}
                 style={useWine ? {} : { backgroundColor: "beige" }}
             >
-                {menu.map(item =>
+                {menu.length > 0 && menu.map(item =>
                     <li
                         key={item.title}
                         onClick={() => handleDropdown(item.title)}

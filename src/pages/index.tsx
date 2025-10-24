@@ -41,7 +41,7 @@ export default function Home({ products }: HomeProps) {
   }
   useEffect(() => {
     if (!products || products.length === 0) return
-    debug.log("produtos do server", products)
+    //debug.log("produtos do server", products)
     setProductList(products)
   }, [productList, products])
 
@@ -66,7 +66,7 @@ export default function Home({ products }: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.container}>
-        <Carousel images={carouselImages} autoplay={false} />
+        <Carousel images={carouselImages} />
         <CarouselProducts products={productList} text={true} cardsPerContainer={cardsPerContainer} />
         <BannerCollection collection={collection} />
         <Categories categories={categories} />

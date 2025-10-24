@@ -7,10 +7,10 @@ import CollectionProducts from '@/components/collectionsComponents/collectionPro
 import { GetServerSideProps } from 'next'
 import { Product, ProductList } from '@/@types/nuvemshop/products'
 import axios from 'axios'
-import { nuvemshop } from '@/services/classes/nuvemshop'
 import { useEffect, useState } from 'react'
 import { useMain } from '@/contexts/mainContext'
 import { debug } from '@/utils/DebugLogger'
+import { nuvemshop } from '@/services/classes/nuvemshop'
 
 interface CollectionProps {
     productListProps: ProductList

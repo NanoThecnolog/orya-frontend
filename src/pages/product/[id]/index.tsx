@@ -7,8 +7,8 @@ import ProductImages from '@/components/productPage/ProductImages'
 import ProductInfo from '@/components/productPage/ProductInfo'
 import { useMain } from '@/contexts/mainContext'
 import { useEffect, useMemo, useState } from 'react'
-import { nuvemshop } from '@/services/classes/nuvemshop'
 import RelatedProducts from '@/components/productPage/RelatedProducts'
+import { nuvemshop } from '@/services/classes/nuvemshop'
 
 interface ProductProps {
     product: Product | null

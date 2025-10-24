@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
-import Image from 'next/image'
 import { collections } from '@/common/variables/collections'
 import CollectionsComponent from '@/components/collectionsComponents/collectionsComp'
 
