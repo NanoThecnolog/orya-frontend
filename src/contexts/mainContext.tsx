@@ -1,7 +1,7 @@
 import { MenuProps } from "@/@types/Menu";
 import { Product, ProductList } from "@/@types/nuvemshop/products";
 import { renderMenu } from "@/services/classes/menu";
-import { nuvemshop } from "@/services/classes/nuvemshop";
+import axios from "axios";
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface MainProviderProps {
@@ -40,8 +40,8 @@ export function MainProvider({ children }: MainProviderProps) {
     const [menu, setMenu] = useState<MenuProps[]>([])
 
     const getProducts = async () => {
-        const products = await nuvemshop.getProducts()
-        setProductList(products)
+        const products = await axios.get<ProductList>("/api/products")
+        setProductList(products.data)
     }
     const getMenu = async () => {
         const menu = renderMenu.menu(productList)

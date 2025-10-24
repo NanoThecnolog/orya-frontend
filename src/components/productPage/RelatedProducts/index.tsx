@@ -1,7 +1,7 @@
 import { Product } from '@/@types/nuvemshop/products'
 import styles from './styles.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 import Image from 'next/image'
 import SendCartButton from '@/components/ui/CartButton'
 import { Ecommerce } from '@/services/classes/ecommerce'

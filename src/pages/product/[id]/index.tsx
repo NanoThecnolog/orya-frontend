@@ -53,8 +53,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     try {
         const [productRes, productListRes] = await Promise.all([
-            axios.get<Product>(`${url}/api/product/${id}`),
-            axios.get<ProductList>(`${url}/api/products`)
+            axios.get<Product>(`${url}/api/product/${id}`, {
+                headers: { "User-Agent": "loja-orya (contato@ericssongomes.com)" }
+            }),
+            axios.get<ProductList>(`${url}/api/products`, {
+                headers: { "User-Agent": "loja-orya (contato@ericssongomes.com)" }
+            })
         ])
 
 

@@ -9,7 +9,6 @@ import { Product, ProductList } from '@/@types/nuvemshop/products'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useMain } from '@/contexts/mainContext'
-import { debug } from '@/utils/DebugLogger'
 import { nuvemshop } from '@/services/classes/nuvemshop'
 
 interface CollectionProps {
@@ -21,6 +20,10 @@ export default function Collection({ productListProps }: CollectionProps) {
     const { collection } = router.query
     const [products, setProducts] = useState<Product[]>([])
     const { productList, setProductList } = useMain()
+
+    useEffect(() => {
+        if (productList.length === 0) setProductList(productListProps)
+    }, [productList, productListProps])
 
     const data = {
         title: collection as string,
@@ -39,9 +42,7 @@ export default function Collection({ productListProps }: CollectionProps) {
         setProducts(productsByCategory)
     }, [productListProps, collection])
 
-    useEffect(() => {
-        if (productList.length === 0) setProductList(productListProps)
-    }, [productList, productListProps])
+
 
     return (
         <>
@@ -58,10 +59,13 @@ export default function Collection({ productListProps }: CollectionProps) {
         </>
     )
 }
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const url = process.env.OFFICIAL_URL
+    const { collection } = ctx.query
     try {
-        const response = await axios.get<ProductList>(`${url}/api/products`)
+        const response = await axios.get<ProductList>(`${url}/api/products`, {
+            headers: { "User-Agent": "loja-orya (contato@ericssongomes.com)" }
+        })
         //console.log("chamada bem sucedida", response.data.length)
         return {
             props: {

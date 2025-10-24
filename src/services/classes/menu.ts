@@ -57,21 +57,21 @@ class RenderMenu extends Nuvemshop {
                 title: "coleções",
                 dropMenu: collections.map(col => ({
                     title: col.name.pt,
-                    link: `/collections/${col.name.pt.toLowerCase()}`
+                    link: `/collections/${col.name.pt.toLowerCase().replace(/coleção\s*/i, '').trim()}`
                 }))
             },
             {
                 title: "categorias",
                 dropMenu: allCategories.map(cat => ({
                     title: cat.name.pt,
-                    link: `/categories/category/${cat.name.pt}`
+                    link: `/categories/category/${cat.name.pt.toLowerCase().replace(/coleção\s*/i, '').trim()}`
                 }))
             },
             {
                 title: "linhas",
                 dropMenu: lines.map(line => ({
                     title: line.name.pt,
-                    link: `/line/${line.name.pt}`
+                    link: `/line/${line.name.pt.toLowerCase().replace(/linha\s*/i, '').trim()}`
                 }))
             },
             {

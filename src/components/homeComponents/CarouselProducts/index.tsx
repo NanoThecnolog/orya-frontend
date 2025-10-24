@@ -1,7 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './styles.module.scss'
 import Image from 'next/image'
-import { ProductProps } from '@/common/variables/products'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { format } from '@/utils/formatContent'
 import { Product, ProductList } from '@/@types/nuvemshop/products'
@@ -9,7 +8,6 @@ import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import SendCartButton from '@/components/ui/CartButton'
 import { Ecommerce } from '@/services/classes/ecommerce'
-import { breakpoints } from '@/common/variables/swiperBreakpoint'
 
 interface CarouselProductProps {
     products: ProductList | null

@@ -1,12 +1,10 @@
 import { Breadcrumbs } from '@/components/productsComponents/Breadcrumbs'
 import styles from './styles.module.scss'
 import { Product } from '@/@types/nuvemshop/products'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import { format } from '@/utils/formatContent'
 import Image from 'next/image'
 import { useMain } from '@/contexts/mainContext'
 import { Ecommerce } from '@/services/classes/ecommerce'
-import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 
 interface CompProps {

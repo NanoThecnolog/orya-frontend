@@ -83,7 +83,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const url = process.env.OFFICIAL_URL
 
   try {
-    const response = await axios.get<ProductList>(`${url}/api/products`)
+    const response = await axios.get<ProductList>(`${url}/api/products`, {
+      headers: { "User-Agent": "loja-orya (contato@ericssongomes.com)" }
+    })
     const data = response.data
     //console.log("resultado da request de produtos", data)
     return {

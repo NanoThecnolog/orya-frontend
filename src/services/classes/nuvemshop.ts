@@ -14,13 +14,21 @@ export class Nuvemshop {
 
         const url = process.env.BASE_URL;
         if (!url) debug.error("Variável de ambiente BASE_URL não configurada.");
+
+        const headers: Record<string, string> = {
+            Authentication: this.token ? `bearer ${this.token}` : "",
+            "User-Agent": "loja-orya (contato@ericssongomes.com)"
+        }
+        //if (typeof window === "undefined") headers["User-Agent"] = "loja-orya (contato@ericssongomes.com)"
+
+
         this.token = token || ""
         this.api = axios.create({
             baseURL: url,
             headers: {
                 Authentication: this.token ? `bearer ${this.token}` : "",
-                "User-Agent": "loja-orya (contato@ericssongomes.com)",
-            },
+                "User-Agent": "loja-orya (contato@ericssongomes.com)"
+            }
         })
     }
 

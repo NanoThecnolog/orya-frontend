@@ -3,14 +3,11 @@ import styles from './styles.module.scss'
 import { CiSearch, CiUser } from 'react-icons/ci'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoBagOutline } from 'react-icons/io5'
-import { useEffect, useMemo, useState } from 'react'
+import { useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
-//import { menu } from '@/common/variables/menu'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
-import { renderMenu } from '@/services/classes/menu'
-import { MenuProps } from '@/@types/Menu'
 
 interface HeaderProps {
     useWine: boolean
@@ -80,19 +77,21 @@ export default function Header({ useWine }: HeaderProps) {
                     <li
                         key={item.title}
                         onClick={() => handleDropdown(item.title)}
-                        style={{ color: useWine ? "white" : "var(--wine)" }}
+                        style={useWine ? { color: "white" } : { color: "var(--wine)" }}
                     >
                         <div className={styles.listItem}>
                             {item.title}
                             {!item.link && <IoIosArrowDown />}
                         </div>
                         {activeMenu === item.title && !item.link && (
-                            <ul className={`${styles.dropdown} ${styles.active}`}>
+                            <ul className={`${styles.dropdown} ${styles.active}`}
+                                style={useWine ? {} : { backgroundColor: "beige" }}
+                            >
                                 {item.dropMenu?.map(drop =>
                                     <li
                                         key={drop.title}
                                         className={styles.dropItem}
-                                        style={useWine ? { color: "white" } : { backgroundColor: "beige", color: "var(--wine)" }}
+                                        style={useWine ? { color: "white" } : { color: "var(--wine)" }}
                                         onClick={() => handleClick(drop.link!)}
                                     >
                                         {drop.title}
