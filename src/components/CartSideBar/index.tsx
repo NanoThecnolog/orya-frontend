@@ -21,7 +21,7 @@ export default function CartSidebar() {
     const { cartItems, setCartItems } = useMain()
     const [totalPrice, setTotalPrice] = useState<number>(0)
     const [subTotal, setSubTotal] = useState<number>(0)
-    const [shipping, setShipping] = useState<number>(0)
+    const [shipping, setShipping] = useState<number>(40)
 
     const toggleCart = () => setCartOpen(!cartOpen);
 
@@ -81,6 +81,10 @@ export default function CartSidebar() {
                             <p>{format.price(subTotal.toString())}</p>
                         </div>
                     }
+                    <div className={styles.shippingContainer}>
+                        <h4>Frete</h4>
+                        <p>{format.price(shipping.toString())}</p>
+                    </div>
                 </div>
 
                 {

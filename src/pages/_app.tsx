@@ -13,12 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const currentPath = router.pathname
   const asPath = router.asPath
+  const [isReady, setIsReady] = useState(false)
 
   const winePaths = [
     "/",
@@ -32,12 +33,20 @@ export default function App({ Component, pageProps }: AppProps) {
     winePrefixes.some(prefix => asPath.startsWith(prefix))
 
   useEffect(() => {
-    const handleStart = () => NProgress.start()
-    const handleStop = () => NProgress.done()
+    const handleStart = () => {
+      setIsReady(false)
+      NProgress.start()
+    }
+    const handleStop = () => {
+      NProgress.done()
+      setTimeout(() => setIsReady(true), 100)
+    }
 
     router.events.on('routeChangeStart', handleStart)
     router.events.on('routeChangeComplete', handleStop)
     router.events.on('routeChangeError', handleStop)
+
+    setIsReady(true)
 
     return () => {
       router.events.off('routeChangeStart', handleStart)
@@ -49,19 +58,23 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return <MainProvider>
     <AnimatePresence mode="wait">
-      <motion.div
-        key={router.route}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: .5, ease: "easeInOut" }}
-      >
-        <Header useWine={showWineFontColor} />
-        <CartSidebar />
-        <Component {...pageProps} />
-        <ToastContainer autoClose={3500} position="top-left" />
-        <Footer />
-      </motion.div>
+      {
+        isReady &&
+        <motion.div
+          key={router.route}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: .5, ease: "easeInOut" }}
+        >
+          <Header useWine={showWineFontColor} />
+          <CartSidebar />
+          <Component {...pageProps} />
+          <ToastContainer autoClose={3500} position="top-left" />
+          <Footer />
+        </motion.div>
+      }
+
     </AnimatePresence>
   </MainProvider>
 }

@@ -3,7 +3,6 @@ import { debug } from "@/utils/DebugLogger";
 import axios, { AxiosError, AxiosInstance } from "axios";
 
 
-
 export class Nuvemshop {
     private token: string | undefined;
     private api: AxiosInstance

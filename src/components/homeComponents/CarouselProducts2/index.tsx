@@ -83,7 +83,7 @@ export default function CarouselProducts2({
                                     <div className={styles.productInfo}>
                                         <h4>{product.name.pt.toUpperCase()}</h4>
                                         <p>{price}</p>
-                                        <p>{discount} no pix</p>
+                                        <p>{discount}</p>
                                     </div>
                                 </SwiperSlide>
                             )

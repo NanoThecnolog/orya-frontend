@@ -63,5 +63,8 @@ export class Ecommerce {
         this.setCartItems([])
         toast.info("Carrinho vazio!")
     }
+    addShipping(): void {
+
+    }
 }
 
