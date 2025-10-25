@@ -79,7 +79,9 @@ export default function ProductInfo({ product }: InfoProps) {
                     />
                 </div>
             </div>
-            <div className={styles.takeCareContainer}>
+            {
+                /*
+                <div className={styles.takeCareContainer}>
                 <h3>CUIDADOS E MANUTENÇÃO DAS JOIAS</h3>
                 <section>
                     <h4>Recomendações Gerais</h4>
@@ -131,6 +133,8 @@ export default function ProductInfo({ product }: InfoProps) {
                     </p>
                 </section>
             </div>
+                 */
+            }
         </section>
     )
 }

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './styles.module.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ProductImage } from '@/@types/nuvemshop/products'
 
 interface ProductImagesProps {
@@ -9,6 +9,9 @@ interface ProductImagesProps {
 
 export default function ProductImages({ images }: ProductImagesProps) {
     const [activeImage, setActiveImage] = useState<string>(images[0].src)
+    useEffect(() => {
+        setActiveImage(images[0].src)
+    }, [images])
     return (
         <div className={styles.container}>
             <div className={styles.thumbs}>

@@ -9,12 +9,14 @@ import { useMain } from '@/contexts/mainContext'
 import { format } from '@/utils/formatContent'
 import { useEffect, useState } from 'react'
 import { relatedBreakpoints } from '@/common/variables/swiperBreakpoint'
+import { useRouter } from 'next/navigation'
 
 interface RelatedProps {
     related: Product[]
 }
 
 export default function RelatedProducts({ related }: RelatedProps) {
+    const router = useRouter()
     const { cartItems, setCartItems } = useMain()
     const [width, setWidth] = useState(0)
     const [cardsPerContainer, setCardsPerContainer] = useState(4)
@@ -22,6 +24,9 @@ export default function RelatedProducts({ related }: RelatedProps) {
     const handleClick = (product: Product) => {
         const ecommerce = new Ecommerce(cartItems, setCartItems)
         ecommerce.addToCart(product)
+    }
+    const pushProductPage = (id: number) => {
+        router.push(`/product/${id}`)
     }
     useEffect(() => {
         function handleResize() {
@@ -61,21 +66,20 @@ export default function RelatedProducts({ related }: RelatedProps) {
                                         fill
                                         className={styles.image}
                                         priority={false}
+                                        onClick={() => pushProductPage(product.id)}
                                     />
                                     <div className={styles.buttonContainer}>
                                         <SendCartButton handleClick={() => handleClick(product)} />
                                     </div>
                                 </div>
-                                <div className={styles.productInfo}>
+                                <div className={styles.productInfo} onClick={() => pushProductPage(product.id)}>
                                     <h4>{product.name.pt.toUpperCase()}</h4>
                                     <p>{price}</p>
                                     <p>{discount}</p>
                                 </div>
                             </SwiperSlide>
                         )
-                    }
-
-                    )}
+                    })}
                 </Swiper>
             </div>
 

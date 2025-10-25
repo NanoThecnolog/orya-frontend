@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return <MainProvider>
     <AnimatePresence mode="wait">
       {
-        isReady &&
+
         <motion.div
           key={router.route}
           initial={{ opacity: 0 }}
