@@ -6,45 +6,99 @@
     max-width: 300px;
     gap: 20px;
 
-    .filterContainer {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+    .hamburguer {
+        display: none;
+        cursor: pointer;
+    }
 
-        ul {
-            li {
-                margin: 5px 0;
+    .filter {
+        .filterContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            ul {
+                li {
+                    margin: 5px 0;
+                    cursor: pointer;
+
+                    @media(hover:hover) and (pointer:fine) {
+                        &:hover {
+                            transform: scale(1.05);
+                        }
+                    }
+                }
+            }
+
+            .inputContainer {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                label {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    input {
+                        background-color: white;
+                        border: none;
+                        border-radius: .4rem;
+                        padding: 5px 10px;
+                        color: black;
+                        letter-spacing: 2px;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+            }
+
+            .clearFilter {
+                margin-top: 10px;
                 cursor: pointer;
             }
         }
 
-        .inputContainer {
+    }
+
+
+}
+
+@media(max-width: 769px) {
+    .container {
+        padding-bottom: 20px;
+
+        .hamburguer {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            z-index: 30;
+            //outline: 2px solid red;
+            background-color: var(--wine);
+            color: white;
+            width: 135px;
+            padding: 10px;
+            justify-content: space-between;
 
-            label {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-
-                input {
-                    background-color: white;
-                    border: none;
-                    border-radius: .4rem;
-                    padding: 5px 10px;
-                    color: black;
-                    letter-spacing: 2px;
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
+            svg {
+                padding-left: 5px;
             }
         }
 
-        .clearFilter {
-            cursor: pointer;
+        .filter {
+            opacity: 0;
+            max-height: 0;
+
+            &.open {
+                opacity: 1;
+                max-height: 500px;
+            }
         }
+    }
+}
+
+@media(max-width:560px) {
+    .container {
+        padding-bottom: 50px;
     }
 }

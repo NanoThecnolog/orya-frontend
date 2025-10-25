@@ -15,14 +15,7 @@ export default function Products() {
             </Head>
             <main className={styles.container}>
                 <Breadcrumbs />
-                <section className={styles.productContainer}>
-                    {
-                        //<OrderFilter />
-                    }
-                </section>
-                {
-                    <ProductsContainer />
-                }
+                <ProductsContainer />
             </main>
         </>
     )

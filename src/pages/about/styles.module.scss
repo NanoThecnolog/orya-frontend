@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #f5f5dc;
+    //margin: 100px 0;
+    padding: 100px 20px;
+
+    .sectionContainer {
+        display: flex;
+        flex-direction: column;
+
+        .aboutContainer {
+            display: flex;
+            gap: 5px;
+
+            .imageContainer {
+                position: relative;
+                aspect-ratio: 6 / 5;
+                width: 1600px;
+
+                .image {
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+
+            .aboutText {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 50%;
+                //outline: 2px solid red;
+                padding: 50px;
+                gap: 20px;
+            }
+        }
+    }
+}

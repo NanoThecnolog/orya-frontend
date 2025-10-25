@@ -33,7 +33,7 @@ export class RenderMenu extends CategoryUtils {
                 }))
             },
             {
-                title: "onde encontrar",
+                title: "contato",
                 link: "/contact",
             },
             {

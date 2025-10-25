@@ -2,6 +2,7 @@ import { Category, ProductList } from '@/@types/nuvemshop/products'
 import styles from './styles.module.scss'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Filter } from '@/services/classes/filter'
+import { IoFilter } from 'react-icons/io5'
 
 interface CompProps {
     products: ProductList,
@@ -15,6 +16,7 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
     const [categories, setCategories] = useState<Category[]>([])
     const [collections, setCollections] = useState<Category[]>([])
     const [lines, setLines] = useState<Category[]>([])
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         const setStates = () => {
@@ -44,62 +46,68 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
 
     return (
         <aside className={styles.container}>
-            <div className={styles.filterContainer}>
-                <ul>
-                    {categories.map((cat, index) =>
-                        <li key={cat.id}
-                            onClick={() => filterByCategory(cat.id)}
-                        >{cat.name.pt}</li>
-                    )}
-                </ul>
+            <div className={styles.hamburguer} onClick={() => setOpen(!open)}>
+                {open ? "Fechar filtro" : "Filtrar"} <IoFilter size={20} />
             </div>
-            <div className={styles.filterContainer}>
-                <h2>Filtrar por Coleção</h2>
-                <ul>
-                    {collections.map(col =>
-                        <li key={col.id}
-                            onClick={() => filterByCategory(col.id)}
-                        >{col.name.pt}</li>
-                    )}
-                </ul>
-            </div>
-            <div className={styles.filterContainer}>
-                <h2>Filtrar por Linha</h2>
-                <ul>
-                    {
-                        lines.map(line =>
-                            <li key={line.id}
-                                onClick={() => filterByCategory(line.id)}
-                            >{line.name.pt}</li>
-                        )
-                    }
-                </ul>
-            </div>
-            <div className={styles.filterContainer}>
-                <h2>Filtrar por preço.</h2>
-                <div className={styles.inputContainer}>
-                    <label htmlFor="from">
-                        <p>De</p>
-                        <input
-                            type="text"
-                            id='from'
-                            value={fromPrice}
-                            onChange={(e) => setFromPrice(e.target.value)}
-                        />
-                    </label>
-                    <label htmlFor="to">
-                        <p>Até</p>
-                        <input
-                            type="text"
-                            id='to'
-                            value={toPrice}
-                            onChange={(e) => setToPrice(e.target.value)}
-                        />
-                    </label>
+            <div className={`${styles.filter} ${open && styles.open}`}>
+                <div className={styles.filterContainer}>
+                    <h2>Por Categoria</h2>
+                    <ul>
+                        {categories.map((cat) =>
+                            <li key={cat.id}
+                                onClick={() => filterByCategory(cat.id)}
+                            >{cat.name.pt}</li>
+                        )}
+                    </ul>
                 </div>
-            </div>
-            <div className={styles.filterContainer}>
-                <p onClick={clearFilter} className={styles.clearFilter}>Limpar Filtros</p>
+                <div className={styles.filterContainer}>
+                    <h2>Por Coleção</h2>
+                    <ul>
+                        {collections.map(col =>
+                            <li key={col.id}
+                                onClick={() => filterByCategory(col.id)}
+                            >{col.name.pt}</li>
+                        )}
+                    </ul>
+                </div>
+                <div className={styles.filterContainer}>
+                    <h2>Por Linha</h2>
+                    <ul>
+                        {
+                            lines.map(line =>
+                                <li key={line.id}
+                                    onClick={() => filterByCategory(line.id)}
+                                >{line.name.pt}</li>
+                            )
+                        }
+                    </ul>
+                </div>
+                <div className={styles.filterContainer}>
+                    <h2>Por preço.</h2>
+                    <div className={styles.inputContainer}>
+                        <label htmlFor="from">
+                            <p>De</p>
+                            <input
+                                type="text"
+                                id='from'
+                                value={fromPrice}
+                                onChange={(e) => setFromPrice(e.target.value)}
+                            />
+                        </label>
+                        <label htmlFor="to">
+                            <p>Até</p>
+                            <input
+                                type="text"
+                                id='to'
+                                value={toPrice}
+                                onChange={(e) => setToPrice(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                </div>
+                <div className={styles.filterContainer}>
+                    <p onClick={clearFilter} className={styles.clearFilter}>Limpar Filtros</p>
+                </div>
             </div>
         </aside>
     )

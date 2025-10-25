@@ -15,9 +15,7 @@ export default function ProductsContainer() {
     return (
         <section className={styles.container}>
             <MainFilter products={productList} updateFiltered={setFiltered} />
-            {
-                <Products products={filtered} />
-            }
+            <Products products={filtered} />
         </section>
     )
 }
