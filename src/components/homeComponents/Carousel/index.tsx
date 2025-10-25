@@ -28,7 +28,7 @@ export default function Carousel({
 
     if (!images || images.length === 0) return null
 
-    const logo = "/logo/SEM FUNDO/ORYÁ_LOGO SF_V2_2.png"
+    //const logo = "/logo/SEM FUNDO/ORYÁ_LOGO SF_V2_2.png"
 
     return (
         <section className={`${styles.carouselContainer} ${className}`}>
@@ -52,14 +52,14 @@ export default function Carousel({
                                 className={styles.image}
                                 priority={index === 0}
                             />
-                            <Image
+                            {/*<Image
                                 src={logo}
                                 alt="Logo"
                                 width={480}
                                 height={480}
                                 className={`${styles.logo} ${styles[`logo-${index}`]}`}
                                 priority={false}
-                            />
+                            />*/}
                         </div>
                     </SwiperSlide>
                 )}
