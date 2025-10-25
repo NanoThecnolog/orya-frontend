@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    //outline: 2px solid green;
+    width: 100%;
+    max-width: 300px;
+    gap: 20px;
+
+    .filterContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        ul {
+            li {
+                margin: 5px 0;
+                cursor: pointer;
+            }
+        }
+
+        .inputContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            label {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                input {
+                    background-color: white;
+                    border: none;
+                    border-radius: .4rem;
+                    padding: 5px 10px;
+                    color: black;
+                    letter-spacing: 2px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .clearFilter {
+            cursor: pointer;
+        }
+    }
+}

@@ -5,7 +5,7 @@ import { useState } from 'react'
 export default function OrderFilter() {
     const [selectOrder, setSelectOrder] = useState<string>("")
     return (
-        <div className={styles.container}>
+        <section className={styles.container}>
             <h3>Produtos</h3>
             <select
                 name=""
@@ -19,6 +19,6 @@ export default function OrderFilter() {
                     )
                 }
             </select>
-        </div>
+        </section>
     )
 }
