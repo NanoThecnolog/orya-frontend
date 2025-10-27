@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
   ]
   const winePrefixes = [
     "/collections/",
+    "/categories/",
   ]
 
   const showWineFontColor =

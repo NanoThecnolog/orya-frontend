@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
-import { Breadcrumbs } from '@/components/productsComponents/Breadcrumbs'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import OrderFilter from '@/components/productsComponents/OrderFilter'
 import ProductsContainer from '@/components/productsComponents/ProductsContainer'
 

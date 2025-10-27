@@ -38,7 +38,6 @@ export default function CarouselProducts({
         ecommerce.addToCart(product)
     }
 
-
     return (
         <section className={styles.container}>
             <div className={styles.products}>

@@ -1,4 +1,4 @@
-import { Breadcrumbs } from '@/components/productsComponents/Breadcrumbs'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import styles from './styles.module.scss'
 import { Product } from '@/@types/nuvemshop/products'
 import { format } from '@/utils/formatContent'

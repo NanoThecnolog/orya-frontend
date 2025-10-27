@@ -1,5 +1,6 @@
 import { Category, ProductList } from "@/@types/nuvemshop/products";
 import { CategoryUtils } from "./categoryUtils";
+import { debug } from "@/utils/DebugLogger";
 
 export class Filter extends CategoryUtils {
     private products: ProductList
@@ -25,6 +26,15 @@ export class Filter extends CategoryUtils {
     }
     getLines(): Category[] {
         return this.extractLines(this.getAllCategories(this.products))
+    }
+    productsByCategory(name: string) {
+        const category = (this.getAllCategories(this.products)).find(cat => cat.name.pt.toLowerCase() === name.toLowerCase())
+        debug.log("categoria no metodo", category)
+
+        return this.products.filter(product =>
+            product.categories.some(cat =>
+                cat.name.pt === category?.name.pt
+            ))
     }
 }
 

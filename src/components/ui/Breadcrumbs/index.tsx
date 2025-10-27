@@ -4,9 +4,9 @@ import styles from "./styles.module.scss"
 
 export function Breadcrumbs() {
     const pathname = usePathname()
-    const parts = pathname.split("/").filter(Boolean)
+    const parts = pathname?.split("/").filter(Boolean)
 
-    const crumbs = parts.map((part, index) => {
+    const crumbs = parts?.map((part, index) => {
         const href = "/" + parts.slice(0, index + 1).join("/")
         const label = part.charAt(0).toUpperCase() + part.slice(1)
         return { href, label }
@@ -18,7 +18,7 @@ export function Breadcrumbs() {
                 <li>
                     <Link href={"/"}>Início</Link>
                 </li>
-                {crumbs.map((crumb, i) => (
+                {crumbs && crumbs.map((crumb, i) => (
                     <li key={i}>
                         <span className={styles.separator}>›</span>
                         <span>{crumb.label}</span>

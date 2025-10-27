@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { format } from '@/utils/formatContent'
 import ProductImages from '../ProductImages'
 import { useState } from 'react'
-import { Breadcrumbs } from '@/components/productsComponents/Breadcrumbs'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { useMain } from '@/contexts/mainContext'
 import { Ecommerce } from '@/services/classes/ecommerce'
 
