@@ -6,4 +6,7 @@ export class Functions {
     pushProductPage = (id: number) => {
         this.router.push(`/product/${id}`)
     }
+    pushCategoryPage = (name: string) => {
+        this.router.push(`/categories/category/${name.toLowerCase()}`)
+    }
 }

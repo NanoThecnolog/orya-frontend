@@ -1,16 +1,20 @@
 import Image from 'next/image'
 import styles from './styles.module.scss'
 import { CategoryProps } from '@/@types/categories'
+import { useRouter } from 'next/navigation'
+import { Functions } from '@/utils/functions'
 
 interface Props {
     categories: CategoryProps[]
 }
 
 export default function Categories({ categories }: Props) {
+    const router = useRouter()
+    const functions = new Functions(router)
     return (
         <section className={styles.container}>
             {categories.map((category, index) =>
-                <div key={index} className={styles.categoryContainer}>
+                <div key={index} className={styles.categoryContainer} onClick={() => functions.pushCategoryPage(category.name)}>
                     <div className={styles.imageContainer}>
                         <Image
                             src={category.image}

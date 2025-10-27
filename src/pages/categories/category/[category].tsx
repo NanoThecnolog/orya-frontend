@@ -38,7 +38,9 @@ export default function Category() {
             <main className={styles.container}>
                 <Banner />
                 <div className={styles.productContainer}>
-                    <Breadcrumbs />
+                    <div className={styles.breadCrumbContainer}>
+                        <Breadcrumbs />
+                    </div>
                     <ProductsByCategory products={products} />
                 </div>
 
