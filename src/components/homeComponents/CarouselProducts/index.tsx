@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import SendCartButton from '@/components/ui/CartButton'
 import { Ecommerce } from '@/services/classes/ecommerce'
+import { Functions } from '@/utils/functions'
 
 interface CarouselProductProps {
     products: ProductList | null
@@ -30,10 +31,7 @@ export default function CarouselProducts({
 }: CarouselProductProps) {
     const router = useRouter()
     const { cartItems, setCartItems } = useMain()
-
-    const pushProductPage = (id: number) => {
-        router.push(`/product/${id}`)
-    }
+    const functions = new Functions(router)
 
     const handleClick = (product: Product) => {
         const ecommerce = new Ecommerce(cartItems, setCartItems)
@@ -73,7 +71,7 @@ export default function CarouselProducts({
                                                 sizes="(max-width: 768px) 100vw, 50vw"
                                                 className={styles.image}
                                                 priority={false}
-                                                onClick={() => pushProductPage(product.id)}
+                                                onClick={() => functions.pushProductPage(product.id)}
                                             />
                                             <div className={styles.buttonContainer}>
                                                 <SendCartButton handleClick={() => handleClick(product)} />

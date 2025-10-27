@@ -40,9 +40,23 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
         )
         updateFiltered(filteredProducts)
     }
+    const filterByPrice = (min: number, max: number) => {
+        const filteredProducts = products.filter(product => {
+            const price = parseFloat(product?.variants?.[0]?.price ?? "0")
+            return price >= min && price <= max
+        })
+        updateFiltered(filteredProducts)
+    }
     const clearFilter = () => {
         updateFiltered(products)
     }
+    useEffect(() => {
+        const min = parseFloat(fromPrice ?? "0")
+        const max = parseFloat(toPrice ?? "0")
+        if (min > 0 && max > 0) {
+            filterByPrice(min, max)
+        }
+    }, [fromPrice, toPrice])
 
     return (
         <aside className={styles.container}>
@@ -83,7 +97,7 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
                     </ul>
                 </div>
                 <div className={styles.filterContainer}>
-                    <h2>Por preço.</h2>
+                    <h2>Por preço</h2>
                     <div className={styles.inputContainer}>
                         <label htmlFor="from">
                             <p>De</p>

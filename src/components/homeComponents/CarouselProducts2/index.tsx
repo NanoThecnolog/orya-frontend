@@ -7,6 +7,7 @@ import { Product, ProductList } from '@/@types/nuvemshop/products'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import SendCartButton from '@/components/ui/CartButton'
+import { Functions } from '@/utils/functions'
 
 interface CarouselProductProps {
     products: ProductList | null
@@ -27,10 +28,8 @@ export default function CarouselProducts2({
 }: CarouselProductProps) {
     const router = useRouter()
     const { cartItems, setCartItems } = useMain()
+    const functions = new Functions(router)
 
-    const pushProductPage = (id: number) => {
-        router.push(`/product/${id}`)
-    }
 
     const handleClick = (product: Product) => {
         const hasItem = cartItems.find(item => item.product.id === product.id)
@@ -74,7 +73,7 @@ export default function CarouselProducts2({
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                             className={styles.image}
                                             priority={false}
-                                            onClick={() => pushProductPage(product.id)}
+                                            onClick={() => functions.pushProductPage(product.id)}
                                         />
                                         <div className={styles.buttonContainer}>
                                             <SendCartButton handleClick={() => handleClick(product)} />

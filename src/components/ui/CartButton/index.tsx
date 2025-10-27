@@ -4,6 +4,7 @@ interface ButtonProps {
     handleClick: () => void
 }
 export default function SendCartButton({ handleClick }: ButtonProps) {
+
     return (
         <button
             className={styles.button}

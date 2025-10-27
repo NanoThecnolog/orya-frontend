@@ -10,6 +10,7 @@ import { format } from '@/utils/formatContent'
 import { useEffect, useState } from 'react'
 import { relatedBreakpoints } from '@/common/variables/swiperBreakpoint'
 import { useRouter } from 'next/navigation'
+import { Functions } from '@/utils/functions'
 
 interface RelatedProps {
     related: Product[]
@@ -17,6 +18,7 @@ interface RelatedProps {
 
 export default function RelatedProducts({ related }: RelatedProps) {
     const router = useRouter()
+    const functions = new Functions(router)
     const { cartItems, setCartItems } = useMain()
     const [width, setWidth] = useState(0)
     const [cardsPerContainer, setCardsPerContainer] = useState(4)
@@ -25,9 +27,7 @@ export default function RelatedProducts({ related }: RelatedProps) {
         const ecommerce = new Ecommerce(cartItems, setCartItems)
         ecommerce.addToCart(product)
     }
-    const pushProductPage = (id: number) => {
-        router.push(`/product/${id}`)
-    }
+
     useEffect(() => {
         function handleResize() {
             const windowWidth = window.innerWidth;
@@ -66,13 +66,13 @@ export default function RelatedProducts({ related }: RelatedProps) {
                                         fill
                                         className={styles.image}
                                         priority={false}
-                                        onClick={() => pushProductPage(product.id)}
+                                        onClick={() => functions.pushProductPage(product.id)}
                                     />
                                     <div className={styles.buttonContainer}>
                                         <SendCartButton handleClick={() => handleClick(product)} />
                                     </div>
                                 </div>
-                                <div className={styles.productInfo} onClick={() => pushProductPage(product.id)}>
+                                <div className={styles.productInfo} onClick={() => functions.pushProductPage(product.id)}>
                                     <h4>{product.name.pt.toUpperCase()}</h4>
                                     <p>{price}</p>
                                     <p>{discount}</p>
