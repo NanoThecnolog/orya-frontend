@@ -29,7 +29,7 @@ export class Filter extends CategoryUtils {
     }
     productsByCategory(name: string) {
         const category = (this.getAllCategories(this.products)).find(cat => cat.name.pt.toLowerCase() === name.toLowerCase())
-        debug.log("categoria no metodo", category)
+        //debug.log("categoria no metodo", category)
 
         return this.products.filter(product =>
             product.categories.some(cat =>

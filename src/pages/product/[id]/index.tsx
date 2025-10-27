@@ -18,11 +18,11 @@ export default function ProductPage({ product, productList }: ProductProps) {
     //const { productList } = useMain()
     const [relatedProducts, setRelatedProducts] = useState<Product[]>([])
 
-    /*const getRelatedProducts = useMemo(() => {
+    useMemo(() => {
         if (!product) return
         const related = nuvemshop.relatedProductsByCategory(product, productList)
         setRelatedProducts(related)
-    }, [product, productList])*/
+    }, [product, productList])
 
     /*useEffect(() => {
         if (product && productList) getRelatedProducts()
@@ -46,7 +46,7 @@ export default function ProductPage({ product, productList }: ProductProps) {
         </>
     )
 }
-//rever a function getServerSideProps
+
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const id = Array.isArray(ctx.query.id) ? ctx.query.id[0] : ctx.query.id;
     const url = process.env.OFFICIAL_URL
