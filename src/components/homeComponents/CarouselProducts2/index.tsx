@@ -29,8 +29,6 @@ export default function CarouselProducts2({
     const router = useRouter()
     const { cartItems, setCartItems } = useMain()
     const functions = new Functions(router)
-
-
     const handleClick = (product: Product) => {
         const hasItem = cartItems.find(item => item.product.id === product.id)
         if (hasItem) {

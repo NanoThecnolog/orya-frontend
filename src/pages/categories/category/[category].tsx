@@ -43,8 +43,6 @@ export default function Category() {
                     </div>
                     <ProductsByCategory products={products} />
                 </div>
-
-
             </main>
         </>
     )

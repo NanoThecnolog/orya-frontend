@@ -115,7 +115,9 @@ export default function Header({ useWine }: HeaderProps) {
                 </div>
                 <div className={styles.icons}>
                     <CiSearch size={20} onClick={() => setOpenSearch(!openSearch)} />
-                    <CiUser size={20} />
+                    {
+                        //<CiUser size={20} />
+                    }
                     <div className={styles.cartIcon} onClick={() => { setCartOpen(true) }}>
                         <IoBagOutline size={19} />
                         {cartItems.length > 0 &&

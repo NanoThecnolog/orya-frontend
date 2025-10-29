@@ -1,8 +1,10 @@
 import { MenuProps } from "@/@types/Menu";
 import { Product, ProductList } from "@/@types/nuvemshop/products";
 import { renderMenu } from "@/services/classes/menu";
+import { debug } from "@/utils/DebugLogger";
 import axios from "axios";
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 interface MainProviderProps {
     children: ReactNode;
@@ -19,6 +21,11 @@ interface MainContextProps {
     productList: ProductList
     setProductList: Dispatch<SetStateAction<ProductList>>
     menu: MenuProps[]
+}
+
+interface signInProps {
+    email: string,
+    password: string
 }
 
 
@@ -55,6 +62,23 @@ export function MainProvider({ children }: MainProviderProps) {
         if (productList.length > 0) getMenu()
         else getProducts()
     }, [productList])
+
+    //logica de login
+
+    const signIn = async ({ email, password }: signInProps) => {
+        try {
+            const login = await axios.get('/api/auth/login', {
+                data: {
+                    email, password
+                }
+            })
+            const dataUser = login.data
+            toast.success("Bem vindo!")
+        } catch (err) {
+            debug.log("Email ao autenticar usuario", err)
+            toast.error("Erro ao tentar realizar login. Verifique seu email e sua senha, e tente novamente")
+        }
+    }
 
     return (
         <mainContext.Provider value={{ cartOpen, setCartOpen, cartItems, setCartItems, productList, setProductList, menu }}>

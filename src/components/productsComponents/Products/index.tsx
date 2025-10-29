@@ -5,7 +5,7 @@ import { format } from '@/utils/formatContent'
 import { useRouter } from 'next/navigation'
 import { Functions } from '@/utils/functions'
 import SendCartButton from '@/components/ui/CartButton'
-import { Ecommerce } from '@/services/classes/ecommerce'
+import { Cart } from '@/services/classes/cartManager'
 import { useMain } from '@/contexts/mainContext'
 
 interface CompProps {
@@ -18,8 +18,8 @@ export default function Products({ products }: CompProps) {
     const { cartItems, setCartItems } = useMain()
 
     const handleClick = (product: Product) => {
-        const ecommerce = new Ecommerce(cartItems, setCartItems)
-        ecommerce.addToCart(product)
+        const cart = new Cart(cartItems, setCartItems)
+        cart.addToCart(product)
     }
     return (
         <section className={styles.container}>

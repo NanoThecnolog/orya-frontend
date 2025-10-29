@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import Image from 'next/image'
 import { format } from '@/utils/formatContent'
 import SendCartButton from '@/components/ui/CartButton'
-import { Ecommerce } from '@/services/classes/ecommerce'
+import { Cart } from '@/services/classes/cartManager'
 import { useMain } from '@/contexts/mainContext'
 import { useRouter } from 'next/navigation'
 import { Functions } from '@/utils/functions'
@@ -20,7 +20,7 @@ export default function ProductsByCategory({ products }: CompProps) {
 
 
     const handleClick = (product: Product) => {
-        const ecommerce = new Ecommerce(cartItems, setCartItems)
+        const ecommerce = new Cart(cartItems, setCartItems)
         ecommerce.addToCart(product)
     }
 

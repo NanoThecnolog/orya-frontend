@@ -5,7 +5,7 @@ import ProductImages from '../ProductImages'
 import { useState } from 'react'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { useMain } from '@/contexts/mainContext'
-import { Ecommerce } from '@/services/classes/ecommerce'
+import { Cart } from '@/services/classes/cartManager'
 
 interface InfoProps {
     product: Product
@@ -26,8 +26,8 @@ export default function ProductInfo({ product }: InfoProps) {
         }
     }
     const sendToCart = (product: Product) => {
-        const ecommerce = new Ecommerce(cartItems, setCartItems)
-        ecommerce.addToCart(product, amount)
+        const cart = new Cart(cartItems, setCartItems)
+        cart.addToCart(product, amount)
     }
     return (
         <section className={styles.container}>

@@ -5,7 +5,7 @@ import { format } from "@/utils/formatContent";
 import Image from "next/image";
 import { FaTrash } from "react-icons/fa";
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
-import { Ecommerce } from "@/services/classes/ecommerce";
+import { Cart } from "@/services/classes/cartManager";
 import { Product } from "@/@types/nuvemshop/products";
 
 type CartItem = {
@@ -31,10 +31,10 @@ export default function CartSidebar() {
     }, [cartItems, shipping])
 
     const handleAmount = (product: Product, operation: "add" | "sub" | "remove") => {
-        const ecommerce = new Ecommerce(cartItems, setCartItems)
-        if (operation === "add") ecommerce.addToCart(product)
-        if (operation === "sub") ecommerce.subFromCart(product)
-        if (operation === "remove") ecommerce.deleteProductFromCart(product)
+        const cart = new Cart(cartItems, setCartItems)
+        if (operation === "add") cart.addToCart(product)
+        if (operation === "sub") cart.subFromCart(product)
+        if (operation === "remove") cart.deleteProductFromCart(product)
     }
 
     return (
@@ -82,8 +82,13 @@ export default function CartSidebar() {
                         </div>
                     }
                     <div className={styles.shippingContainer}>
-                        <h4>Frete</h4>
-                        <p>{format.price(shipping.toString())}</p>
+                        {
+                            cartItems.length > 0 &&
+                            <>
+                                <h4>Frete</h4>
+                                <p>{format.price(shipping.toString())}</p>
+                            </>
+                        }
                     </div>
                 </div>
 

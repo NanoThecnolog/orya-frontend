@@ -4,7 +4,7 @@ import { Product } from '@/@types/nuvemshop/products'
 import { format } from '@/utils/formatContent'
 import Image from 'next/image'
 import { useMain } from '@/contexts/mainContext'
-import { Ecommerce } from '@/services/classes/ecommerce'
+import { Cart } from '@/services/classes/cartManager'
 import { useRouter } from 'next/navigation'
 
 interface CompProps {
@@ -16,8 +16,8 @@ export default function CollectionProducts({ products }: CompProps) {
     const { cartItems, setCartItems } = useMain()
 
     const handleClick = (product: Product): void => {
-        const ecommerce = new Ecommerce(cartItems, setCartItems)
-        ecommerce.addToCart(product)
+        const cart = new Cart(cartItems, setCartItems)
+        cart.addToCart(product)
 
     }
     const goToProductPage = (id: number) => {

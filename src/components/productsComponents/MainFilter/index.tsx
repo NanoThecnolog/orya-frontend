@@ -48,6 +48,8 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
         updateFiltered(filteredProducts)
     }
     const clearFilter = () => {
+        setFromPrice("")
+        setToPrice("")
         updateFiltered(products)
     }
     useEffect(() => {

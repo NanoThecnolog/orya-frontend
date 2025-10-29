@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import Image from 'next/image'
 import SendCartButton from '@/components/ui/CartButton'
-import { Ecommerce } from '@/services/classes/ecommerce'
+import { Cart } from '@/services/classes/cartManager'
 import { useMain } from '@/contexts/mainContext'
 import { format } from '@/utils/formatContent'
 import { useEffect, useState } from 'react'
@@ -24,8 +24,8 @@ export default function RelatedProducts({ related }: RelatedProps) {
     const [cardsPerContainer, setCardsPerContainer] = useState(4)
 
     const handleClick = (product: Product) => {
-        const ecommerce = new Ecommerce(cartItems, setCartItems)
-        ecommerce.addToCart(product)
+        const cart = new Cart(cartItems, setCartItems)
+        cart.addToCart(product)
     }
 
     useEffect(() => {

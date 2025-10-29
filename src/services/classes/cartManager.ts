@@ -3,7 +3,7 @@ import { CartProps } from "@/contexts/mainContext";
 import { Dispatch, SetStateAction } from "react";
 import { toast } from "react-toastify";
 
-export class Ecommerce {
+export class Cart {
     private cartItems: CartProps[];
     private setCartItems: Dispatch<SetStateAction<CartProps[]>>;
 

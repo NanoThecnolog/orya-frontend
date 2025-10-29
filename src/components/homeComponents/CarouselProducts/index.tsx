@@ -7,7 +7,7 @@ import { Product, ProductList } from '@/@types/nuvemshop/products'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import SendCartButton from '@/components/ui/CartButton'
-import { Ecommerce } from '@/services/classes/ecommerce'
+import { Cart } from '@/services/classes/cartManager'
 import { Functions } from '@/utils/functions'
 
 interface CarouselProductProps {
@@ -34,8 +34,8 @@ export default function CarouselProducts({
     const functions = new Functions(router)
 
     const handleClick = (product: Product) => {
-        const ecommerce = new Ecommerce(cartItems, setCartItems)
-        ecommerce.addToCart(product)
+        const cart = new Cart(cartItems, setCartItems)
+        cart.addToCart(product)
     }
 
     return (
