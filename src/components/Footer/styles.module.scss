@@ -25,6 +25,13 @@
             li {
                 text-transform: uppercase;
                 letter-spacing: 2px;
+                cursor: pointer;
+
+                @media(hover: hover) and (pointer: fine) {
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+                }
             }
         }
     }
@@ -136,9 +143,7 @@
                     display: flex;
                     align-items: center;
 
-                    .input {
-                        //outline: 2px solid red;
-                    }
+
                 }
 
 

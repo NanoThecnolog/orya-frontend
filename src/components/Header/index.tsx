@@ -76,7 +76,10 @@ export default function Header({ useWine }: HeaderProps) {
                 {menu.length > 0 && menu.map(item =>
                     <li
                         key={item.title}
-                        onClick={() => handleDropdown(item.title)}
+                        onClick={() => {
+                            if (item.title === "sobre" && item.link) handleClick(item.link)
+                            else handleDropdown(item.title)
+                        }}
                         style={useWine ? { color: "white" } : { color: "var(--wine)" }}
                     >
                         <div className={styles.listItem}>

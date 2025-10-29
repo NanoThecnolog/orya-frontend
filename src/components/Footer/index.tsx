@@ -8,8 +8,10 @@ import { Validator } from '@/services/classes/validator'
 import axios from 'axios'
 import { debug } from '@/utils/DebugLogger'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 export default function Footer() {
+    const router = useRouter()
     const [email, setEmail] = useState<string>("")
     //const [name, setName] = useState<string>("")
 
@@ -19,8 +21,34 @@ export default function Footer() {
         //setName(name)
     }, [email])
 
-    const links = [
-        "cuidados", "guia de tamanhos", "políticas de troca e devolução", "formas de pagamento", "sobre", "faq", "contato@orya.com"
+    const links = [{
+        name: "cuidados",
+        link: "/"
+    },
+    {
+        name: "guia de tamanhos",
+        link: "/"
+    },
+    {
+        name: "políticas de troca e devolução",
+        link: "/"
+    },
+    {
+        name: "formas de pagamento",
+        link: "/"
+    },
+    {
+        name: "sobre",
+        link: "/"
+    },
+    {
+        name: "faq",
+        link: "/"
+    },
+    {
+        name: "contato@orya.com",
+        link: "/"
+    },
     ]
 
     const handleNewsLetter = async () => {
@@ -38,14 +66,17 @@ export default function Footer() {
             debug.error("Erro durante cadastro de newsletter no componente footer", err)
         }
     }
+    const handleClick = (link: string) => {
+        router.push(link)
+    }
 
     return (
         <footer className={styles.container}>
             <div className={styles.linkContainer}>
                 <ul>
                     {links.map(item =>
-                        <li key={item}>
-                            {item}
+                        <li key={item.name} onClick={() => handleClick(item.link)}>
+                            {item.name}
                         </li>
                     )}
                 </ul>

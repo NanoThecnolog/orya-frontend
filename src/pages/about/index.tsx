@@ -27,15 +27,9 @@ export default function About() {
                         </div>
                         <div className={styles.aboutText}>
                             <h2>Nós somos a oryá!</h2>
-                            <p>
-                                Vitatiis etur? Cus ut apis dolut antur?
-                                Ro ma nonsece rnatur, simolorepta doluptat.
-                                Ximporatumet lame vel et aut lam quiscillaut rehent
-                                venihil latempe rferum velibus, opti qui officti
-                                onemquat asimintio doloribus, conseni magnimus,
-                                consequia et doloreic tem acia essimus, assum
-                                voluptibus voluptatur?
-                            </p>
+                            <p>Apresentamos a ORYÁ: joias que são uma extensão da personalidade, unindo sofisticação e singularidade. Cada peça foi criada para conectar a mulher contemporânea à sua essência, indo além do ordinário para se tornar uma forma de expressão pessoal.</p>
+                            <p>Inspirado nas raízes indígenas das fundadoras, o nome ORYÁ surge da união das palavras “Ouro” e “Ykerá” (irmã), representando a proximidade, a parceria e o vínculo profundo entre as irmãs Tainá e Raira Mioto.</p>
+                            <p>A ORYÁ cria joias que se tornam parte da história e da celebração única de cada mulher, refletindo sua essência e personalidade.</p>
                         </div>
                     </div>
                 </section>
