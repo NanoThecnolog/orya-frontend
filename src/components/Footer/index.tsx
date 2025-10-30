@@ -23,7 +23,7 @@ export default function Footer() {
 
     const links = [{
         name: "cuidados",
-        link: "/"
+        link: "/cuidados-e-garantia"
     },
     {
         name: "guia de tamanhos",
