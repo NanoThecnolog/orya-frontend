@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { collections } from '@/common/variables/collections'
 import CollectionsComponent from '@/components/collectionsComponents/collectionsComp'
 
-export default function Collections() {
+export default function CollectionsPage() {
     return (
         <>
             <Head>

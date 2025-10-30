@@ -23,7 +23,7 @@ interface HomeProps {
   products: ProductList
 }
 
-export default function Home({ products }: HomeProps) {
+export default function HomePage({ products }: HomeProps) {
   const { productList, setProductList } = useMain()
   const [width, setWidth] = useState(0)
   const [cardsPerContainer, setCardsPerContainer] = useState(4)

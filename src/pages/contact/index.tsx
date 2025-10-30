@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
 
-export default function Contact() {
+export default function ContactPage() {
     return (
         <>
             <Head>

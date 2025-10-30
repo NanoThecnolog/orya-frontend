@@ -4,7 +4,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import OrderFilter from '@/components/productsComponents/OrderFilter'
 import ProductsContainer from '@/components/productsComponents/ProductsContainer'
 
-export default function Products() {
+export default function ProductsPage() {
 
     return (
         <>

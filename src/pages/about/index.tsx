@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from './styles.module.scss'
 import Image from 'next/image'
 
-export default function About() {
+export default function AboutPage() {
     return (
         <>
             <Head>

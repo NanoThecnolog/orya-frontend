@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
 
-export default function Categories() {
+export default function CategoriesPage() {
     return (
         <>
             <Head>

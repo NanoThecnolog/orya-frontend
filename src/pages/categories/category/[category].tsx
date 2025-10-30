@@ -10,7 +10,7 @@ import Banner from '@/components/CategoriesPage/Banner'
 import ProductsByCategory from '@/components/CategoriesPage/ProductByCategory'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 
-export default function Category() {
+export default function CategoryPage() {
     const router = useRouter()
     const { productList } = useMain()
     const { category } = router.query

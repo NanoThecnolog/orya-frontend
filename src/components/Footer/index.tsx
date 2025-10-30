@@ -39,7 +39,7 @@ export default function Footer() {
     },
     {
         name: "sobre",
-        link: "/"
+        link: "/about"
     },
     {
         name: "faq",
