@@ -7,8 +7,9 @@ export function Breadcrumbs() {
     const parts = pathname?.split("/").filter(Boolean)
 
     const crumbs = parts?.map((part, index) => {
+        const decoded = decodeURIComponent(part)
         const href = "/" + parts.slice(0, index + 1).join("/")
-        const label = part.charAt(0).toUpperCase() + part.slice(1)
+        const label = decoded.charAt(0).toUpperCase() + decoded.slice(1)
         return { href, label }
     })
 

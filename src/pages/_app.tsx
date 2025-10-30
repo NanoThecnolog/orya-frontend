@@ -58,7 +58,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return <MainProvider>
-    <AnimatePresence mode="wait">
+
+    <CartSidebar />
+    <AnimatePresence mode="wait" initial={false}>
       {
 
         <motion.div
@@ -69,12 +71,11 @@ export default function App({ Component, pageProps }: AppProps) {
           transition={{ duration: .5, ease: "easeInOut" }}
         >
           <Header useWine={showWineFontColor} />
-          <CartSidebar />
           <Component {...pageProps} />
-          <ToastContainer autoClose={3500} position="top-left" />
-          <Footer />
         </motion.div>
       }
+      <ToastContainer autoClose={3500} position="top-left" />
+      <Footer />
 
     </AnimatePresence>
   </MainProvider>

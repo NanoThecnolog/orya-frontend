@@ -20,8 +20,8 @@ export default function ProductsByCategory({ products }: CompProps) {
 
 
     const handleClick = (product: Product) => {
-        const ecommerce = new Cart(cartItems, setCartItems)
-        ecommerce.addToCart(product)
+        const cart = new Cart(cartItems, setCartItems)
+        cart.addToCart(product)
     }
 
     return (
@@ -40,6 +40,7 @@ export default function ProductsByCategory({ products }: CompProps) {
                                     fill
                                     priority={false}
                                     className={styles.image}
+                                    onClick={() => functions.pushProductPage(product.id)}
                                 />
                                 <div className={styles.buttonContainer}>
                                     <SendCartButton handleClick={() => handleClick(product)} />

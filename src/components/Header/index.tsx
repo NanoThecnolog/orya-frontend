@@ -77,7 +77,7 @@ export default function Header({ useWine }: HeaderProps) {
                     <li
                         key={item.title}
                         onClick={() => {
-                            if (item.title === "sobre" && item.link) handleClick(item.link)
+                            if ((item.title === "sobre" || item.title === "contato") && item.link) handleClick(item.link)
                             else handleDropdown(item.title)
                         }}
                         style={useWine ? { color: "white" } : { color: "var(--wine)" }}
