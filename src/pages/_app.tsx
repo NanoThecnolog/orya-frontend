@@ -4,6 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "@/styles/globals.scss";
+import styles from "../styles/Home.module.scss"
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -60,23 +61,23 @@ export default function App({ Component, pageProps }: AppProps) {
   return <MainProvider>
 
     <CartSidebar />
-    <AnimatePresence mode="wait" initial={false}>
-      {
-
-        <motion.div
-          key={router.route}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: .5, ease: "easeInOut" }}
-        >
-          <Header useWine={showWineFontColor} />
-          <Component {...pageProps} />
-        </motion.div>
-      }
-      <ToastContainer autoClose={3500} position="top-left" />
-      <Footer />
-
-    </AnimatePresence>
+    <div className={styles.mainContainer}>
+      <AnimatePresence mode="wait" initial={false}>
+        {
+          <motion.div
+            key={router.route}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: .5, ease: "easeInOut" }}
+          >
+            <Header useWine={showWineFontColor} />
+            <Component {...pageProps} />
+          </motion.div>
+        }
+        <ToastContainer autoClose={3500} position="top-left" />
+        <Footer />
+      </AnimatePresence>
+    </div>
   </MainProvider>
 }
