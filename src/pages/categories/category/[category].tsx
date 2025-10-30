@@ -27,6 +27,8 @@ export default function CategoryPage() {
         //if(!category) return debug.log("Categoria não encontrada no filtro de produtos por categorias.")
     }, [productList, category])
 
+    const bannerImage = "/img/ORYA 16417.jpg"
+
 
     return (
         <>
@@ -36,7 +38,7 @@ export default function CategoryPage() {
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
-                <Banner />
+                <Banner bannerImage={bannerImage} height='80vh' />
                 <div className={styles.productContainer}>
                     <div className={styles.breadCrumbContainer}>
                         <Breadcrumbs />

@@ -36,5 +36,21 @@ export class Filter extends CategoryUtils {
                 cat.name.pt === category?.name.pt
             ))
     }
+    productsByLine(name: string) {
+        const lines = this.getLines()
+        const line = lines.find(l =>
+            l.name.pt.toLowerCase().replace(/^linha\s*/i, '').trim() === name.toLowerCase())
+        if (!line) return []
+        debug.log("Linha no metodo productsByLine", line)
+        debug.log("lista de produtos recebida no metodo", this.products)
+        const products = this.products.filter(product =>
+            product.categories.some(cat =>
+                cat.name.pt.toLowerCase() === line?.name.pt.toLowerCase()
+            )
+        )
+        debug.log("produtos retornados no metodo productsByLine", products)
+
+        return products
+    }
 }
 

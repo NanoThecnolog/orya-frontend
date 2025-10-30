@@ -56,7 +56,6 @@ export default function ProductsByCategory({ products }: CompProps) {
                         </div>
                     )
                 }
-
                 )}
             </div>
         </section>
