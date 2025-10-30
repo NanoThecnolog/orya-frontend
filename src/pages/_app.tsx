@@ -62,7 +62,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     <CartSidebar />
     <div className={styles.mainContainer}>
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="sync" initial={false}>
         {
           <motion.div
             key={router.route}
