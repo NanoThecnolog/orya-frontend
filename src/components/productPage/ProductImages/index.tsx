@@ -47,11 +47,14 @@ export default function ProductImages({ images }: ProductImagesProps) {
             <div className={styles.mainImageContainer}>
                 <Swiper
                     modules={[Navigation]}
-                    navigation={true}
+                    navigation
                     slidesPerView={1}
                     className={styles.carousel}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     onSlideChange={(swiper) => setActiveImage(images[swiper.activeIndex].src)}
+                    observer
+                    observeParents
+                    onInit={(swiper: SwiperCore) => swiper.update()}
                 >
                     {
                         images.map((img) =>
