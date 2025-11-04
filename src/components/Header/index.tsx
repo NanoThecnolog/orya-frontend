@@ -86,10 +86,10 @@ export default function Header({ useWine }: HeaderProps) {
                         <AnimatePresence>
                             {activeMenu === item.title && !item.link && (
                                 <motion.ul
-                                    initial={{ opacity: 0, y: -10, height: 100 }}
+                                    initial={{ opacity: 0, y: -10, height: "100%" }}
                                     animate={{ opacity: 1, y: 0, maxHeight: 500 }}
                                     exit={{ opacity: 0, y: -10, maxHeight: 0 }}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    transition={{ duration: 0.4, ease: "easeInOut" }}
                                     className={`${styles.dropdown} ${styles.active}`}
                                     style={useWine ? {} : { backgroundColor: "beige" }}
                                 >
