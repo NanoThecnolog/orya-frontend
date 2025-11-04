@@ -25,6 +25,7 @@
             width: 50%;
             min-width: 320px;
             gap: 20px;
+            color: var(--wine);
 
             .productInfo {
                 width: 100%;
@@ -34,6 +35,7 @@
                 h2 {
                     font-size: 2rem;
                     word-break: break-word;
+
                 }
 
                 p:first-of-type {

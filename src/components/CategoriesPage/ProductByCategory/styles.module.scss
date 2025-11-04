@@ -71,9 +71,14 @@
             display: flex;
             justify-content: space-between;
             padding-top: 10px;
+            color: var(--wine);
 
             .price {
                 text-align: right;
+
+                p:first-child {
+                    font-weight: 900;
+                }
             }
         }
     }

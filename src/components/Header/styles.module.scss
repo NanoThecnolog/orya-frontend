@@ -64,11 +64,9 @@
                 gap: 50px;
                 width: 100%;
                 max-width: 100vw;
-                //text-transform: none;
                 z-index: 20;
                 overflow: hidden;
-                height: 0;
-                //transition: height 0.3s ease;
+                height: auto;
 
                 .dropItem {
                     padding: 5px 15px;
@@ -76,22 +74,16 @@
                     font-weight: 900;
                     letter-spacing: 2px;
                     color: var(--wine);
-                    //flex: 1 0 20px;
-                    //white-space: nowrap;
-                    //transition: transform 0.2s ease;
 
                     @media(hover: hover) and (pointer: fine) {
                         &:hover {
                             transform: scale(1.05);
                         }
                     }
-
-
                 }
 
                 &.active {
                     padding: 25px 50px 25px 200px;
-                    height: auto;
                 }
             }
         }

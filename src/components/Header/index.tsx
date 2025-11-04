@@ -8,6 +8,7 @@ import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface HeaderProps {
     useWine: boolean
@@ -32,16 +33,6 @@ export default function Header({ useWine }: HeaderProps) {
     const handleClick = (link: string) => {
         router.push(link)
     }
-
-    /**
-     * useEffect(() => {
-        const getMenu = async () => {
-            const menu = await renderMenu.menu()
-            setMenu(menu)
-        }
-        getMenu()
-    }, [])
-     */
 
     return (
         <nav className={styles.container} style={useWine ? {} : { backgroundColor: "beige" }}>
@@ -80,28 +71,41 @@ export default function Header({ useWine }: HeaderProps) {
                             if ((item.title === "sobre" || item.title === "contato") && item.link) handleClick(item.link)
                             else handleDropdown(item.title)
                         }}
+                        onMouseEnter={() => {
+                            if (!item.link) setActiveMenu(item.title)
+                        }}
+                        onMouseLeave={() => {
+                            if (!item.link) setActiveMenu(null)
+                        }}
                         style={useWine ? { color: "white" } : { color: "var(--wine)" }}
                     >
                         <div className={styles.listItem}>
                             {item.title}
                             {!item.link && <IoIosArrowDown />}
                         </div>
-                        {activeMenu === item.title && !item.link && (
-                            <ul className={`${styles.dropdown} ${styles.active}`}
-                                style={useWine ? {} : { backgroundColor: "beige" }}
-                            >
-                                {item.dropMenu?.map(drop =>
-                                    <li
-                                        key={drop.title}
-                                        className={styles.dropItem}
-                                        style={useWine ? { color: "white" } : { color: "var(--wine)" }}
-                                        onClick={() => handleClick(drop.link!)}
-                                    >
-                                        {drop.title}
-                                    </li>
-                                )}
-                            </ul>
-                        )}
+                        <AnimatePresence>
+                            {activeMenu === item.title && !item.link && (
+                                <motion.ul
+                                    initial={{ opacity: 0, y: -10, height: 100 }}
+                                    animate={{ opacity: 1, y: 0, maxHeight: 500 }}
+                                    exit={{ opacity: 0, y: -10, maxHeight: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className={`${styles.dropdown} ${styles.active}`}
+                                    style={useWine ? {} : { backgroundColor: "beige" }}
+                                >
+                                    {item.dropMenu?.map(drop =>
+                                        <li
+                                            key={drop.title}
+                                            className={styles.dropItem}
+                                            style={useWine ? { color: "white" } : { color: "var(--wine)" }}
+                                            onClick={() => handleClick(drop.link!)}
+                                        >
+                                            {drop.title}
+                                        </li>
+                                    )}
+                                </motion.ul>
+                            )}
+                        </AnimatePresence>
                     </li>
                 )}
             </ul>

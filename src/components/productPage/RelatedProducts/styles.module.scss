@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: var(--wine);
     border-top: 1px solid rgba(0, 0, 0, .2);
 
     padding: 20px;
@@ -83,19 +83,18 @@
                     flex-direction: column;
                     //outline: 2px solid red;
                     width: 100%;
+                    color: var(--wine);
 
 
                     h4 {
                         font-size: 1rem;
                         font-weight: 500;
-                        color: #222;
                         margin-bottom: 1rem;
                         letter-spacing: 2px;
                     }
 
                     p {
                         font-size: 1rem;
-                        color: #000;
                         margin-top: 0.25rem;
                         letter-spacing: 2px;
                         font-weight: 600;

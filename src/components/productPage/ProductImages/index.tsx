@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import styles from './styles.module.scss'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ProductImage } from '@/@types/nuvemshop/products'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper/modules'
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { Swiper as SwiperCore } from 'swiper'
 
 interface ProductImagesProps {
     images: ProductImage[]
@@ -9,9 +13,18 @@ interface ProductImagesProps {
 
 export default function ProductImages({ images }: ProductImagesProps) {
     const [activeImage, setActiveImage] = useState<string>(images[0].src)
+    const swiperRef = useRef<SwiperCore | null>(null)
+
+
+
     useEffect(() => {
         setActiveImage(images[0].src)
     }, [images])
+
+    const handleThumbClick = (src: string, index: number) => {
+        setActiveImage(src)
+        swiperRef.current?.slideTo(index)
+    }
     return (
         <div className={styles.container}>
             <div className={styles.thumbs}>
@@ -19,9 +32,7 @@ export default function ProductImages({ images }: ProductImagesProps) {
                     <div
                         key={index}
                         className={`${styles.thumb} ${img.src === activeImage ? styles.active : ""}`}
-                        onClick={() => {
-                            setActiveImage(img.src)
-                        }}
+                        onClick={() => handleThumbClick(img.src, index)}
                     >
                         <Image
                             src={img.src}
@@ -34,13 +45,32 @@ export default function ProductImages({ images }: ProductImagesProps) {
                 )}
             </div>
             <div className={styles.mainImageContainer}>
-                <Image
-                    src={activeImage}
-                    alt="Imagem do produto"
-                    fill
-                    priority
-                    className={styles.mainImage}
-                />
+                <Swiper
+                    modules={[Navigation]}
+                    navigation={true}
+                    slidesPerView={1}
+                    className={styles.carousel}
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    onSlideChange={(swiper) => setActiveImage(images[swiper.activeIndex].src)}
+                >
+                    {
+                        images.map((img) =>
+                            <SwiperSlide
+                                key={img.id}
+                                className={styles.slide}>
+                                <Image
+                                    src={img.src}
+                                    alt="Imagem do produto"
+                                    fill
+                                    priority
+                                    className={styles.mainImage}
+                                />
+
+                            </SwiperSlide>
+
+                        )
+                    }
+                </Swiper>
             </div>
         </div>
     )

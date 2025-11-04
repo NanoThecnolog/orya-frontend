@@ -87,14 +87,14 @@
                         h4 {
                             font-size: 1rem;
                             font-weight: 500;
-                            color: #222;
+                            color: var(--wine);
                             margin-bottom: 0.8rem;
                             letter-spacing: 1.5px;
                         }
 
                         p {
                             font-size: 1rem;
-                            color: #000;
+                            color: var(--wine);
                             margin-top: 0.25rem;
                             letter-spacing: 1.5px;
                             font-weight: 600;
@@ -107,7 +107,6 @@
                 }
             }
 
-            /* Paginação e navegação */
             .swiper-pagination {
                 bottom: 0;
                 background-color: rgba(0, 0, 0, 0.05);
@@ -131,7 +130,7 @@
             :global(.swiper-button-prev),
             :global(.swiper-button-next) {
                 background-color: rgba(255, 255, 255, 0.8);
-                color: #000;
+                color: var(--wine);
                 width: 40px;
                 height: 40px;
                 padding: 8px;
