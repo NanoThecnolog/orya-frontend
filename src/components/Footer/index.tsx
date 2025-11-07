@@ -9,29 +9,26 @@ import axios from 'axios'
 import { debug } from '@/utils/DebugLogger'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import { oryaData } from '@/common/variables/oryaData'
+import { format } from '@/utils/formatContent'
 
 export default function Footer() {
     const router = useRouter()
     const [email, setEmail] = useState<string>("")
     //const [name, setName] = useState<string>("")
-
-    useEffect(() => {
-
-        //const name = email.split("@")[0]
-        //setName(name)
-    }, [email])
+    const cleanPhone = format.formatPhoneNumber(oryaData.phones[0].countryCode, oryaData.phones[0].areaCode, oryaData.phones[0].number).clean
 
     const links = [{
         name: "cuidados",
         link: "/cuidados-e-garantia"
     },
     {
-        name: "guia de tamanhos",
-        link: "/"
+        name: /*"guia de tamanhos"*/ "Política de Privacidade",
+        link: "/privacy"
     },
     {
         name: "políticas de troca e devolução",
-        link: "/"
+        link: "/troca-e-devolucao"
     },
     {
         name: "formas de pagamento",
@@ -48,8 +45,7 @@ export default function Footer() {
     {
         name: "contato@orya.com",
         link: "/"
-    },
-    ]
+    },]
 
     const handleNewsLetter = async () => {
         if (!Validator.email(email)) return toast.error("Email inválido. Insira um email válido.")
@@ -69,7 +65,6 @@ export default function Footer() {
     const handleClick = (link: string) => {
         router.push(link)
     }
-
     return (
         <footer className={styles.container}>
             <div className={styles.linkContainer}>
@@ -97,9 +92,27 @@ export default function Footer() {
                     </label>
                 </div>
                 <div className={styles.socialContainer}>
-                    <RiInstagramFill size={33} />
-                    <TbBrandWhatsappFilled size={33} />
-                    <MdEmail size={33} />
+                    <a
+                        href={`${oryaData.socialMedia[0].link}`}
+                        target='_blank'
+                        rel="noopener noreferrer"
+                    >
+                        <RiInstagramFill size={33} />
+                    </a>
+                    <a
+                        href={`https://api.whatsapp.com/send/?phone=${cleanPhone}&text=Ol%C3%A1%21+Gostaria+de+tirar+uma+d%C3%BAvida%21%21&type=phone_number&app_absent=0`}
+                        target='_blank'
+                        rel="noopener noreferrer"
+                    >
+                        <TbBrandWhatsappFilled size={33} />
+                    </a>
+                    <a
+                        href={`mailto:${oryaData.email}`}
+                        target='_blank'
+                        rel="noopener noreferrer"
+                    >
+                        <MdEmail size={33} />
+                    </a>
                 </div>
             </div>
         </footer>

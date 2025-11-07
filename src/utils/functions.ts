@@ -9,4 +9,5 @@ export class Functions {
     pushCategoryPage = (name: string) => {
         this.router.push(`/categories/category/${name.toLowerCase()}`)
     }
+
 }

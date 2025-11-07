@@ -1,3 +1,8 @@
+type PhoneResult = {
+    formatted: string
+    clean: string
+}
+
 class FormatContent {
 
     private formatNumber(value: number): string {
@@ -16,6 +21,20 @@ class FormatContent {
         const priceNumber = parseFloat(price)
         const discounted = priceNumber - (priceNumber * (percent / 100))
         return `R$ ${this.formatNumber(discounted)} no pix`
+    }
+    public formatPhoneNumber(ccode: string, areaCode: string, number: string): PhoneResult {
+        const cleanCountry = ccode.replace(/[^\d+]/g, '');
+        const cleanArea = areaCode.replace(/\D/g, '');
+        const cleanNumber = number.replace(/\D/g, '');
+
+        if (!cleanCountry.startsWith('+') || cleanCountry.length < 3) throw new Error('Invalid Country Code')
+        if (cleanArea.length < 2) throw new Error('Invalid area code')
+        if (cleanNumber.length < 8) throw new Error('Invalid phone nummber')
+
+        const formatted = `${cleanCountry} (${cleanArea}) ${cleanNumber.slice(0, 5)}-${cleanNumber.slice(5)}`
+        const clean = `${cleanCountry}${cleanArea}${cleanNumber}`
+
+        return { formatted, clean }
     }
 }
 export const format = new FormatContent()

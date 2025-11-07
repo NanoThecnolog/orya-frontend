@@ -1,7 +1,11 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
+import { oryaData } from '@/common/variables/oryaData'
+import { format } from '@/utils/formatContent'
 
 export default function ContactPage() {
+
+
     return (
         <>
             <Head>
@@ -10,11 +14,31 @@ export default function ContactPage() {
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
-                Apresentamos a ORYÁ: joias que são uma extensão da personalidade, unindo sofisticação e singularidade. Cada peça foi criada para conectar a mulher contemporânea à sua essência, indo além do ordinário para se tornar uma forma de expressão pessoal.
-                Inspirado nas raízes indígenas das fundadoras, o nome ORYÁ surge da união das palavras “Ouro” e “Ykerá” (irmã), representando a proximidade, a parceria e o vínculo profundo entre as irmãs Tainá e Raira Mioto.
+                <section className={styles.sectionContainer}>
+                    <h2 className={styles.title}>CONTATO</h2>
 
-                A ORYÁ cria joias que se tornam parte da história e da celebração única de cada mulher, refletindo sua essência e personalidade.
-                FOTO DAS IRMÃS
+                    <div className={styles.info}>
+                        <p>
+                            <strong>E-mail:</strong>{" "}
+                            <a href={`"mailto:${oryaData.email}`}>{oryaData.email}</a>
+                        </p>
+                        <p>
+                            <strong>Telefone:</strong>{" "}
+                            {oryaData.phones.map((phone, index) => {
+                                const formattedPhone = format.formatPhoneNumber(phone.countryCode, phone.areaCode, phone.number).formatted
+                                const cleanPhone = format.formatPhoneNumber(phone.countryCode, phone.areaCode, phone.number).clean
+
+                                return (
+                                    <a key={index} href={`tel:${cleanPhone}`}>{formattedPhone}</a>
+                                )
+                            })}
+                        </p>
+                        <p>
+                            <strong>Atendimento:</strong> segunda a sexta, das 9h às 18h, exceto
+                            feriados.
+                        </p>
+                    </div>
+                </section>
             </main>
         </>
     )
