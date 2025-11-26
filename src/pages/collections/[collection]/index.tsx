@@ -5,11 +5,11 @@ import CollectionImage from '@/components/collectionsComponents/collectionImage'
 import CollectionDescription from '@/components/collectionsComponents/collectionDesc'
 import CollectionProducts from '@/components/collectionsComponents/collectionProducts'
 import { GetServerSideProps } from 'next'
-import { Product, ProductList } from '@/@types/nuvemshop/products'
+import { Product, ProductList } from '@/@types/tray/products'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useMain } from '@/contexts/mainContext'
-import { nuvemshop } from '@/services/classes/nuvemshop'
+import { apiTray } from '@/services/classes/IntegraApi'
 
 interface CollectionProps {
     productListProps: ProductList
@@ -19,7 +19,7 @@ export default function CollectionPage({ productListProps }: CollectionProps) {
     const router = useRouter()
     const { collection } = router.query
     const [products, setProducts] = useState<Product[]>([])
-    const { productList, setProductList } = useMain()
+    const { productList, setProductList, menu } = useMain()
 
     useEffect(() => {
         if (productList.length === 0) setProductList(productListProps)
@@ -31,16 +31,25 @@ export default function CollectionPage({ productListProps }: CollectionProps) {
         image: "/img/ORYA 16467.jpg"
     }
 
-    const getProductsByCollection = () => {
-        return nuvemshop.getProductsByCollection(productListProps, collection as string)
+    //criar rota no backend do next pra retornar produtos por coleções e por linhas
+    const getProductsByCollection = async () => {
+        const getDropMenu = menu.flatMap(m => m.dropMenu ?? []).find(drop => drop.title.toLowerCase().includes(collection as string))
+        if (!getDropMenu) return
+        console.log(getDropMenu)
+
+        try {
+            const response = await axios.get<Product[]>(`/api/collections/${getDropMenu?.id}`)
+            const productsByCollection = response.data
+            setProducts(productsByCollection)
+        } catch (err) {
+            console.error("Erro ao buscar produtos por coleção")
+            setProducts([])
+        }
     }
     useEffect(() => {
-
         if (!productListProps || productListProps.length === 0 || !(collection as string)) return
-        //debug.log(productListProps)
-        const productsByCategory = getProductsByCollection()
-        setProducts(productsByCategory)
-    }, [productListProps, collection])
+        getProductsByCollection()
+    }, [menu])
 
 
 
@@ -63,9 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const url = process.env.OFFICIAL_URL
     const { collection } = ctx.query
     try {
-        const response = await axios.get<ProductList>(`${url}/api/products`, {
-            headers: { "User-Agent": "loja-orya (contato@ericssongomes.com)" }
-        })
+        const response = await axios.get<ProductList>(`${url}/api/products`)
         //console.log("chamada bem sucedida", response.data.length)
         return {
             props: {

@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import ProductsByCategory from '@/components/CategoriesPage/ProductByCategory'
 import { useMain } from '@/contexts/mainContext'
 import { useRouter } from 'next/router'
-import { Product } from '@/@types/nuvemshop/products'
+import { Product } from '@/@types/tray/products'
 import { useEffect, useState } from 'react'
 import { Filter } from '@/services/classes/filter'
 import { debug } from '@/utils/DebugLogger'
@@ -17,9 +17,9 @@ export default function LinePage() {
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
-        const getProducts = () => {
+        const getProducts = async () => {
             const productClass = new Filter(productList)
-            const products = productClass.productsByLine(line as string)
+            const products = await productClass.productsByLine(line as string)
             debug.log("produtos filtrados por linha", products)
             setProducts(products)
         }

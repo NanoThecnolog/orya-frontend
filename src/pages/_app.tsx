@@ -66,19 +66,25 @@ export default function App({ Component, pageProps }: AppProps) {
       <AnimatePresence mode="wait" initial={false}>
         {
           <motion.div
-            key={router.route}
+            key={router.asPath}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: .5, ease: "easeInOut" }}
           >
-            <Header useWine={showWineFontColor} />
+            {
+              <Header useWine={showWineFontColor} />
+            }
             <Component {...pageProps} />
           </motion.div>
         }
-        <ToastContainer autoClose={3500} position="top-left" />
-        <Footer />
+
+
       </AnimatePresence>
+      <ToastContainer autoClose={3500} position="top-left" />
+      {
+        <Footer />
+      }
     </div>
   </MainProvider>
 }

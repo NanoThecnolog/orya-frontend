@@ -26,9 +26,9 @@
                         pointer-events: auto;
 
                         &:hover {
-                            background-color: white;
-                            color: var(--wine);
-                            border: 1px solid white;
+                            button {
+                                font-weight: 900;
+                            }
                         }
                     }
                 }
@@ -37,7 +37,6 @@
             .imageContainer {
                 position: relative;
                 aspect-ratio: 14 / 16;
-                //height: clamp(200px, 30vw, 400px);
                 cursor: pointer;
 
                 .image {
@@ -68,6 +67,19 @@
                         font-size: clamp(0.8rem, 1.2vw, 1rem);
                         font-weight: 500;
                     }
+
+                    p {
+                        font-size: clamp(0.8rem, 1.2vw, 1rem);
+                    }
+                }
+
+                @media(max-width: 780px) {
+                    display: flex;
+                    flex-direction: column;
+
+                    .priceContainer {
+                        text-align: left;
+                    }
                 }
             }
 
@@ -76,7 +88,7 @@
                 position: absolute;
                 bottom: 0;
                 width: 100%;
-                height: clamp(50px, 7vw, 71px);
+                height: clamp(90px, 7vw, 71px);
                 border: 1px solid var(--wine);
                 background-color: var(--wine);
                 color: white;
@@ -106,12 +118,12 @@
                 }
 
                 @media(max-width: 780px) {
-                    height: 100px;
+                    height: 115px;
                 }
 
                 button {
                     font-size: clamp(0.85rem, 1.5vw, 1rem);
-                    font-weight: 900;
+                    font-weight: 500;
                     text-transform: uppercase;
                     height: 100%;
                 }

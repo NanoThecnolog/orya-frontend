@@ -1,4 +1,4 @@
-import { Product } from '@/@types/nuvemshop/products'
+import { Product } from '@/@types/tray/products'
 import styles from './styles.module.scss'
 import { format } from '@/utils/formatContent'
 import ProductImages from '../ProductImages'
@@ -6,9 +6,10 @@ import { useState } from 'react'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { useMain } from '@/contexts/mainContext'
 import { Cart } from '@/services/classes/cartManager'
+import { ProductDetails } from '@/@types/tray/ProductDetails'
 
 interface InfoProps {
-    product: Product
+    product: ProductDetails
 }
 
 export default function ProductInfo({ product }: InfoProps) {
@@ -32,13 +33,15 @@ export default function ProductInfo({ product }: InfoProps) {
     return (
         <section className={styles.container}>
             <div className={styles.productContainer}>
-                <ProductImages images={product.images} />
+                <ProductImages product={product} />
                 <div className={styles.infoContainer}>
                     <Breadcrumbs />
                     <div className={styles.productInfo}>
-                        <h2>{product.name.pt}</h2>
-                        <p>{format.price(product.variants[0].price)}</p>
-                        <p>{format.discount(product.variants[0].price, 10)}</p>
+                        <h2>{product.Product.name}</h2>
+                        <p>{format.price(product.Product.price)}</p>
+                        <p>{format.discount(product.Product.price, 10)} <span dangerouslySetInnerHTML={{ __html: product.Product.payment_option_html }} /></p>
+
+
                     </div>
                     <div className={styles.quantityContainer}>
                         <div className={styles.inputContainer}>
@@ -64,18 +67,12 @@ export default function ProductInfo({ product }: InfoProps) {
                             </button>
                         </div>
                         <div className={styles.buttonContainer}>
-                            <button type='button' className={styles.buyBtn} onClick={() => sendToCart(product)}>Encomendar</button>
+                            <button type='button' className={styles.buyBtn} onClick={() => sendToCart(product.Product)}>Encomendar</button>
                         </div>
-                    </div>
-                    <div className={styles.paymentMethodsContainer}>
-                        Meios de pagamento
-                    </div>
-                    <div className={styles.shippingContainer}>
-                        Meios de envio
                     </div>
                     <div
                         className={styles.descriptionContainer}
-                        dangerouslySetInnerHTML={{ __html: product.description.pt }}
+                        dangerouslySetInnerHTML={{ __html: product.Product.description }}
                     />
                 </div>
             </div>

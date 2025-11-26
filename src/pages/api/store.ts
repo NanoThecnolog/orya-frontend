@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios, { AxiosError } from "axios";
-import { nuvemshop } from "@/services/classes/nuvemshop";
+import { apiTray } from "@/services/classes/IntegraApi";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'GET') {
@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
     try {
-        const response = await nuvemshop.getStoreData()
+        const response = await apiTray.getStoreData()
         return res.status(200).json(response);
     } catch (err) {
         const error = err as AxiosError<{ message?: string }>

@@ -1,4 +1,4 @@
-import { Product, ProductList } from "@/@types/nuvemshop/products";
+/*import { Product, ProductList } from "@/@types/tray/products";
 import { debug } from "@/utils/DebugLogger";
 import axios, { AxiosError, AxiosInstance } from "axios";
 
@@ -98,4 +98,4 @@ export class Nuvemshop {
     }
 }
 
-export const nuvemshop = new Nuvemshop()
+export const nuvemshop = new Nuvemshop()*/

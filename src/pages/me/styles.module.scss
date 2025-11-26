@@ -1,0 +1,59 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 20px;
+        font-weight: 600;
+        margin-left: 20px;
+    }
+
+    .componentContainer {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        align-items: flex-start;
+
+        /* Aside fixo no desktop */
+        aside {
+            width: 250px;
+            min-width: 250px;
+        }
+
+        /* Área que renderiza os componentes */
+        .componentArea {
+            flex: 1;
+            min-height: 100%;
+        }
+    }
+
+    @media (max-width: 900px) {
+        padding-top: 120px;
+
+        .componentContainer {
+            flex-direction: column;
+
+            aside {
+                width: 100%;
+                min-width: auto;
+                order: 1;
+            }
+
+            .componentArea {
+                width: 100%;
+                order: 2;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 20px;
+        }
+    }
+}

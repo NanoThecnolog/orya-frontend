@@ -1,15 +1,7 @@
-import axios, { AxiosError } from 'axios';
+import { apiTray } from '@/services/classes/IntegraApi';
+import { AxiosError } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const url = `https//${process.env.API_ADDRESS}/newsletter/`
-const accessToken = process.env.ACCESSTOKEN
-
-interface NewsletterRes {
-    id: number,
-    code: number,
-    message: string,
-
-}
 
 //rota pra cadastrar email na newsletter
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -20,25 +12,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { email, name } = req.body
     try {
 
-        const response = {
-            email, name, url, accessToken
+        //return res.status(200).json(response)
+        const response = await apiTray.newsLetter({ NewsLetter: { email, name } })
+        if (!response || response.message !== "Created") {
+            return res.status(400).json({ message: "Email não registrado" })
         }
-
-        return res.status(200).json(response)
-        /*const response = await axios.post<NewsletterRes>(url, {
-            headers: {
-                accessToken
-            },
-            data: {
-                Newsletter: {
-                    email, name
-                }
-            }
-        })
-        const data = response.data
-        if (data.message !== "Created") {
-            return res.status(200).json({ message: "Email registrated" })
-        }*/
+        return res.status(200).json({ message: "Email registrado" })
     } catch (err) {
         const error = err as AxiosError<{ message?: string }>
         const status = error.response?.status || 500

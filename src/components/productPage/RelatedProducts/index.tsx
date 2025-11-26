@@ -1,4 +1,4 @@
-import { Product } from '@/@types/nuvemshop/products'
+import { Product } from '@/@types/tray/products'
 import styles from './styles.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react'
 import { relatedBreakpoints } from '@/common/variables/swiperBreakpoint'
 import { useRouter } from 'next/navigation'
 import { Functions } from '@/utils/functions'
+import { productsImages } from '@/common/variables/products'
+import { debug } from '@/utils/DebugLogger'
 
 interface RelatedProps {
     related: Product[]
@@ -20,8 +22,10 @@ export default function RelatedProducts({ related }: RelatedProps) {
     const router = useRouter()
     const functions = new Functions(router)
     const { cartItems, setCartItems } = useMain()
-    const [width, setWidth] = useState(0)
+    //const [width, setWidth] = useState(0)
     const [cardsPerContainer, setCardsPerContainer] = useState(4)
+
+    const fallback = "/img/sem-foto.png"
 
     const handleClick = (product: Product) => {
         const cart = new Cart(cartItems, setCartItems)
@@ -31,7 +35,8 @@ export default function RelatedProducts({ related }: RelatedProps) {
     useEffect(() => {
         function handleResize() {
             const windowWidth = window.innerWidth;
-            setWidth(windowWidth)
+            //setWidth(windowWidth)
+            debug.log(windowWidth)
             const { cards } = relatedBreakpoints.find(b => windowWidth < b.width) || { cards: 5 }
             setCardsPerContainer(cards)
         }
@@ -50,19 +55,23 @@ export default function RelatedProducts({ related }: RelatedProps) {
                     navigation={false}
                     autoplay={false}
                     loop={false}
-                    slidesPerView={cardsPerContainer}
+                    slidesPerView={Math.min(cardsPerContainer, related.length)}
                     className={styles.swiperCarousel}
                 >
                     {related.length > 0 && related.map(product => {
-                        const price = format.price(product.variants?.[0]?.price ?? null)
-                        const discount = format.discount(product.variants?.[0]?.price ?? null, 10)
-                        const image = product.images?.[0]?.src ?? "/img/sem-foto.png"
+                        const price = format.price(product.price ?? null)
+                        const discount = format.discount(product.price ?? null, 10)
+                        const imgData = productsImages.find(i => i.trayID === product.id);
+                        const code = imgData?.codeImg?.[0];
+                        const image = code !== undefined
+                            ? functions.imagePath(code)
+                            : fallback;
                         return (
                             <SwiperSlide key={product.id} className={styles.slide}>
                                 <div className={styles.imageContainer}>
                                     <Image
                                         src={image}
-                                        alt={product.name.pt}
+                                        alt={product.name}
                                         fill
                                         className={styles.image}
                                         priority={false}
@@ -73,7 +82,7 @@ export default function RelatedProducts({ related }: RelatedProps) {
                                     </div>
                                 </div>
                                 <div className={styles.productInfo} onClick={() => functions.pushProductPage(product.id)}>
-                                    <h4>{product.name.pt.toUpperCase()}</h4>
+                                    <h4>{product.name.toUpperCase()}</h4>
                                     <p>{price}</p>
                                     <p>{discount}</p>
                                 </div>

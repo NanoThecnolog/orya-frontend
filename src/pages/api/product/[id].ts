@@ -1,4 +1,4 @@
-import { nuvemshop } from '@/services/classes/nuvemshop';
+import { apiTray } from '@/services/classes/IntegraApi';
 import { AxiosError } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -10,8 +10,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     const { id } = req.query;
 
+    //console.log("chamando rota")
+
     try {
-        const response = await nuvemshop.produto(id as string)
+        const response = await apiTray.produto(id as string)
         return res.status(200).json(response);
     } catch (err) {
         const error = err as AxiosError<{ message?: string }>

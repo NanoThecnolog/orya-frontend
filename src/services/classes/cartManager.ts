@@ -1,4 +1,4 @@
-import { Product } from "@/@types/nuvemshop/products";
+import { Product } from "@/@types/tray/products";
 import { CartProps } from "@/contexts/mainContext";
 import { Dispatch, SetStateAction } from "react";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ export class Cart {
     private updateCart(updater: SetStateAction<CartProps[]>): void {
         this.setCartItems(updater)
     }
-    private changeAmount(productID: number, delta: number): void {
+    private changeAmount(productID: string, delta: number): void {
         const prevItems = this.cartItems;
         const updated = prevItems
             .map(item => {

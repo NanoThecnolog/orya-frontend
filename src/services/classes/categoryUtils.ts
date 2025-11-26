@@ -1,30 +1,39 @@
-import { Category, ProductList } from "@/@types/nuvemshop/products"
 import { debug } from "@/utils/DebugLogger"
+import { apiTray } from "./IntegraApi"
+import { CategoryList } from "@/@types/categories"
+import axios from "axios"
+import { CategoryTreeResponse } from "@/@types/tray/categoryTreeResponse"
 
 export abstract class CategoryUtils {
-    protected getAllCategories(products: ProductList): Category[] {
-        if (!products || !Array.isArray(products)) {
-            //debug.error("getAllCategories com products invalido", products)
-            return []
-        }
-        //debug.log("Produtos no metodo getAllCategories", products)
-        //const excluded = ["coleção"]
-        const seen = new Set<string>()
 
-        return products.flatMap(product => product.categories)
-            .filter(category => {
-                const name = category.name.pt.toLowerCase()
-                if (seen.has(name)) return false
-                seen.add(name)
-                return true
+
+    protected async getCategoryTree(id: string): Promise<CategoryTreeResponse> {
+        try {
+            const tree = await axios.get<CategoryTreeResponse>('/api/category/tree', {
+                params: { id }
             })
+            return tree.data
+        } catch (err) {
+            console.log("Erro ao buscar árvore da categoria", err)
+            throw new Error('Erro ao buscar árvore de categorias dentro de categoryUtils')
+        }
+    }
+    protected async getAllCategories(): Promise<CategoryList[]> {
+
+        try {
+            const categories = await axios.get(`/api/categories`)
+            return categories.data
+        } catch (err) {
+            console.log("Erro ao buscar todas as categorias dentro de categoryUtils", err)
+            throw new Error('Erro ao buscar todas as categorias dentro de categoryUtils')
+        }
     }
     //precisa alterar a logica de acordo com o cadastro de categorias para identificação de linhas e coleções
-    protected extractCollections(categories: Category[]): Category[] {
+    protected extractCollections(categories: CategoryList[]): CategoryList[] {
         const seen = new Set<string>()
 
         return categories.filter(category => {
-            const name = category.name.pt.toLowerCase()
+            const name = category.Category.name.toLowerCase()
             if (!name.includes("coleção")) return false
             if (seen.has(name)) return false
             seen.add(name)
@@ -32,15 +41,16 @@ export abstract class CategoryUtils {
         })
     }
     //precisa alterar a logica de acordo com o cadastro de categorias e identificacao das linhas e tal
-    protected extractLines(categories: Category[]): Category[] {
+    protected extractLines(categories: CategoryList[]): CategoryList[] {
         const seen = new Set<string>()
 
         return categories.filter(category => {
-            const name = category.name.pt.toLowerCase()
+            const name = category.Category.name.toLowerCase()
             if (!name.includes("linha")) return false
             if (seen.has(name)) return false
             seen.add(name)
             return true
         })
     }
+
 }

@@ -1,19 +1,23 @@
-import { Category, ProductList } from "@/@types/nuvemshop/products";
+import { CategoryProduct } from "@/@types/tray/products";
 import { CategoryUtils } from "./categoryUtils";
 import { debug } from "@/utils/DebugLogger";
+import { Product } from "@/@types/tray/products";
+import { CategoryList } from "@/@types/categories";
+import { CategoryTreeResponse } from "@/@types/tray/categoryTreeResponse";
 
 export class Filter extends CategoryUtils {
-    private products: ProductList
-    constructor(products: ProductList) {
+    private products: Product[]
+    constructor(products: Product[]) {
         super()
         this.products = products
     }
-    getCategories(): Category[] {
-        const categories = this.getAllCategories(this.products)
+    async getCategories(): Promise<CategoryList[]> {
+        const categories = await this.getAllCategories()
+        if (!categories) throw new Error("Erro no metodo getCategories em filter")
         const seen = new Set<string>()
 
         return categories.filter(category => {
-            const name = category.name.pt.toLowerCase()
+            const name = category.Category.name.toLowerCase()
             if (name.includes("coleção")) return false
             if (name.includes("linha")) return false
             if (seen.has(name)) return false
@@ -21,36 +25,45 @@ export class Filter extends CategoryUtils {
             return true
         })
     }
-    getCollections(): Category[] {
-        return this.extractCollections(this.getAllCategories(this.products))
+    async getCollections(): Promise<CategoryList[]> {
+        const categories = await this.getAllCategories()
+        return this.extractCollections(categories)
     }
-    getLines(): Category[] {
-        return this.extractLines(this.getAllCategories(this.products))
+    async getLines(): Promise<CategoryList[]> {
+        const categories = await this.getAllCategories()
+        console.log(categories)
+        return this.extractLines(categories)
     }
-    productsByCategory(name: string) {
-        const category = (this.getAllCategories(this.products)).find(cat => cat.name.pt.toLowerCase() === name.toLowerCase())
-        //debug.log("categoria no metodo", category)
+    async productsByCategory(name: string) {
+        const categories = await this.getAllCategories()
+        const category = categories.find(cat => cat.Category.name.toLowerCase() === name.toLowerCase())
+        debug.log("categoria no metodo", category)
 
         return this.products.filter(product =>
-            product.categories.some(cat =>
-                cat.name.pt === category?.name.pt
+            product.all_categories.some(cat =>
+                cat.toLowerCase() === category?.Category.id.toLowerCase()
             ))
     }
-    productsByLine(name: string) {
-        const lines = this.getLines()
+    async productsByLine(name: string) {
+        const lines = await this.getLines()
         const line = lines.find(l =>
-            l.name.pt.toLowerCase().replace(/^linha\s*/i, '').trim() === name.toLowerCase())
+            l.Category.name.toLowerCase().replace(/^linha\s*/i, '').trim() === name.toLowerCase())
         if (!line) return []
         debug.log("Linha no metodo productsByLine", line)
         debug.log("lista de produtos recebida no metodo", this.products)
         const products = this.products.filter(product =>
-            product.categories.some(cat =>
-                cat.name.pt.toLowerCase() === line?.name.pt.toLowerCase()
+            product.all_categories.some(cat =>
+                cat.toLowerCase() === line.Category.id.toLowerCase()
             )
         )
         debug.log("produtos retornados no metodo productsByLine", products)
 
         return products
+    }
+
+    async getTree(categoryID: string): Promise<CategoryTreeResponse> {
+        const categoryTree = await this.getCategoryTree(categoryID)
+        return categoryTree
     }
 }
 

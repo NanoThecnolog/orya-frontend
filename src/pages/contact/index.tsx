@@ -2,6 +2,8 @@ import Head from 'next/head'
 import styles from './styles.module.scss'
 import { oryaData } from '@/common/variables/oryaData'
 import { format } from '@/utils/formatContent'
+import { MdEmail } from 'react-icons/md'
+import { FaPhoneAlt, FaRegCalendarAlt } from 'react-icons/fa'
 
 export default function ContactPage() {
 
@@ -16,27 +18,37 @@ export default function ContactPage() {
             <main className={styles.container}>
                 <section className={styles.sectionContainer}>
                     <h2 className={styles.title}>CONTATO</h2>
+                    <p>Entre em contato conosco através dos nossos canais de atendimento</p>
 
-                    <div className={styles.info}>
-                        <p>
-                            <strong>E-mail:</strong>{" "}
-                            <a href={`"mailto:${oryaData.email}`}>{oryaData.email}</a>
-                        </p>
-                        <p>
-                            <strong>Telefone:</strong>{" "}
+                    <div className={styles.infoContainer}>
+                        <div className={styles.info}>
+                            <MdEmail size={35} />
+                            <p>
+                                <a href={`"mailto:${oryaData.email}`}>{oryaData.email}</a>
+                            </p>
+                        </div>
+                        <div className={styles.info}>
+                            <FaPhoneAlt size={35} />
+                            <p>
+                                <strong>Telefone{oryaData.phones.length > 1 && "s"}</strong>
+
+                            </p>
                             {oryaData.phones.map((phone, index) => {
                                 const formattedPhone = format.formatPhoneNumber(phone.countryCode, phone.areaCode, phone.number).formatted
                                 const cleanPhone = format.formatPhoneNumber(phone.countryCode, phone.areaCode, phone.number).clean
-
                                 return (
-                                    <a key={index} href={`tel:${cleanPhone}`}>{formattedPhone}</a>
+                                    <p key={index}><a href={`tel:${cleanPhone}`}>{formattedPhone}</a></p>
                                 )
                             })}
-                        </p>
-                        <p>
-                            <strong>Atendimento:</strong> segunda a sexta, das 9h às 18h, exceto
-                            feriados.
-                        </p>
+                        </div>
+                        <div className={styles.info}>
+                            <FaRegCalendarAlt size={35} />
+                            <p>
+                                <strong>Atendimento</strong>
+                            </p>
+                            <p>Segunda à Sexta-feira, das 9h às 18h, exceto
+                                feriados.</p>
+                        </div>
                     </div>
                 </section>
             </main>

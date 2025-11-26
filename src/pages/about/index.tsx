@@ -18,7 +18,7 @@ export default function AboutPage() {
                     <div className={styles.aboutContainer}>
                         <div className={styles.imageContainer}>
                             <Image
-                                src={"/img/ORYA 16513.jpg"}
+                                src={"/img/1Q3A6558.jpg"}
                                 alt=''
                                 fill
                                 priority

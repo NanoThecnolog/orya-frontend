@@ -26,13 +26,43 @@
             text-align: center;
         }
 
-        .info {
-            font-size: 1rem;
-            color: #333;
+        p {
+            text-align: center;
+        }
 
-            a {
-                color: var(--wine);
-                //text-decoration: underline;
+        .infoContainer {
+            display: flex;
+            gap: 20px;
+            //outline: 2px solid red;
+
+            .info {
+                width: 350px;
+                height: 250px;
+                font-size: 1rem;
+                color: #333;
+                background-color: #f7e5c3;
+                border-radius: 1rem;
+                //box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+
+                //outline: 2px solid red;
+                strong {
+                    font-size: 1.2rem;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                a {
+                    color: var(--wine);
+                    //text-decoration: underline;
+                }
             }
         }
     }

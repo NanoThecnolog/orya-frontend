@@ -1,8 +1,9 @@
-import { Category, ProductList } from '@/@types/nuvemshop/products'
+import { ProductList } from '@/@types/tray/products'
 import styles from './styles.module.scss'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Filter } from '@/services/classes/filter'
 import { IoFilter } from 'react-icons/io5'
+import { CategoryList } from '@/@types/categories'
 
 interface CompProps {
     products: ProductList,
@@ -13,22 +14,22 @@ interface CompProps {
 export default function MainFilter({ products, updateFiltered }: CompProps) {
     const [fromPrice, setFromPrice] = useState<string>("")
     const [toPrice, setToPrice] = useState<string>("")
-    const [categories, setCategories] = useState<Category[]>([])
-    const [collections, setCollections] = useState<Category[]>([])
-    const [lines, setLines] = useState<Category[]>([])
+    const [categories, setCategories] = useState<CategoryList[]>([])
+    const [collections, setCollections] = useState<CategoryList[]>([])
+    const [lines, setLines] = useState<CategoryList[]>([])
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        const setStates = () => {
+        const setStates = async () => {
             const filter = new Filter(products)
 
-            const categories = filter.getCategories()
+            const categories = await filter.getCategories()
             setCategories(categories)
 
-            const collections = filter.getCollections()
+            const collections = await filter.getCollections()
             setCollections(collections)
 
-            const lines = filter.getLines()
+            const lines = await filter.getLines()
             setLines(lines)
         }
         if (products && products.length > 0) setStates()
@@ -36,13 +37,13 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
 
     const filterByCategory = (catId: number) => {
         const filteredProducts = products.filter(product =>
-            product.categories.some(cat => cat.id === catId)
+            product.all_categories.some(cat => parseFloat(cat) === catId)
         )
         updateFiltered(filteredProducts)
     }
     const filterByPrice = (min: number, max: number) => {
         const filteredProducts = products.filter(product => {
-            const price = parseFloat(product?.variants?.[0]?.price ?? "0")
+            const price = parseFloat(product.price ?? "0")
             return price >= min && price <= max
         })
         updateFiltered(filteredProducts)
@@ -70,9 +71,9 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
                     <h2>Por Categoria</h2>
                     <ul>
                         {categories.map((cat) =>
-                            <li key={cat.id}
-                                onClick={() => filterByCategory(cat.id)}
-                            >{cat.name.pt}</li>
+                            <li key={cat.Category.id}
+                                onClick={() => filterByCategory(parseFloat(cat.Category.id))}
+                            >{cat.Category.name}</li>
                         )}
                     </ul>
                 </div>
@@ -80,9 +81,9 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
                     <h2>Por Coleção</h2>
                     <ul>
                         {collections.map(col =>
-                            <li key={col.id}
-                                onClick={() => filterByCategory(col.id)}
-                            >{col.name.pt}</li>
+                            <li key={col.Category.id}
+                                onClick={() => filterByCategory(parseFloat(col.Category.id))}
+                            >{col.Category.name}</li>
                         )}
                     </ul>
                 </div>
@@ -91,9 +92,9 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
                     <ul>
                         {
                             lines.map(line =>
-                                <li key={line.id}
-                                    onClick={() => filterByCategory(line.id)}
-                                >{line.name.pt}</li>
+                                <li key={line.Category.id}
+                                    onClick={() => filterByCategory(parseFloat(line.Category.id))}
+                                >{line.Category.name}</li>
                             )
                         }
                     </ul>

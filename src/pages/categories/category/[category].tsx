@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { useMain } from '@/contexts/mainContext'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Product } from '@/@types/nuvemshop/products'
+import { Product } from '@/@types/tray/products'
 import { Filter } from '@/services/classes/filter'
 import { debug } from '@/utils/DebugLogger'
 import Banner from '@/components/CategoriesPage/Banner'
@@ -17,10 +17,10 @@ export default function CategoryPage() {
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
-        const getProducts = () => {
+        const getProducts = async () => {
             const productClass = new Filter(productList)
-            const products = productClass.productsByCategory(category as string)
-            debug.log("produtos filtrados pela categoria", products)
+            const products = await productClass.productsByCategory(category as string)
+            debug.log(`produtos filtrados pela categoria ${category ?? "nome vazio"}`, products)
             setProducts(products)
         }
         if (productList.length > 0 && category) getProducts()

@@ -13,10 +13,11 @@ import Banner from "@/components/Banner";
 import About from "@/components/homeComponents/About";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ProductList } from "@/@types/nuvemshop/products";
+import { ProductList } from "@/@types/tray/products";
 import { GetServerSideProps } from "next";
 import { useMain } from "@/contexts/mainContext";
 import { breakpoints } from "@/common/variables/swiperBreakpoint";
+import { apiTray } from "@/services/classes/IntegraApi";
 //import { debug } from "@/utils/DebugLogger";
 
 interface HomeProps {
@@ -27,18 +28,8 @@ export default function HomePage({ products }: HomeProps) {
   const { productList, setProductList } = useMain()
   const [width, setWidth] = useState(0)
   const [cardsPerContainer, setCardsPerContainer] = useState(4)
+  //console.log("produtos", products)
 
-
-  /*const getProducts = async () => {
-    try {
-      const response = await axios.get<ProductList>("/api/products")
-      const data = response.data
-      console.log("resultado da request de produtos", data)
-      setProductList(data)
-    } catch (err) {
-      console.error("erro na request de produtos", err)
-    }
-  }*/
   useEffect(() => {
     if (!products || products.length === 0) return
     //debug.log("produtos do server", products)
@@ -83,10 +74,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const url = process.env.OFFICIAL_URL
 
   try {
-    const response = await axios.get<ProductList>(`${url}/api/products`, {
-      headers: { "User-Agent": "loja-orya (contato@ericssongomes.com)" }
-    })
-    const data = response.data
+    const response = await apiTray.getProducts()
+    const data = response
     //console.log("resultado da request de produtos", data)
     return {
       props: { products: data }

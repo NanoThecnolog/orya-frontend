@@ -5,5 +5,12 @@ export interface MenuProps {
 }
 export interface DropMenuProps {
     title: string,
+    id: string,
     link?: string,
+    children?: ChildrenProps[]
+}
+export interface ChildrenProps {
+    title: string,
+    id: string,
+    link?: string
 }

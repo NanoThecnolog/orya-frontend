@@ -1,50 +1,67 @@
 export interface ProductProps {
-    img: string,
-    price: number,
-    name: string
+    codeImg: number[],
+    trayID: string
 }
-export const products: ProductProps[] = [
+export const productsImages: ProductProps[] = [
     {
-        img: "/img/ORYA 16542.jpg",
-        price: 399.99,
-        name: "Colar X",
+        codeImg: [16417, 16420],
+        trayID: "1"
+    },
+    {
+        codeImg: [16426, 16462],
+        trayID: "3"
+    },
+    {
+        codeImg: [16425, 16538],
+        trayID: "5"
 
     },
     {
-        img: "/img/ORYA 16398.jpg",
-        price: 388.99,
-        name: "Colar X",
-
+        codeImg: [16488, 16521],
+        trayID: "7"
     },
     {
-        img: "/img/ORYA 16547.jpg",
-        price: 259.99,
-        name: "Pulseira X",
-
+        codeImg: [16431, 16530],
+        trayID: "9"
     },
     {
-        img: "/img/ORYA 16414.jpg",
-        price: 319.90,
-        name: "Pulseira X",
+        codeImg: [16429, 16527],
+        trayID: "11"
     },
     {
-        img: "/img/ORYA 16527.jpg",
-        price: 159.99,
-        name: "Brinco X",
+        codeImg: [],
+        trayID: "13"
     },
     {
-        img: "/img/ORYA 16538.jpg",
-        price: 99.90,
-        name: "Brinco X",
+        codeImg: [16510, 16540],
+        trayID: "15"
     },
     {
-        img: "/img/ORYA 16523.jpg",
-        price: 59.90,
-        name: "Brinco X"
+        codeImg: [16494, 16497],
+        trayID: "17"
     },
     {
-        img: "/img/ORYA 16540.jpg",
-        price: 79.90,
-        name: "Brinco X"
+        codeImg: [16480, 16523],
+        trayID: "19"
     },
+    {
+        codeImg: [16476, 16483],
+        trayID: "21"
+    },
+    {
+        codeImg: [16451, 16536],
+        trayID: "23"
+    },
+    {
+        codeImg: [16470, 16535],
+        trayID: "25"
+    },
+    {
+        codeImg: [16458, 16533],
+        trayID: "27"
+    },
+    {
+        codeImg: [16494, 16497],
+        trayID: "29"
+    }
 ]

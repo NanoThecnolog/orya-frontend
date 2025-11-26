@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from './styles.module.scss'
 import { CiSearch, CiUser } from 'react-icons/ci'
-import { IoIosArrowDown } from 'react-icons/io'
+import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import { IoBagOutline } from 'react-icons/io5'
 import { useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
@@ -15,17 +15,20 @@ interface HeaderProps {
 }
 export default function Header({ useWine }: HeaderProps) {
     const router = useRouter()
+    const { menu, cartItems, productList, setCartOpen } = useMain()
+
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
-    const { menu } = useMain()
-    const { cartItems, productList } = useMain()
+    const [activeSub, setActiveSub] = useState<string | null>(null)
+
     const [mobileOpen, setMobileOpen] = useState<boolean>(false)
     const [openSearch, setOpenSearch] = useState<boolean>(false)
     const [searchInput, setSearchInput] = useState<string>("")
+
+    //console.log(menu)
+
     const logoSRC = useWine ?
         "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" :
         "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
-
-    const { setCartOpen } = useMain()
 
     const handleDropdown = (item: string) => {
         setActiveMenu(activeMenu === item ? null : item)
@@ -68,7 +71,7 @@ export default function Header({ useWine }: HeaderProps) {
                     <li
                         key={item.title}
                         onClick={() => {
-                            if ((item.title === "sobre" || item.title === "contato") && item.link) handleClick(item.link)
+                            if (item.link) handleClick(item.link)
                             else handleDropdown(item.title)
                         }}
                         onMouseEnter={() => {
@@ -86,21 +89,73 @@ export default function Header({ useWine }: HeaderProps) {
                         <AnimatePresence>
                             {activeMenu === item.title && !item.link && (
                                 <motion.ul
-                                    initial={{ opacity: 0, y: -10, height: "100%" }}
+                                    key={"dropdown"}
+                                    initial={{ opacity: 0, y: -10, maxHeight: 100 }}
                                     animate={{ opacity: 1, y: 0, maxHeight: 500 }}
                                     exit={{ opacity: 0, y: -10, maxHeight: 0 }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
                                     className={`${styles.dropdown} ${styles.active}`}
-                                    style={useWine ? {} : { backgroundColor: "beige" }}
+                                    style={useWine
+                                        ? { borderTop: '1px solid rgba(204, 204, 204, 0.15)', borderBottom: '1px solid rgba(204, 204, 204, 0.15)' }
+                                        : { backgroundColor: "beige", borderTop: '.5px solid var(--wine)', borderBottom: '.5px solid var(--wine)' }}
                                 >
                                     {item.dropMenu?.map(drop =>
                                         <li
                                             key={drop.title}
-                                            className={styles.dropItem}
+                                            className={`${styles.dropItemContainer} ${activeSub === drop.title ? styles.active : ""}`}
                                             style={useWine ? { color: "white" } : { color: "var(--wine)" }}
-                                            onClick={() => handleClick(drop.link!)}
+                                            onClick={() => {
+                                                if (!drop.children) handleClick(drop.link!)
+                                            }}
+                                            onMouseEnter={() => {
+                                                if (drop.children) setActiveSub(drop.title)
+                                            }}
+                                            onMouseLeave={() => {
+                                                if (drop.children) setActiveSub(null)
+                                            }}
                                         >
-                                            {drop.title}
+                                            <div
+                                                className={styles.dropItemTitle}
+
+                                                onClick={() => {
+                                                    if (!drop.children) handleClick(drop.link!)
+                                                }}
+
+                                            >
+                                                {drop.title}
+                                                {drop.children && drop.children.length > 0 && <IoIosArrowForward />}
+                                            </div>
+                                            <AnimatePresence>
+                                                {activeSub === drop.title && drop.children &&
+                                                    <motion.div
+                                                        key={"submenu"}
+                                                        initial={{ opacity: 0, x: 0, maxHeight: 0 }}
+                                                        animate={{ opacity: 1, x: 0, maxHeight: 600 }}
+                                                        exit={{ opacity: 0, x: 0, maxHeight: 0 }}
+                                                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                                                        className={`${styles.submenu}`}
+                                                    /*style={useWine
+                                                        ? { borderTop: '1px solid rgba(204, 204, 204, 0.15)', borderBottom: '1px solid rgba(204, 204, 204, 0.15)' }
+                                                        : { backgroundColor: "beige", borderTop: '.5px solid var(--wine)', borderBottom: '.5px solid var(--wine)' }}*/
+                                                    >
+                                                        {
+                                                            drop.children.map(child =>
+                                                                <li
+                                                                    key={child.title}
+                                                                    className={styles.submenuItem}
+                                                                    style={useWine ? { color: "white" } : { color: "var(--wine)" }}
+                                                                    onClick={() => handleClick(child.link!)}
+                                                                >
+                                                                    <div className={styles.submenuTitle}>
+                                                                        {child.title}
+                                                                    </div>
+                                                                </li>
+                                                            )
+                                                        }
+                                                    </motion.div>
+                                                }
+                                            </AnimatePresence>
+
                                         </li>
                                     )}
                                 </motion.ul>
@@ -122,9 +177,8 @@ export default function Header({ useWine }: HeaderProps) {
                 </div>
                 <div className={styles.icons}>
                     <CiSearch size={20} onClick={() => setOpenSearch(!openSearch)} />
-                    {
-                        //<CiUser size={20} />
-                    }
+                    <CiUser size={20} onClick={() => router.push('/me')} />
+
                     <div className={styles.cartIcon} onClick={() => { setCartOpen(true) }}>
                         <IoBagOutline size={19} />
                         {cartItems.length > 0 &&

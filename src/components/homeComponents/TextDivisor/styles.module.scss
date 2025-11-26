@@ -16,13 +16,14 @@
         font-family: var(--font-Roboto);
 
         h2 {
-            color: gray;
+            color: var(--wine);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
 
         p {
             color: gray;
+            letter-spacing: 1.5px;
         }
 
         .color {

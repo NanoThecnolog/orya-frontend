@@ -124,8 +124,90 @@
         .shippingContainer {
             margin-top: 10px;
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+
+            .cepRow {
+                display: flex;
+                gap: 8px;
+                margin: 8px 0;
+            }
+
+            .cepInput {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .cepButton {
+                padding: 8px 16px;
+                border: none;
+                background: #333;
+                color: #fff;
+                border-radius: 4px;
+                cursor: pointer;
+
+                &:hover {
+                    background: #222;
+                }
+            }
+
+            .cotationContainer {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                width: 100%;
+
+                .cotation {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 12px 16px;
+                    background: #f7f7f7;
+                    border-radius: 8px;
+                    border: 1px solid #e3e3e3;
+
+                    p {
+                        font-size: 0.9rem;
+                        text-align: left;
+                        flex: 1;
+
+                        &:nth-child(1) {
+                            font-weight: 600;
+                        }
+
+                        &:nth-child(2) {
+                            text-align: right;
+                            font-weight: 500;
+                        }
+
+                        &:nth-child(3) {
+                            text-align: right;
+                            opacity: 0.7;
+                            font-size: 0.85rem;
+                        }
+                    }
+                }
+            }
+
+            @media (max-width: 560px) {
+                .cotationContainer {
+                    .cotation {
+                        flex-direction: column;
+                        gap: 6px;
+                        text-align: center;
+
+                        p {
+                            flex: unset;
+                            width: 100%;
+                            text-align: center !important;
+                        }
+                    }
+                }
+            }
+
         }
 
     }

@@ -16,7 +16,7 @@ class FormatContent {
         const number = parseFloat(price)
         return `R$ ${this.formatNumber(number)}`
     }
-    public discount(price: string | null, percent: number) {
+    public discount(price: string | null, percent: number = 5) {
         if (!price) return ""
         const priceNumber = parseFloat(price)
         const discounted = priceNumber - (priceNumber * (percent / 100))
@@ -36,5 +36,24 @@ class FormatContent {
 
         return { formatted, clean }
     }
+
+
+    date(dateInput: string | Date): string {
+        const date = new Date(dateInput)
+
+        if (isNaN(date.getTime())) {
+            throw new Error("Data inválida")
+        }
+        return date.toLocaleDateString("pt-BR", {
+            timeZone: "UTC"
+        }).replace(/\//g, "/")
+
+        /*const day = String(date.getDate()).padStart(2, "0")
+        const month = String(date.getMonth() + 1).padStart(2, "0")
+        const year = date.getFullYear()
+
+        return `${day}/${month}/${year}`*/
+    }
+
 }
 export const format = new FormatContent()

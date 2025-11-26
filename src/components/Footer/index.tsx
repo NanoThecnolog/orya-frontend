@@ -19,30 +19,37 @@ export default function Footer() {
     const cleanPhone = format.formatPhoneNumber(oryaData.phones[0].countryCode, oryaData.phones[0].areaCode, oryaData.phones[0].number).clean
 
     const links = [{
+        id: 1,
         name: "cuidados",
         link: "/cuidados-e-garantia"
     },
     {
-        name: /*"guia de tamanhos"*/ "Política de Privacidade",
+        id: 2,
+        name: "Política de Privacidade",
         link: "/privacy"
     },
     {
+        id: 3,
         name: "políticas de troca e devolução",
         link: "/troca-e-devolucao"
     },
     {
+        id: 4,
         name: "formas de pagamento",
         link: "/"
     },
     {
+        id: 5,
         name: "sobre",
         link: "/about"
     },
     {
+        id: 6,
         name: "faq",
         link: "/"
     },
     {
+        id: 7,
         name: "contato@orya.com",
         link: "/"
     },]
@@ -69,8 +76,8 @@ export default function Footer() {
         <footer className={styles.container}>
             <div className={styles.linkContainer}>
                 <ul>
-                    {links.map(item =>
-                        <li key={item.name} onClick={() => handleClick(item.link)}>
+                    {links.map((item, index) =>
+                        <li key={item.id} onClick={() => handleClick(item.link)}>
                             {item.name}
                         </li>
                     )}
