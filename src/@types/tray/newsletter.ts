@@ -5,7 +5,7 @@ export interface NewsLetterResponse {
 }
 
 export interface NewsLetterProps {
-    NewsLetter: {
+    newsletter: {
         email: string,
         name: string
     }

@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useEffect, useState } from "react";
+import WhatsappButton from "@/components/ui/WhatsappButton";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -82,9 +83,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
       </AnimatePresence>
       <ToastContainer autoClose={3500} position="top-left" />
-      {
-        <Footer />
-      }
+      <Footer />
+      <WhatsappButton />
     </div>
   </MainProvider>
 }

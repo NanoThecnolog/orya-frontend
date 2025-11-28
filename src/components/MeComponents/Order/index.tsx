@@ -81,11 +81,10 @@ export default function OrderComp({ orderID }: OrderCompProps) {
                             <h2>Pedido #{order.id}</h2>
                             <p>Data da compra: {format.date(order.date)}</p>
                             <p>Status: {order.status}</p>
+                            <p>Frete: {format.price(order.shipment_value)} <span>{order.shipment/*order.estimated_delivery_date && `- Data Estimada de Entrega: ${format.date(order.estimated_delivery_date)}`*/}</span></p>
                             <p>Total: {format.price(order.total)}</p>
-                            <p>Frete: {format.price(order.shipment_value)} {order.estimated_delivery_date && `- Data Estimada de Entrega: ${format.date(order.estimated_delivery_date)}`}</p>
                         </div>
                         <div className={styles.shipping}>
-
                         </div>
                     </header>
 

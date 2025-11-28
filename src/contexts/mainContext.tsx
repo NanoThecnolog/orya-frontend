@@ -1,9 +1,13 @@
 import { MenuProps } from "@/@types/Menu";
+import { CartCreateServiceProps } from "@/@types/tray/createCart";
 import { CreateUserProps } from "@/@types/tray/createUserProps";
 import { CreateUserResponse } from "@/@types/tray/createUserResponse";
 import { CustomerListItem, CustomersListResponse } from "@/@types/tray/getCustomersResponse";
 import { LoginResponseInterface, UserLoginProps } from "@/@types/tray/loginProps";
+import { PaymentOption } from "@/@types/tray/paymentOptions";
+import { PaymentMethod, PaymentMethodsGroup } from "@/@types/tray/paymentsMethods";
 import { Product } from "@/@types/tray/products";
+import { Cart } from "@/services/classes/cartManager";
 import { renderMenu } from "@/services/classes/menu";
 import { Validator } from "@/services/classes/validator";
 import { debug } from "@/utils/DebugLogger";
@@ -33,6 +37,7 @@ interface MainContextProps {
     setUser: (data: UserLoginProps) => void
     customer: CustomerListItem | null
     setCustomer: (data: CustomerListItem) => void
+    paymentOptions: PaymentMethod[]
 }
 
 interface signInProps {
@@ -49,6 +54,7 @@ export const mainContext = createContext<MainContextProps>({
     menu: [],
     user: null,
     customer: null,
+    paymentOptions: [],
     setCartOpen: () => { },
     setCartItems: () => { },
     setProductList: () => { },
@@ -67,6 +73,7 @@ export function MainProvider({ children }: MainProviderProps) {
     const [menu, setMenu] = useState<MenuProps[]>([])
     const [user, setUser] = useState<UserLoginProps | null>(null)
     const [customer, setCustomer] = useState<CustomerListItem | null>(null)
+    const [paymentOptions, setPaymentOptions] = useState<PaymentMethod[]>([])
 
     const getProducts = async () => {
         const products = await axios.get<Product[]>("/api/products")
@@ -77,6 +84,11 @@ export function MainProvider({ children }: MainProviderProps) {
         setMenu(menu)
     }
 
+
+
+    useEffect(() => {
+        debug.log(cartItems)
+    }, [cartItems]);
     useEffect(() => {
         const getCustomerDetails = async () => {
             try {
@@ -99,6 +111,44 @@ export function MainProvider({ children }: MainProviderProps) {
         if (productList.length > 0) getMenu()
         else getProducts()
     }, [productList])
+    useEffect(() => {
+        try {
+            if (productList.length === 0) return
+            const stored = localStorage.getItem('cart_data')
+            //debug.log("stored", stored)
+            if (!stored) return
+            const parsed: CartCreateServiceProps = JSON.parse(stored)
+            //debug.log("stored parsed", parsed)
+            const products: CartProps[] = parsed.products.map((p) => {
+                const product = productList.find(product => product.id === p.product_id)
+                if (!product) return null
+                return {
+                    product: product,
+                    amount: Number(p.quantity)
+                } as CartProps
+            })
+                .filter((item): item is CartProps => item !== null)
+            if (Array.isArray(parsed.products)) {
+                //debug.log("tudo certo, setando cartItems", products)
+                setCartItems(products)
+            }
+        } catch (err) {
+            debug.error("Erro ao iniciar estado do carrinho", err)
+        }
+    }, [productList])
+
+    useEffect(() => {
+        const getPaymentOptions = async () => {
+            try {
+                const response = await axios.get<PaymentMethodsGroup>('/api/payment/methods')
+                const options = response.data
+                setPaymentOptions(options.credit)
+            } catch (err) {
+                debug.error("Erro ao buscar opções de pagamentos")
+            }
+        }
+        if (!paymentOptions) getPaymentOptions()
+    }, [])
 
     const signIn = async ({ email, password }: signInProps) => {
         try {
@@ -131,7 +181,7 @@ export function MainProvider({ children }: MainProviderProps) {
     }
 
     return (
-        <mainContext.Provider value={{ cartOpen, user, cartItems, menu, productList, customer, setUser, setCartItems, setProductList, signIn, signUp, setCartOpen, setCustomer }}>
+        <mainContext.Provider value={{ cartOpen, user, cartItems, menu, productList, customer, paymentOptions, setUser, setCartItems, setProductList, signIn, signUp, setCartOpen, setCustomer }}>
             {children}
         </mainContext.Provider>
     )

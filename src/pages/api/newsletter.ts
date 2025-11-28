@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
 
         //return res.status(200).json(response)
-        const response = await apiTray.newsLetter({ NewsLetter: { email, name } })
+        const response = await apiTray.newsLetter({ newsletter: { email, name: name as string ?? 'Cliente' } })
         if (!response || response.message !== "Created") {
             return res.status(400).json({ message: "Email não registrado" })
         }

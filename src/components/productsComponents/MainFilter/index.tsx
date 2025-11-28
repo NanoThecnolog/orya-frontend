@@ -2,7 +2,7 @@ import { ProductList } from '@/@types/tray/products'
 import styles from './styles.module.scss'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Filter } from '@/services/classes/filter'
-import { IoFilter } from 'react-icons/io5'
+import { IoClose, IoFilter } from 'react-icons/io5'
 import { CategoryList } from '@/@types/categories'
 
 interface CompProps {
@@ -64,7 +64,7 @@ export default function MainFilter({ products, updateFiltered }: CompProps) {
     return (
         <aside className={styles.container}>
             <div className={styles.hamburguer} onClick={() => setOpen(!open)}>
-                {open ? "Fechar filtro" : "Filtrar"} <IoFilter size={20} />
+                <span>Filtrar {open ? <IoClose size={20} /> : <IoFilter size={20} />}</span>
             </div>
             <div className={`${styles.filter} ${open && styles.open}`}>
                 <div className={styles.filterContainer}>

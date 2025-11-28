@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
 import { LiaLongArrowAltRightSolid } from 'react-icons/lia'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Functions } from '@/utils/functions'
 
 interface HeaderProps {
     useWine: boolean
@@ -53,6 +54,9 @@ export default function Header({ useWine }: HeaderProps) {
                 className={styles.hamburger}
                 style={{ color: useWine ? "white" : "var(--wine)" }}
             >
+                <div>
+                    <CiUser size={20} onClick={() => Functions.openWindow('https://checkout.oryaatelier.com/my-account')} />
+                </div>
                 <div className={styles.cartIcon} onClick={() => { setCartOpen(true), setMobileOpen(false) }}>
                     <IoBagOutline size={19} />
                     {cartItems.length > 0 &&
@@ -117,8 +121,9 @@ export default function Header({ useWine }: HeaderProps) {
                                             <div
                                                 className={styles.dropItemTitle}
 
-                                                onClick={() => {
-                                                    if (!drop.children) handleClick(drop.link!)
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleClick(drop.link!)
                                                 }}
 
                                             >
@@ -177,7 +182,7 @@ export default function Header({ useWine }: HeaderProps) {
                 </div>
                 <div className={styles.icons}>
                     <CiSearch size={20} onClick={() => setOpenSearch(!openSearch)} />
-                    <CiUser size={20} onClick={() => router.push('/me')} />
+                    <CiUser size={20} onClick={() => Functions.openWindow('https://checkout.oryaatelier.com/my-account')} />
 
                     <div className={styles.cartIcon} onClick={() => { setCartOpen(true) }}>
                         <IoBagOutline size={19} />

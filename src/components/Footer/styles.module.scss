@@ -160,29 +160,59 @@
         gap: 2rem;
         padding: 2rem 1rem;
 
-        .linkContainer ul {
-            grid-template-columns: 1fr;
-            gap: 8px;
+        .linkContainer {
+            //padding: 0 20px;
+
+            ul {
+                text-align: center;
+
+                //outline: 2px solid red;
+                grid-template-columns: 170px 170px;
+                gap: 8px;
+                font-size: .7rem;
+
+                li {
+                    text-align: start;
+                    text-wrap: balance;
+                    overflow-wrap: anywhere;
+                }
+            }
+
         }
 
         .iconContainer {
-            .inputContainer label {
+            .inputContainer {
                 //max-width: 320px;
-                display: flex;
-                align-items: center;
+
+
                 //outline: 2px solid red;
 
-                .input {
-                    input {
-                        font-size: 0.9rem;
+                .labelContainer {
+                    display: flex;
+                    align-items: center;
+                    //outline: 2px solid red;
+
+                    h4 {
+                        padding-left: 45px;
+                        font-size: .9rem;
+                        //outline: 2px solid red;
+
                     }
 
-                    svg {
-                        right: 12px;
-                        bottom: 9px;
+                    .input {
+                        input {
+                            font-size: 0.9rem;
+                        }
+
+                        svg {
+                            right: 12px;
+                            bottom: 9px;
+                        }
                     }
                 }
             }
+
+
 
             .socialContainer {
                 gap: 15px;

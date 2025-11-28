@@ -63,7 +63,7 @@ export default function HomePage({ products }: HomeProps) {
         <Categories categories={categories} />
         <CarouselProducts2 products={productList} cardsPerContainer={cardsPerContainer} />
         <TextDivisor />
-        <Banner image="/img/ORYA 16550.png" />
+        <Banner image="/img/ORYA 16467.jpg" />
         <About />
       </main>
     </>

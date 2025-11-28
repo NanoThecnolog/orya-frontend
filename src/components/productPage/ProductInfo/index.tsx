@@ -14,7 +14,8 @@ interface InfoProps {
 
 export default function ProductInfo({ product }: InfoProps) {
     const [amount, setAmount] = useState<number>(1)
-    const { cartItems, setCartItems } = useMain()
+    const { cartItems, setCartItems, paymentOptions } = useMain()
+
     //console.log(product.variants[0].inventory_levels)
 
     const changeAmount = (operation: boolean) => {
@@ -39,7 +40,7 @@ export default function ProductInfo({ product }: InfoProps) {
                     <div className={styles.productInfo}>
                         <h2>{product.Product.name}</h2>
                         <p>{format.price(product.Product.price)}</p>
-                        <p>{format.discount(product.Product.price, 10)} <span dangerouslySetInnerHTML={{ __html: product.Product.payment_option_html }} /></p>
+                        <p>{format.discount(product.Product.price, 10)} <span>ou <strong>{product.Product.payment_option_details[0].plots}x</strong> de <strong>{format.price(product.Product.payment_option_details[0].value)}</strong></span></p>
 
 
                     </div>
@@ -74,6 +75,9 @@ export default function ProductInfo({ product }: InfoProps) {
                         className={styles.descriptionContainer}
                         dangerouslySetInnerHTML={{ __html: product.Product.description }}
                     />
+                    <div>
+                        *Joia disponível sob encomenda. Nossa confecção é manual e o prazo de produção é de 30 dias úteis.
+                    </div>
                 </div>
             </div>
         </section>

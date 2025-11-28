@@ -1,0 +1,63 @@
+/* components/faq.module.scss */
+.faqContainer {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+
+    .category {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .categoryTitle {
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .item {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+
+
+            .question {
+                width: 100%;
+                text-align: left;
+                //outline: 2px solid red;
+                background: none;
+                border: none;
+
+                cursor: pointer;
+                padding: 0.5rem 0;
+                display: flex;
+                justify-content: space-between;
+                gap: 5px;
+
+                button {
+                    font-size: 1.3rem;
+                    font-weight: 500;
+                    text-align: left;
+                }
+            }
+
+            .answer {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height .4s ease-in-out;
+                font-size: 1rem;
+
+                p {
+                    padding: 0.5rem 0;
+                    text-align: justify;
+                }
+            }
+
+            /*.open {
+                transition: max-height .4s ease-in-out;
+                max-height: 500px;
+            }*/
+        }
+    }
+}

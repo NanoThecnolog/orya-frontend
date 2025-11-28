@@ -83,25 +83,36 @@ export default function CartSidebar() {
             progress: undefined
         })
 
-        const sessionID = Functions.generateSessionID()
+        const currentProducts = cartItems.map(item => ({ product_id: item.product.id, quantity: item.amount.toString() }))
+
+        const saved = Cart.getSavedCart()
+        let sessionID = saved?.session_id || ""
+
+
+        //const sessionID = Functions.generateSessionID()
+
+
+        if (!saved || !Cart.isSameCart(currentProducts)) sessionID = Functions.generateSessionID()
+
         const cart: CartCreateServiceProps = {
             session_id: sessionID,
-            products: cartItems.map(item => ({ product_id: item.product.id, quantity: item.amount.toString() }))
+            products: currentProducts
         }
+
         try {
             const response = await axios.post<CreateCartResponse>('/api/cart/create', cart)
             const createdCart = response.data
             const url = createdCart.cart_url
+            Cart.saveCartLocal(cart)
             setTimeout(() => (
                 Functions.openWindow(url),
-                toggleCart()
+                toggleCart(),
+                toast.dismiss("buy-toast")
             ), 2000)
 
         } catch (err) {
             debug.error("Erro ao criar carrinho e finalizar compra", err)
             toast.error("Erro ao finalizar a compra", { toastId: "buy-error" });
-        } finally {
-            toast.dismiss("buy-toast")
         }
     }
 
@@ -155,7 +166,7 @@ export default function CartSidebar() {
                     }<div className={styles.shippingContainer}>
                         {cartItems.length > 0 && (
                             <>
-                                <h4>Frete</h4>
+                                <h4>Calcular Frete</h4>
 
                                 <div className={styles.cepRow}>
                                     <input
@@ -180,9 +191,13 @@ export default function CartSidebar() {
                                     <div className={styles.cotationContainer}>
                                         {cotation.map((item, index) => (
                                             <div key={index} className={styles.cotation}>
-                                                <p>{item.name}</p>
-                                                <p>{format.price(item.value)}</p>
-                                                <p>{item.information}</p>
+                                                <div className={styles.cotationInfo}>
+                                                    <p>{item.name}</p>
+                                                    <p>{item.information}</p>
+                                                </div>
+                                                <div className={styles.cotationPrice}>
+                                                    <p>{format.price(item.value)}</p>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

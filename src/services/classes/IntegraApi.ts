@@ -16,6 +16,8 @@ import { ShippingCotation } from "@/@types/tray/shippingCotation";
 import { CartCreateServiceProps, CartDataProps, CartProduct } from "@/@types/tray/createCart";
 import { CreateCartResponse } from "@/@types/tray/createCartResponse";
 import { CategoryTreeResponse } from "@/@types/tray/categoryTreeResponse";
+import { PaymentOptionsResponse } from "@/@types/tray/paymentOptions";
+import { PaymentMethodsGroup, PaymentMethodsResponse } from "@/@types/tray/paymentsMethods";
 
 
 export class IntegraApi {
@@ -321,13 +323,32 @@ export class IntegraApi {
         }
     }
     async getShippingCotation(data: ShippingCotation) {
+        debug.log(data)
         try {
             const response = await this.api.post('/shipping/cotation', data)
             return response.data
         } catch (err) {
             const error = err as AxiosError<{ message?: string }>;
             const message = error.response?.data?.message || error.message;
-            debug.error(`Erro ao buscar dados do endereço do cliente: ${message}`, err);
+            const response = error.response?.data
+            debug.log(response)
+            debug.error(`Erro ao buscar informações sobre frete: ${message}`, err);
+            return null
+        }
+    }
+
+    async getPaymentOptions(): Promise<PaymentMethodsGroup | null> {
+        try {
+            const response = await this.api.get<PaymentMethodsResponse>('/payment/all')
+            console.log(response.data)
+            const options = response.data.PaymentMethods
+            return options
+        } catch (err) {
+            const error = err as AxiosError<{ message?: string }>;
+            const message = error.response?.data?.message || error.message;
+            const data = error.response?.data
+            debug.error(`Erro ao buscar opções de pagamento da loja: ${message}`, err);
+            debug.log("data da requisição de opções de pagamento", data)
             return null
         }
     }

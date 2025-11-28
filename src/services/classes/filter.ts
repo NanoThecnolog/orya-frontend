@@ -31,7 +31,7 @@ export class Filter extends CategoryUtils {
     }
     async getLines(): Promise<CategoryList[]> {
         const categories = await this.getAllCategories()
-        console.log(categories)
+        debug.log(categories)
         return this.extractLines(categories)
     }
     async productsByCategory(name: string) {

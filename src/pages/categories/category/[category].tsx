@@ -27,7 +27,7 @@ export default function CategoryPage() {
         //if(!category) return debug.log("Categoria não encontrada no filtro de produtos por categorias.")
     }, [productList, category])
 
-    const bannerImage = "/img/ORYA 16417.jpg"
+    const bannerImage = /*`/img/categories/${category}.jpg` || */ "/img/ORYA 16417.jpg"
 
 
     return (

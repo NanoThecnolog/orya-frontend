@@ -1,0 +1,24 @@
+.container {
+    width: 100%;
+    max-width: 700px;
+    position: relative;
+    aspect-ratio: 4 / 5;
+
+    @media(min-width: 768px) {
+        min-height: 600px;
+    }
+
+
+
+    .image {
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+@media(min-widh: 1024px) {
+    .container {
+        height: 900px;
+        aspect-ratio: unset;
+    }
+}

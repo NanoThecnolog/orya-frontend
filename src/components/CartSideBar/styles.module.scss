@@ -132,25 +132,32 @@
                 display: flex;
                 gap: 8px;
                 margin: 8px 0;
-            }
 
-            .cepInput {
-                flex: 1;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
+                .cepInput {
+                    flex: 1;
+                    padding: 8px;
+                    border: none;
+                    border-radius: 4px;
+                    background-color: #ddd;
+                    color: var(--wine);
 
-            .cepButton {
-                padding: 8px 16px;
-                border: none;
-                background: #333;
-                color: #fff;
-                border-radius: 4px;
-                cursor: pointer;
+                    &:focus {
+                        color: var(--wine);
+                        outline: none;
+                    }
+                }
 
-                &:hover {
-                    background: #222;
+                .cepButton {
+                    padding: 8px 16px;
+                    border: none;
+                    background: #333;
+                    color: #fff;
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: #222;
+                    }
                 }
             }
 
@@ -169,7 +176,36 @@
                     border-radius: 8px;
                     border: 1px solid #e3e3e3;
 
-                    p {
+                    .cotationInfo {
+                        //outline: 2px solid red;
+                        font-size: 0.9rem;
+                        text-align: left;
+
+                        p {
+                            font-size: 0.9rem;
+                            text-align: left;
+                            flex: 1;
+
+                            &:nth-child(1) {
+                                font-weight: 600;
+                            }
+
+                            &:nth-child(2) {
+                                font-weight: 100;
+                                font-size: .8rem;
+                            }
+                        }
+                    }
+
+                    .cotationPrice {
+                        //outline: 2px solid red;
+                        text-align: right;
+                        opacity: 0.7;
+                        font-size: 0.85rem;
+
+                    }
+
+                    /*p {
                         font-size: 0.9rem;
                         text-align: left;
                         flex: 1;
@@ -188,7 +224,7 @@
                             opacity: 0.7;
                             font-size: 0.85rem;
                         }
-                    }
+                    }*/
                 }
             }
 

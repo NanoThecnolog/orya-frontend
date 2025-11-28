@@ -17,7 +17,7 @@ interface CollectionProps {
 
 export default function CollectionPage({ productListProps }: CollectionProps) {
     const router = useRouter()
-    const { collection } = router.query
+    const collection = String(router.query.collection).toLowerCase()
     const [products, setProducts] = useState<Product[]>([])
     const { productList, setProductList, menu } = useMain()
 

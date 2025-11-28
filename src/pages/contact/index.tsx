@@ -4,6 +4,8 @@ import { oryaData } from '@/common/variables/oryaData'
 import { format } from '@/utils/formatContent'
 import { MdEmail } from 'react-icons/md'
 import { FaPhoneAlt, FaRegCalendarAlt } from 'react-icons/fa'
+import Faq from '@/components/FAQ'
+import { faqData } from '@/common/variables/faq'
 
 export default function ContactPage() {
 
@@ -50,7 +52,9 @@ export default function ContactPage() {
                                 feriados.</p>
                         </div>
                     </div>
+
                 </section>
+                <Faq data={faqData} />
             </main>
         </>
     )

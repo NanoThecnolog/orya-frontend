@@ -22,6 +22,7 @@ export default function Categories({ categories }: Props) {
                             fill
                             priority={false}
                             className={styles.image}
+                            style={{ objectPosition: category.position ?? "center" }}
                         />
                         <p className={styles.name}>{category.name}</p>
                     </div>

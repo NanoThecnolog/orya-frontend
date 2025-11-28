@@ -47,7 +47,7 @@ export default function CarouselProducts2({
                         pagination={pagination ? { clickable: true } : false}
                         autoplay={autoplay ? { delay: 4000, disableOnInteraction: false } : false}
                         slidesPerView={cardsPerContainer}
-                        initialSlide={3}
+                        initialSlide={4}
                         className={styles.carousel}
                     >
                         {Array.isArray(products) && products.map((product, index) => {

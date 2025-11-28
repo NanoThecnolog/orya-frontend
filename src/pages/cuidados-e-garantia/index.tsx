@@ -12,7 +12,7 @@ export default function CareAndWarrantyPage() {
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
-                <section className={styles.pageContainer}>
+                <section className={styles.sectionContainer}>
                     <div className={styles.title}>
                         <h1>CUIDADOS E TERMO DE GARANTIA</h1>
                     </div>
@@ -20,6 +20,14 @@ export default function CareAndWarrantyPage() {
                         <div className={styles.cover}>
                             <h2>TERMO DE GARANTIA</h2>
                             <p>A Oryá Atelier garante a autenticidade e a alta qualidade dos materiais utilizados em suas joias, produzidas em ouro 18 quilates, prata 950 e gemas naturais, sempre de acordo com padrões internacionais.</p>
+                        </div>
+                        <div className={styles.warnings}>
+                            <p>
+                                Nossa garantia é válida por seis meses a partir da data da compra. Não cobre, no entanto, danos pelo uso indevido da peça, acidentes, procedimentos de reparos externos, reação com produtos químicos mesmo que inerentes ao corpo do usuário.
+                            </p>
+                            <p>
+                                Após o período de garantia, oferecemos serviços de reparo mediante orçamento prévio.
+                            </p>
                         </div>
                         <div className={styles.notCover}>
                             <h3>NÃO ESTÃO COBERTOS PELA GARANTIA</h3>
@@ -31,14 +39,6 @@ export default function CareAndWarrantyPage() {
                                 }
 
                             </ul>
-                        </div>
-                        <div className={styles.warnings}>
-                            <p>
-                                Nossa garantia é válida por seis meses a partir da data da compra. Não cobre, no entanto, danos pelo uso indevido da peça, acidentes, procedimentos de reparos externos, reação com produtos químicos mesmo que inerentes ao corpo do usuário.
-                            </p>
-                            <p>
-                                Após o período de garantia, oferecemos serviços de reparo mediante orçamento prévio.
-                            </p>
                         </div>
                     </div>
                     <div className={styles.takecare}>

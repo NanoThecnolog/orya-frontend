@@ -1,6 +1,7 @@
 export interface CategoryProps {
     name: string,
     image: string
+    position?: string
 }
 
 export interface CategoryList {

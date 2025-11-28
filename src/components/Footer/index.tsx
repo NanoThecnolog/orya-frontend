@@ -35,8 +35,8 @@ export default function Footer() {
     },
     {
         id: 4,
-        name: "formas de pagamento",
-        link: "/"
+        name: "Medidas e tamanhos",
+        link: "/tamanhos"
     },
     {
         id: 5,
@@ -46,11 +46,11 @@ export default function Footer() {
     {
         id: 6,
         name: "faq",
-        link: "/"
+        link: "/faq"
     },
     {
         id: 7,
-        name: "contato@orya.com",
+        name: oryaData.email,
         link: "/"
     },]
 
@@ -85,7 +85,7 @@ export default function Footer() {
             </div>
             <div className={styles.iconContainer}>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="">
+                    <label htmlFor="" className={styles.labelContainer}>
                         <h4>Se inscreva na nossa newsletter:</h4>
                         <div className={styles.input}>
                             <input

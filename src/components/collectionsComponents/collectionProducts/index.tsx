@@ -55,8 +55,7 @@ export default function CollectionProducts({ products }: CompProps) {
                                 <h3>{(product.name).toUpperCase()}</h3>
                                 <div className={styles.priceContainer}>
                                     <h4>{price}</h4>
-                                    <h5>{discount}</h5>
-                                    <p><span>ou <strong>{product.payment_option_details[0].plots}x</strong> de <strong>{format.price(product.payment_option_details[0].value)}</strong> com juros</span></p>
+                                    <h5>{discount} <span>ou <strong>{product.payment_option_details[0].plots}x</strong> de <strong>{format.price(product.payment_option_details[0].value)}</strong></span></h5>
                                 </div>
                             </div>
                             <div className={styles.buttonContainer} onClick={() => handleClick(product)}>

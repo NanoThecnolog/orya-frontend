@@ -1,0 +1,28 @@
+@use '../../../styles/animations.module.scss';
+
+.buttonContainer {
+    position: fixed;
+    bottom: 2%;
+    right: 1.5%;
+    z-index: 99;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all .4s;
+
+    animation: pulse 4s ease-in-out infinite;
+
+    .iconGradient {
+        color: var(--wine); //#25B33D;
+        stroke: beige;
+        stroke-width: .7px;
+        //fill: none;
+        padding: 1px;
+        border-radius: 50%;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+
+}

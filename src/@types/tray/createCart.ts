@@ -26,5 +26,5 @@ export interface CartCreateServiceProps {
 }
 export interface CartProduct {
     product_id: string,
-    quantity: string
+    quantity: string | number
 }

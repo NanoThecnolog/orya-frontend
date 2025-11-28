@@ -84,7 +84,7 @@ export default function RelatedProducts({ related }: RelatedProps) {
                                 <div className={styles.productInfo} onClick={() => functions.pushProductPage(product.id)}>
                                     <h4>{product.name.toUpperCase()}</h4>
                                     <p>{price}</p>
-                                    <p>{discount}</p>
+                                    <p>{discount} <span>ou <strong>{product.payment_option_details[0].plots}x</strong> de <strong>{format.price(product.payment_option_details[0].value)}</strong></span></p>
                                 </div>
                             </SwiperSlide>
                         )
