@@ -34,7 +34,7 @@ export class CartTrayManager extends IntegraApi {
         const first = await this.createCart({
             session_id: session_id,
             product_id: parseFloat(products[0].product_id),
-            quantity: parseFloat(products[0].quantity)
+            quantity: Number(products[0].quantity)
         })
         if (!first) return "Erro ao criar carrinho."
 
@@ -57,7 +57,7 @@ export class CartTrayManager extends IntegraApi {
 
             const res = await this.createCart({
                 product_id: parseFloat(item.product_id),
-                quantity: parseFloat(item.quantity),
+                quantity: Number(item.quantity),
                 session_id
             })
 
