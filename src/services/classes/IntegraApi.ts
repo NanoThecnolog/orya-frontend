@@ -61,6 +61,7 @@ export class IntegraApi {
             return products;
         } catch (err) {
             const error = err as AxiosError<{ message?: string }>;
+            const status = error.response?.status || 500;
             const message = error.response?.data?.message || error.message;
             debug.error(`Erro ao buscar produtos: status ${status}, message ${message}`);
             return [];
