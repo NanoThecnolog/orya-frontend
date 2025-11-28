@@ -51,7 +51,7 @@ export default function Faq({ data }: Props) {
 
                                     <button>{item.question}</button>
                                     {
-                                        open ? <IoIosArrowUp /> : <IoIosArrowDown />
+                                        open === key ? <IoIosArrowUp /> : <IoIosArrowDown />
                                     }
                                 </div>
 
