@@ -1,0 +1,32 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+
+    .imageContainer {
+        position: relative;
+        width: 100%;
+        max-width: 320px;
+        aspect-ratio: 16 / 6;
+        margin: 100px;
+
+        .image {
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    p {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+    }
+}

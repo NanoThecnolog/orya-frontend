@@ -23,6 +23,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const asPath = router.asPath
   const [isReady, setIsReady] = useState(false)
 
+  const isConstrucao = currentPath === '/construcao'
+
   const winePaths = [
     "/",
   ]
@@ -62,7 +64,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return <MainProvider>
 
-    <CartSidebar />
+    {!isConstrucao && <CartSidebar />}
+
     <div className={styles.mainContainer}>
       <AnimatePresence mode="wait" initial={false}>
         {
@@ -74,17 +77,20 @@ export default function App({ Component, pageProps }: AppProps) {
             transition={{ duration: .5, ease: "easeInOut" }}
           >
             {
-              <Header useWine={showWineFontColor} />
+              !isConstrucao && <Header useWine={showWineFontColor} />
             }
             <Component {...pageProps} />
           </motion.div>
         }
-
-
       </AnimatePresence>
-      <ToastContainer autoClose={3500} position="top-left" />
-      <Footer />
-      <WhatsappButton />
+      {
+        !isConstrucao &&
+        <>
+          <ToastContainer autoClose={3500} position="top-left" />
+          <Footer />
+          <WhatsappButton />
+        </>
+      }
     </div>
   </MainProvider>
 }

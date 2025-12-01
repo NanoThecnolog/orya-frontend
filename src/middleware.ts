@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(req: NextRequest) {
+/*export function middleware(req: NextRequest) {
     const token = req.cookies.get("auth_token")?.value
 
     if (!token || token.split('.').length !== 3) {
@@ -13,4 +13,25 @@ export function middleware(req: NextRequest) {
 
 export const config = {
     matcher: ['/me/:path*']
+}*/
+export function middleware(req: NextRequest) {
+    const { pathname } = req.nextUrl;
+
+    if (pathname.startsWith("/construcao")) {
+        return NextResponse.next();
+    }
+
+    if (
+        pathname.startsWith("/_next") ||
+        pathname.startsWith("/favicon") ||
+        pathname.includes(".")
+    ) {
+        return NextResponse.next();
+    }
+
+    return NextResponse.rewrite(new URL("/construcao", req.url));
 }
+
+export const config = {
+    matcher: ["/:path*"]
+};
