@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from './styles.module.scss'
 
 export default function About() {
-    const image = "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
+    const image = "/logo/sem-fundo/ORYA_LOGO_SF_V1_1.png"
     return (
         <section className={styles.container}>
             <div className={styles.logoContainer}>

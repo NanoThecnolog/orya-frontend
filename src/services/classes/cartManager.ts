@@ -1,4 +1,4 @@
-import { CartCreateServiceProps } from "@/@types/tray/createCart";
+import { CartCreateServiceProps, CartProduct } from "@/@types/tray/createCart";
 import { Product } from "@/@types/tray/products";
 import { CartProps } from "@/contexts/mainContext";
 import { Functions } from "@/utils/functions";
@@ -91,7 +91,7 @@ export class Cart {
         return data ? JSON.parse(data) : null
     }
 
-    static isSameCart(currentProducts: any[]) {
+    static isSameCart(currentProducts: CartProduct[]) {
         const saved = this.getSavedCart();
         if (!saved) return false; // não existe carrinho salvo
 
@@ -103,7 +103,7 @@ export class Cart {
         }
 
         // compara item por item
-        const equal = savedProducts.every((savedItem: any) => {
+        const equal = savedProducts.every((savedItem: CartProduct) => {
             const match = currentProducts.find(cp => cp.product_id === savedItem.product_id);
             if (!match) return false;
 

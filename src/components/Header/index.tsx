@@ -28,8 +28,8 @@ export default function Header({ useWine }: HeaderProps) {
     //console.log(menu)
 
     const logoSRC = useWine ?
-        "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_2.png" :
-        "/logo/SEM FUNDO/ORYÁ_LOGO SF_V1_1.png"
+        "/logo/SEM FUNDO/ORYA_LOGO_SF_V1_2.png" :
+        "/logo/SEM FUNDO/ORYA_LOGO_SF_V1_1.png"
 
     const handleDropdown = (item: string) => {
         setActiveMenu(activeMenu === item ? null : item)

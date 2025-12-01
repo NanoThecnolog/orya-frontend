@@ -19,7 +19,7 @@ export class CartTrayManager extends IntegraApi {
             const response = await this.api.post("/cart/create", carrinho)
             return response.data
         } catch (err) {
-            const error = err as AxiosError<{ message?: string, trayResponse?: { code: number, url: string, name: string, causes: Object } }>;
+            const error = err as AxiosError<{ message?: string, trayResponse?: { code: number, url: string, name: string, causes: string[] } }>;
             const message = error.response?.data?.message || error.message;
             debug.error(`Erro ao criar carrinho na tray: ${message}`, error.response?.data?.trayResponse?.causes);
             return null
