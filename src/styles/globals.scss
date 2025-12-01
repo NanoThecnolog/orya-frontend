@@ -6,7 +6,7 @@
   --foreground: #171717;
   --wine: #610824;
   --wine-opacity: #6108247e;
-  --font-Roboto: "Roboto", serif;
+  --font-Roboto: "Roboto", sans-serif;
   --font-Noto: "Noto Naskh Arabic", serif;
 }
 
@@ -26,7 +26,7 @@ body {
 body {
   color: var(--wine);
   //background: var(--background);
-  font-family: var(--font-Roboto);
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -38,6 +38,7 @@ body {
   transition: .4s ease-in-out;
   user-select: none;
   letter-spacing: 1px;
+  font-family: var(--font-Roboto);
   //color: var(--wine);
 }
 
