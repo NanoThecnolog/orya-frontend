@@ -50,22 +50,29 @@ export default function CartSidebar() {
 
     const handleCalculateShipping = async () => {
 
+
+        const products = cartItems.map(item => {
+            return {
+                product_id: item.product.id,
+                price: item.product.price,
+                quantity: item.amount
+            }
+        })
+
         try {
-            const products = cartItems.map(item => {
-                return {
-                    product_id: item.product.id,
-                    price: item.product.price,
-                    quantity: item.amount
-                }
-            })
-            console.log("produtos: ", products)
             const response = await axios.post<ShippingCotationResponse>('/api/shipping/cotation', {
                 zipcode: cep,
                 products
             })
             const shippingCotation = response.data
             //if(!shippingCotation) throw new Error("Erro ao realizar cotação")
-            setCotation(shippingCotation.Shipping.cotation)
+            console.log(shippingCotation)
+            if (!shippingCotation || !shippingCotation.Shipping.cotation) {
+                setCep('')
+                setCotation([])
+                return toast.error("CEP não encontrado. Verifique o cep e tente novamente")
+            }
+            setCotation(shippingCotation.Shipping.cotation ?? [])
         } catch (err) {
             console.error("Erro ao realizar cotação de frete", err)
         }
@@ -127,6 +134,7 @@ export default function CartSidebar() {
                 <div className={styles.items}>
                     {cartItems.length === 0 && <p>Carrinho vazio</p>}
                     {cartItems.map(item => {
+                        if (!item?.product) return null
                         const imgData = productsImages.find(i => i.trayID === item.product.id);
                         const code = imgData?.codeImg?.[0];
                         const image = code !== undefined
@@ -152,7 +160,7 @@ export default function CartSidebar() {
                                     </div>
                                 </div>
                                 <div className={styles.priceContainer}>
-                                    <p className={styles.price}>{format.price(item.product.price)}</p>
+                                    <p className={styles.price}>{format.price(item.product.price.toString())}</p>
                                     <FaTrash title="excluir" onClick={() => handleAmount(item.product, "remove")} />
                                 </div>
                             </div>
@@ -187,7 +195,7 @@ export default function CartSidebar() {
                                     </button>
                                 </div>
                                 {
-                                    cotation.length > 0 &&
+                                    cotation && cotation.length > 0 &&
                                     <div className={styles.cotationContainer}>
                                         {cotation.map((item, index) => (
                                             <div key={index} className={styles.cotation}>
@@ -196,7 +204,7 @@ export default function CartSidebar() {
                                                     <p>{item.information}</p>
                                                 </div>
                                                 <div className={styles.cotationPrice}>
-                                                    <p>{format.price(item.value)}</p>
+                                                    <p>{format.price(item.value.toString())}</p>
                                                 </div>
                                             </div>
                                         ))}
