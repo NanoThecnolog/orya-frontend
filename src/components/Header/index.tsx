@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { CiSearch, CiUser } from 'react-icons/ci'
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import { IoBagOutline } from 'react-icons/io5'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
@@ -36,6 +36,10 @@ export default function Header({ useWine }: HeaderProps) {
     }
     const handleClick = (link: string) => {
         router.push(link)
+    }
+    const handleSearch = (e: FormEvent) => {
+        e.preventDefault()
+        router.push(`/products?name=${searchInput}`)
     }
 
     return (
@@ -172,13 +176,17 @@ export default function Header({ useWine }: HeaderProps) {
 
             <div className={styles.iconContainer} style={{ color: useWine ? "white" : "var(--wine)" }}>
                 <div className={`${styles.searchInput} ${openSearch ? styles.open : ""}`}>
-                    <input
-                        type="text"
-                        placeholder="Buscar produto"
-                        value={searchInput}
-                        onChange={(e) => setSearchInput(e.target.value)}
-                    />
-                    <LiaLongArrowAltRightSolid size={25} />
+                    <form onSubmit={handleSearch}>
+                        <input
+                            type="text"
+                            placeholder="Buscar produto"
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
+                        />
+                        <div>
+                            <button type='submit'><LiaLongArrowAltRightSolid size={25} /></button>
+                        </div>
+                    </form>
                 </div>
                 <div className={styles.icons}>
                     <CiSearch size={20} onClick={() => setOpenSearch(!openSearch)} />

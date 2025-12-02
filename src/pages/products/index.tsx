@@ -3,8 +3,13 @@ import styles from './styles.module.scss'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import OrderFilter from '@/components/productsComponents/OrderFilter'
 import ProductsContainer from '@/components/productsComponents/ProductsContainer'
+import { useRouter } from 'next/router'
 
 export default function ProductsPage() {
+    const router = useRouter()
+    const { name } = router.query
+
+
 
     return (
         <>
@@ -15,7 +20,7 @@ export default function ProductsPage() {
             </Head>
             <main className={styles.container}>
                 <Breadcrumbs />
-                <ProductsContainer />
+                <ProductsContainer productName={name as string} />
             </main>
         </>
     )
