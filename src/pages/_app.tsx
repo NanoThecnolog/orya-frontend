@@ -71,7 +71,8 @@ export default function App({ Component, pageProps }: AppProps) {
     }
 
     <div className={styles.mainContainer} style={{ opacity: isReady ? 1 : 0, backgroundColor: 'beige' }}>
-      <AnimatePresence mode="wait" initial={false}>
+      {
+        /*<AnimatePresence mode="wait" initial={false}>
         {
           <motion.div
             key={router.asPath}
@@ -84,7 +85,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </motion.div>
         }
-      </AnimatePresence>
+      </AnimatePresence>*/
+      }
+      <Component {...pageProps} />
       {
         !isConstrucao &&
         <>
