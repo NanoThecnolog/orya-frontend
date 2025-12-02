@@ -74,6 +74,9 @@ export function MainProvider({ children }: MainProviderProps) {
     const [user, setUser] = useState<UserLoginProps | null>(null)
     const [customer, setCustomer] = useState<CustomerListItem | null>(null)
     const [paymentOptions, setPaymentOptions] = useState<PaymentMethod[]>([])
+    const inConstruction = false
+
+
 
     const getProducts = async () => {
         const products = await axios.get<Product[]>("/api/products")
@@ -112,6 +115,7 @@ export function MainProvider({ children }: MainProviderProps) {
         else getProducts()
     }, [productList])
     useEffect(() => {
+        //if (inConstruction) return
         try {
             if (productList.length === 0) return
             const stored = localStorage.getItem('cart_data')

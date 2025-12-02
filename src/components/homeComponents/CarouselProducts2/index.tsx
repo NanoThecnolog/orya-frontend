@@ -58,6 +58,7 @@ export default function CarouselProducts2({
                             const image = code !== undefined
                                 ? functions.imagePath(code)
                                 : "/img/sem-foto.png";
+                            const payment = product?.payment_option_details?.[0] || null
 
                             return (
                                 <SwiperSlide key={index} className={styles.slide}>
@@ -78,7 +79,7 @@ export default function CarouselProducts2({
                                     <div className={styles.productInfo}>
                                         <h4>{product.name.toUpperCase()}</h4>
                                         <p>{price}</p>
-                                        <p>{discount} <span>ou <strong>{product.payment_option_details[0].plots}x</strong> de <strong>{format.price(product.payment_option_details[0].value)}</strong></span></p>
+                                        <p>{discount} {payment && <span>ou <strong>{payment.plots}x</strong> de <strong>{format.price(payment.value)}</strong></span>}</p>
                                     </div>
                                 </SwiperSlide>
                             )

@@ -15,7 +15,10 @@ export const config = {
     matcher: ['/me/:path*']
 }*/
 export function middleware(req: NextRequest) {
-    const { pathname } = req.nextUrl;
+    /*const { pathname } = req.nextUrl;
+    const inConstruction = false
+
+    if (!inConstruction) return NextResponse.next()
 
     if (pathname.startsWith("/construcao")) {
         return NextResponse.next();
@@ -29,7 +32,8 @@ export function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
-    return NextResponse.rewrite(new URL("/construcao", req.url));
+    return NextResponse.rewrite(new URL("/construcao", req.url));*/
+    return NextResponse.next()
 }
 
 export const config = {

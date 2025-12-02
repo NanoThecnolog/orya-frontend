@@ -62,11 +62,15 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router.events])
 
 
+
   return <MainProvider>
 
     {!isConstrucao && <CartSidebar />}
+    {
+      !isConstrucao && <Header useWine={showWineFontColor} />
+    }
 
-    <div className={styles.mainContainer}>
+    <div className={styles.mainContainer} style={{ opacity: isReady ? 1 : 0, backgroundColor: 'beige' }}>
       <AnimatePresence mode="wait" initial={false}>
         {
           <motion.div
@@ -76,9 +80,7 @@ export default function App({ Component, pageProps }: AppProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: .5, ease: "easeInOut" }}
           >
-            {
-              !isConstrucao && <Header useWine={showWineFontColor} />
-            }
+
             <Component {...pageProps} />
           </motion.div>
         }
