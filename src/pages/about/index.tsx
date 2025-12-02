@@ -35,10 +35,10 @@ export default function AboutPage() {
                     <div className={styles.aboutContainer}>
                         <div className={styles.aboutText}>
                             <h2>
-                                Como trabalhamos
+                                Behind our process
                             </h2>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur culpa alias laborum aspernatur quo dolores! Quae aliquid recusandae expedita fugit voluptas eaque! Facilis fugit amet quasi architecto rem commodi. Vero.
+                                Cada peça é uma história que se entrelaça com a sua, criada para refletir sua autenticidade e te acompanhar nos momentos que realmente importam. Investimos em qualidade, produto e design versátil para que nossas joias acompanhem seu dia a dia com sofisticação e praticidade. Cada joia nasce do encontro entre técnica, criatividade e significado.
                             </p>
                         </div>
                         <div className={styles.aboutVideo}>

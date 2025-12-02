@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-/*export function middleware(req: NextRequest) {
+export function middleware(req: NextRequest) {
     const token = req.cookies.get("auth_token")?.value
 
     if (!token || token.split('.').length !== 3) {
@@ -13,9 +13,9 @@ import type { NextRequest } from 'next/server'
 
 export const config = {
     matcher: ['/me/:path*']
-}*/
-export function middleware(req: NextRequest) {
-    /*const { pathname } = req.nextUrl;
+}
+/*export function middleware(req: NextRequest) {
+    const { pathname } = req.nextUrl;
     const inConstruction = false
 
     if (!inConstruction) return NextResponse.next()
@@ -32,10 +32,10 @@ export function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
-    return NextResponse.rewrite(new URL("/construcao", req.url));*/
-    return NextResponse.next()
+    return NextResponse.rewrite(new URL("/construcao", req.url));
+    //return NextResponse.next()
 }
 
 export const config = {
     matcher: ["/:path*"]
-};
+};*/
