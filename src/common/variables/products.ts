@@ -49,11 +49,11 @@ export const productsImages: ProductProps[] = [
         trayID: "21"
     },
     {
-        codeImg: [16451, 16536],
+        codeImg: [16470, 16535],
         trayID: "23"
     },
     {
-        codeImg: [16470, 16535],
+        codeImg: [16451, 16536],
         trayID: "25"
     },
     {
@@ -63,5 +63,9 @@ export const productsImages: ProductProps[] = [
     {
         codeImg: [16494, 16497],
         trayID: "29"
-    }
+    },
+    {
+        codeImg: [16510, 16540],
+        trayID: "33"
+    },
 ]
