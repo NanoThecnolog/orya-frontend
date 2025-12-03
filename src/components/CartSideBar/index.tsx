@@ -79,6 +79,7 @@ export default function CartSidebar() {
     }
 
     const handleFinishBuy = async () => {
+        const tempWindow = window.open('', '_blank')
         //criar carrinho fazendo requisição pra cada produto do carrinho utilizando o mesmo sessionID
         toast.info("Obrigado pela sua compra! Agora você será direcionado para o checkout do seu pedido.", {
             toastId: "buy-toast",
@@ -110,16 +111,20 @@ export default function CartSidebar() {
             const response = await axios.post<CreateCartResponse>('/api/cart/create', cart)
             const createdCart = response.data
             const url = createdCart.cart_url
+
+            debug.log("URL DO CHECKOUT:", url);
             Cart.saveCartLocal(cart)
-            setTimeout(() => (
-                Functions.openWindow(url),
-                toggleCart(),
-                toast.dismiss("buy-toast")
-            ), 2000)
+
+            if (tempWindow) tempWindow.location.href = url;
+
+            toggleCart()
+            toast.dismiss("buy-toast")
 
         } catch (err) {
             debug.error("Erro ao criar carrinho e finalizar compra", err)
             toast.error("Erro ao finalizar a compra", { toastId: "buy-error" });
+
+            if (tempWindow) tempWindow.close();
         }
     }
 
