@@ -28,10 +28,11 @@ export const productsImages: ProductProps[] = [
         codeImg: [16429, 16527],
         trayID: "11"
     },
+    /*
     {
         codeImg: [],
         trayID: "13"
-    },
+    },*/
     {
         codeImg: [16510, 16540],
         trayID: "15"
