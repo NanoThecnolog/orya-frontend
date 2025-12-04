@@ -60,29 +60,49 @@ export default function ProductPage({ product, productList }: ProductProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const id = Array.isArray(ctx.query.id) ? ctx.query.id[0] : ctx.query.id;
+    //const id = Array.isArray(ctx.query.id) ? ctx.query.id[0] : ctx.query.id;
     const shortcut = Array.isArray(ctx.query.shortcut) ? ctx.query.shortcut[0] : ctx.query.shortcut;
     const url = process.env.OFFICIAL_URL
 
+    if (!url || !shortcut) {
+        return {
+            props: {
+                product: null,
+                productList: []
+            }
+        }
+    }
+
     try {
-        const [productRes, productListRes] = await Promise.all([
+        /*const [productRes, productListRes] = await Promise.all([
             axios.get<ProductDetails>(`${url}/api/product/${id}`),
             axios.get<ProductList>(`${url}/api/products`),
-        ])
-        /*
-        const product = productListRes.data.find(product => product.shortcut === shortcut)
+        ])*/
+        const productListRes = await axios.get<ProductList>(`${url}/api/products`)
+        const productList = productListRes?.data ?? []
+
+        const product = productList.find(product => product.shortcut === shortcut)
         if (!product) return {
             props: {
                 product: null,
-                productList: productListRes.data
+                productList
             }
         }
-        */
-        //const getProductDetails = await axios.get(`${url}/api/product/${productRes.data.Product.id}`)
+
+        const productDetailsRes = await axios.get<ProductDetails>(`${url}/api/product/${product.id}`)
+        const productDetail = productDetailsRes?.data
+        if (!productDetail)
+            return {
+                props: {
+                    product: null,
+                    productList
+                }
+            }
+
         return {
             props: {
-                product: productRes.data,
-                productList: productListRes.data
+                product: productDetail,
+                productList
             }
         }
     } catch (err) {
@@ -90,7 +110,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         return {
             props: {
                 product: null,
-                productList: [] as unknown as ProductList
+                productList: []
             }
         }
     }

@@ -45,13 +45,13 @@ export default function ProductsByCategory({ products }: CompProps) {
                                     fill
                                     priority={false}
                                     className={styles.image}
-                                    onClick={() => functions.pushProductPage(product.id)}
+                                    onClick={() => functions.pushProductPage(product.shortcut)}
                                 />
                                 <div className={styles.buttonContainer}>
                                     <SendCartButton handleClick={() => handleClick(product)} />
                                 </div>
                             </div>
-                            <div className={styles.textContainer} onClick={() => functions.pushProductPage(product.id)}>
+                            <div className={styles.textContainer} onClick={() => functions.pushProductPage(product.shortcut)}>
                                 <h3>{product.name.toUpperCase()}</h3>
                                 <div className={styles.price}>
                                     <p>{price}</p>

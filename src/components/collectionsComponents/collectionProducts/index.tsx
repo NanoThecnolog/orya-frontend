@@ -25,9 +25,6 @@ export default function CollectionProducts({ products }: CompProps) {
         cart.addToCart(product)
 
     }
-    const goToProductPage = (id: number) => {
-        router.push(`/product/${id}`)
-    }
     return (
         <section className={styles.container}>
             <Breadcrumbs />
@@ -42,7 +39,7 @@ export default function CollectionProducts({ products }: CompProps) {
                         : fallback;
                     return (
                         <div key={product.id} className={styles.productContainer}>
-                            <div className={styles.imageContainer} onClick={() => goToProductPage(parseFloat(product.id))}>
+                            <div className={styles.imageContainer} onClick={() => functions.pushProductPage(product.shortcut)}>
                                 <Image
                                     src={image}
                                     alt={product.name || "Imagem do produto"}

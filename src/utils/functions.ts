@@ -4,8 +4,8 @@ import { v4 as uuid } from "uuid"
 export class Functions {
     constructor(private router: ReturnType<typeof useRouter>) {
     }
-    pushProductPage = (id: string) => {
-        this.router.push(`/product/${id}`)
+    pushProductPage = (shortcut: string) => {
+        this.router.push(`/product/${shortcut}`)
     }
     pushCategoryPage = (name: string) => {
         this.router.push(`/categories/category/${name.toLowerCase()}`)

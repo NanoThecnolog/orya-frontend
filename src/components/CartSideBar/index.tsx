@@ -154,6 +154,7 @@ export default function CartSidebar() {
                                         fill
                                         priority={false}
                                         className={styles.image}
+                                        onClick={() => functions.pushProductPage(item.product.shortcut)}
                                     />
                                 </div>
                                 <div className={styles.cartItemDetails}>

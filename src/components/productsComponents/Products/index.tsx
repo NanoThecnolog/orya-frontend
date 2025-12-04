@@ -33,7 +33,7 @@ export default function Products({ products }: CompProps) {
                     : "/img/sem-foto.png";
                 return (
                     <div key={product.id} className={styles.productContainer}>
-                        <div className={styles.imageContainer} onClick={() => functions.pushProductPage(product.id)}>
+                        <div className={styles.imageContainer} onClick={() => functions.pushProductPage(product.shortcut)}>
                             <Image
                                 src={image}
                                 alt={product.name}

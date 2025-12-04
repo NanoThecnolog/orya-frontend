@@ -70,7 +70,7 @@ export default function CarouselProducts2({
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                             className={styles.image}
                                             priority={false}
-                                            onClick={() => functions.pushProductPage(product.id)}
+                                            onClick={() => functions.pushProductPage(product.shortcut)}
                                         />
                                         <div className={styles.buttonContainer}>
                                             <SendCartButton handleClick={() => handleClick(product)} />

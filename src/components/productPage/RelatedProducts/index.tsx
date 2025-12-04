@@ -75,13 +75,13 @@ export default function RelatedProducts({ related }: RelatedProps) {
                                         fill
                                         className={styles.image}
                                         priority={false}
-                                        onClick={() => functions.pushProductPage(product.id)}
+                                        onClick={() => functions.pushProductPage(product.shortcut)}
                                     />
                                     <div className={styles.buttonContainer}>
                                         <SendCartButton handleClick={() => handleClick(product)} />
                                     </div>
                                 </div>
-                                <div className={styles.productInfo} onClick={() => functions.pushProductPage(product.id)}>
+                                <div className={styles.productInfo} onClick={() => functions.pushProductPage(product.shortcut)}>
                                     <h4>{product.name.toUpperCase()}</h4>
                                     <p>{price}</p>
                                     <p>{discount} <span>ou <strong>{product.payment_option_details[0].plots}x</strong> de <strong>{format.price(product.payment_option_details[0].value)}</strong></span></p>
