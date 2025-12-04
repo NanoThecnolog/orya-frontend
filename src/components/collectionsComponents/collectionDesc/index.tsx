@@ -13,7 +13,7 @@ export default function CollectionDescription({ title, description }: Descriptio
                     <h2>{title}</h2>
                 </div>
                 <div className={styles.description}>
-                    <p>{description}</p>
+                    <p>{/*description*/}</p>
                 </div>
             </div>
         </section>
