@@ -7,8 +7,8 @@ export default function PrivacyPage() {
     return (
         <>
             <Head>
-                <title>Políticas de Troca e Devolução</title>
-                <meta name='description' content='Página de políticas e troca de devolução' />
+                <title>Políticas de Privacidade | Oryá Atelier de Joias</title>
+                <meta name='description' content='Política de Privacidade da ORYÁ: saiba como coletamos, utilizamos e protegemos seus dados. Transparência e segurança em todas as etapas para garantir uma experiência confiável e responsável.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>

@@ -7,7 +7,7 @@ export default function RingSizePage() {
         <>
             <Head>
                 <title>Tamanhos | Loja Oryá</title>
-                <meta name='description' content='Como medir o tamanho do seu anel' />
+                <meta name='description' content='Guia prático para medir o tamanho do seu anel com precisão. Aprenda métodos simples para identificar a medida ideal e garantir conforto e perfeito encaixe nas joias ORYÁ.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>

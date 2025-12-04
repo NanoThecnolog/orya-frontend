@@ -9,11 +9,14 @@ import { debug } from '@/utils/DebugLogger'
 import Banner from '@/components/CategoriesPage/Banner'
 import ProductsByCategory from '@/components/CategoriesPage/ProductByCategory'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
+import { GetServerSideProps } from 'next'
 
-export default function CategoryPage() {
-    const router = useRouter()
+interface CategoryPageProps {
+    category: string
+}
+
+export default function CategoryPage({ category }: CategoryPageProps) {
     const { productList } = useMain()
-    const { category } = router.query
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
@@ -33,8 +36,8 @@ export default function CategoryPage() {
     return (
         <>
             <Head>
-                <title>{`Categoria ${category ? category.toString() : ""} | Oryá Atelier` || 'Carregando categoria...'}</title>
-                <meta name='description' content='Pagina da categoria' />
+                <title>{`Categoria ${category ? category.toString().toUpperCase() : ""} | Oryá Atelier de Jóias` || 'Carregando categoria...'}</title>
+                <meta name='description' content={`Descubra a categoria ${category.toUpperCase()} com joias criadas para refletir estilo, personalidade e significado. Explore peças exclusivas que combinam design autoral, qualidade e sofisticação.`} />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
@@ -48,4 +51,19 @@ export default function CategoryPage() {
             </main>
         </>
     )
+}
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+    const category = Array.isArray(ctx.query.category) ? ctx.query.category[0] : ctx.query.category;
+
+    if (!category)
+        return {
+            props: { category: null }
+        }
+
+    return {
+        props: {
+            category
+        }
+    }
 }

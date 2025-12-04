@@ -9,11 +9,16 @@ import { Product } from '@/@types/tray/products'
 import { useEffect, useState } from 'react'
 import { Filter } from '@/services/classes/filter'
 import { debug } from '@/utils/DebugLogger'
+import { GetServerSideProps } from 'next'
 
-export default function LinePage() {
+interface LinePageProps {
+    line: string | null
+}
+
+export default function LinePage({ line }: LinePageProps) {
     const router = useRouter()
     const { productList } = useMain()
-    const { line } = router.query
+    //const { line } = router.query
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
@@ -31,8 +36,8 @@ export default function LinePage() {
     return (
         <>
             <Head>
-                <title>Pagina da linha</title>
-                <meta name='description' content='' />
+                <title>Linha {line?.toUpperCase()} | Oryá Atelier de Jóias</title>
+                <meta name='description' content='Coleções que expressam estilo, significado e autenticidade. Cada linha com peças exclusivas criadas para celebrar diferentes formas de beleza e identidade.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
@@ -46,4 +51,20 @@ export default function LinePage() {
             </main>
         </>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+    const line = Array.isArray(ctx.query.line) ? ctx.query.line[0] : ctx.query.line;
+
+    if (!line)
+        return {
+            props: { line: null }
+        }
+
+    return {
+        props: {
+            line
+        }
+    }
 }

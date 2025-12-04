@@ -14,8 +14,8 @@ export default function ProductsPage() {
     return (
         <>
             <Head>
-                <title>Compre online produtos da Oryá</title>
-                <meta name='description' content='Página de produtos da Oryá' />
+                <title>Compre online as nossas Jóias | Oryá Atelier de Jóias</title>
+                <meta name='description' content='Explore todas as jóias da ORYÁ: joias autorais que unem sofisticação, identidade e design versátil. Encontre peças criadas para acompanhar seu estilo e realçar sua essência em qualquer ocasião.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>

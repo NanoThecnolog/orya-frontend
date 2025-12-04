@@ -5,8 +5,8 @@ export default function ReturnExchangePage() {
     return (
         <>
             <Head>
-                <title></title>
-                <meta name='description' content='' />
+                <title>Política de Troca e Devolução | Orya Atelier</title>
+                <meta name='description' content='Informações sobre troca e devolução da Oryá, com orientações práticas para substituições ou retornos de produtos. Processo simples, transparência e suporte dedicado para garantir uma experiência segura e satisfatória.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>

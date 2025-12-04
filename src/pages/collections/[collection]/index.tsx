@@ -12,12 +12,11 @@ import { useMain } from '@/contexts/mainContext'
 import { apiTray } from '@/services/classes/IntegraApi'
 
 interface CollectionProps {
-    productListProps: ProductList
+    productListProps: ProductList,
+    collection: string
 }
 
-export default function CollectionPage({ productListProps }: CollectionProps) {
-    const router = useRouter()
-    const collection = String(router.query.collection).toLowerCase()
+export default function CollectionPage({ productListProps, collection }: CollectionProps) {
     const [products, setProducts] = useState<Product[]>([])
     const { productList, setProductList, menu } = useMain()
 
@@ -56,8 +55,8 @@ export default function CollectionPage({ productListProps }: CollectionProps) {
     return (
         <>
             <Head>
-                <title>{`Coleção ${collection?.toString().toUpperCase() || 'Carregando coleção...'}`}</title>
-                <meta name='description' content='Coleção Ondyne' />
+                <title>{`Coleção ${collection?.toString().toUpperCase() || 'Carregando coleção...'} | Oryá Atelier de Jóias`}</title>
+                <meta name='description' content='Coleção Ondyne: Jóias autorais que combinam design, significado e identidade. Peças únicas criadas para refletir diferentes estilos e momentos especiais.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
@@ -70,20 +69,28 @@ export default function CollectionPage({ productListProps }: CollectionProps) {
 }
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const url = process.env.OFFICIAL_URL
-    const { collection } = ctx.query
+    const collection = Array.isArray(ctx.query.collection) ? ctx.query.collection[0] : ctx.query.collection;
     try {
         const response = await axios.get<ProductList>(`${url}/api/products`)
-        //console.log("chamada bem sucedida", response.data.length)
+        if (!collection)
+            return {
+                props: {
+                    productListProps: response.data,
+                    collection: null
+                }
+            }
         return {
             props: {
-                productListProps: response.data
+                productListProps: response.data,
+                collection: collection.toLowerCase()
             }
         }
     } catch (err) {
         console.error("Erro no getServerSideProps na pagina collection", err)
         return {
             props: {
-                productListProps: [] as unknown as ProductList
+                productListProps: [],
+                collection: null
             }
         }
     }

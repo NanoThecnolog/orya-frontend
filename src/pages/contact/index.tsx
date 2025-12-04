@@ -13,8 +13,8 @@ export default function ContactPage() {
     return (
         <>
             <Head>
-                <title>Pagina de contato | Oryá Atelier</title>
-                <meta name='description' content='Página de contato da loja Oryá' />
+                <title>Pagina de contato | Oryá Atelier de Jóias</title>
+                <meta name='description' content='Entre em contato com a ORYÁ. Fale com nossa equipe para tirar dúvidas, solicitar suporte ou obter informações sobre produtos e pedidos. Atendimento dedicado e respostas rápidas.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>

@@ -6,8 +6,8 @@ export default function AboutPage() {
     return (
         <>
             <Head>
-                <title>Sobre Nós</title>
-                <meta name='description' content='Página sobre a empresa' />
+                <title>Sobre Nós | Oryá Atelier de Jóias</title>
+                <meta name='description' content='Somos a Oryá! Fabricamos joias criadas para expressar personalidade, autenticidade e sofisticação. Inspirada nas raízes indígenas das fundadoras, a marca combina técnica, criatividade e significado para oferecer peças que acompanham a mulher contemporânea em cada momento importante, unindo qualidade, versatilidade e identidade própria.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>

@@ -7,8 +7,8 @@ export default function CareAndWarrantyPage() {
     return (
         <>
             <Head>
-                <title>Cuidados e Garantia | Oryá Atelier</title>
-                <meta name='description' content='Página de cuidados da Oryá Atelier' />
+                <title>Cuidados e Garantia | Oryá Atelier de Jóias</title>
+                <meta name='description' content='Orientações de cuidados e detalhes de garantia das joias ORYÁ. Saiba como preservar o brilho, a durabilidade e a integridade das peças, além de entender os benefícios e coberturas oferecidos pela Oryá.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
             </Head>
             <main className={styles.container}>
