@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { CiSearch, CiUser } from 'react-icons/ci'
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import { IoBagOutline } from 'react-icons/io5'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { useRouter } from 'next/navigation'
 import { useMain } from '@/contexts/mainContext'
@@ -24,6 +24,17 @@ export default function Header({ useWine }: HeaderProps) {
     const [mobileOpen, setMobileOpen] = useState<boolean>(false)
     const [openSearch, setOpenSearch] = useState<boolean>(false)
     const [searchInput, setSearchInput] = useState<string>("")
+
+    const menuRef = useRef<HTMLUListElement | null>(null)
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (mobileOpen && menuRef.current && !menuRef.current.contains(e.target as Node))
+                setMobileOpen(false)
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [mobileOpen])
 
     //console.log(menu)
 
@@ -72,6 +83,7 @@ export default function Header({ useWine }: HeaderProps) {
                 </div>
             </div>
             <ul
+                ref={menuRef}
                 className={`${styles.menu} ${mobileOpen ? styles.open : ""}`}
                 style={useWine ? {} : { backgroundColor: "beige" }}
             >
