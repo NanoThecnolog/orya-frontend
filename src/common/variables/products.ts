@@ -8,7 +8,7 @@ export const productsImages: ProductProps[] = [
         trayID: "1"
     },
     {
-        codeImg: [16426, 16462],
+        codeImg: [16426/*, 16462*/],
         trayID: "3"
     },
     {
