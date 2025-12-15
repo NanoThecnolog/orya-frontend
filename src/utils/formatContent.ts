@@ -19,7 +19,7 @@ class FormatContent {
     public discount(price: string | null, percent: number = 5) {
         if (!price) return ""
         const priceNumber = parseFloat(price)
-        const discounted = priceNumber - (priceNumber * (percent / 100))
+        const discounted = priceNumber - (priceNumber * (5 / 100))
         return `R$ ${this.formatNumber(discounted)} no pix`
     }
     public formatPhoneNumber(ccode: string, areaCode: string, number: string): PhoneResult {
